@@ -1,0 +1,1 @@
+document.getElementById("client").selectedIndex = -1;

@@ -1,0 +1,104 @@
+html {
+    background: black;
+    color: #333;
+    font-family: "arial", "times", "sans-serif";
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    color: #333;
+    background: #fefefe;
+}
+
+#basicData {
+    border: 1px solid silver;
+    border-bottom-style: none;
+    background: #fefefe;
+    min-height: 90vh;
+}
+
+#basicData #createMaterialHeader {
+    padding: 0px;
+    margin: 2px;
+}
+
+#newPasswordBar {
+    background: #cfdde8;
+    display: flex;
+}
+
+#newPasswordBar p {
+    margin: 0px;
+    padding: 10px;
+}
+
+#newPasswordBar p a {
+    text-decoration: none;
+    color: #333;
+}
+
+#basicData #createMaterialHeader h2 {
+    margin: 0px;
+    padding: 5px;
+    background: linear-gradient(#cfdeed, #b0c7dd);
+}
+
+.tabcontent {
+    display: list-item;
+    width: 800px;
+    padding: 10px;
+    border-top: none;
+    margin: 2px;
+    background: #e9f0f6;
+    max-height: 96vh;
+}
+
+.tabcontent select, .tabcontent input {
+    border: none;
+    box-shadow: 0px 0px 2px black;
+    padding: 5px 10px;
+    border-radius: 25px 25px 25px 25px;
+    background: rgba(255, 255, 255, 0.6);
+    margin: 10px 0px 10px 0px;
+    outline:none;
+}
+
+.tabcontent #isAdmin {
+    width: 30px;
+    text-align: center;
+}
+
+.tabcontent select option {
+    border-radius: 25px 0px 0px 25px;
+}
+
+.tabcontent label {
+    color: #aaa;
+    font-size: 12px;
+    color: #333;
+}
+
+footer {
+    width: 100%;
+    background: linear-gradient(#cfdeed, #b0c7dd);
+    margin: 0px;
+    padding: 0px;
+    height: 4vh;
+    display: table;
+}
+
+footer p {
+    padding: 5px;
+    margin: 0px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+footer p a {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    font-style: italic;
+    margin: 2px;
+}
