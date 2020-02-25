@@ -15,12 +15,24 @@ body {
     border: 1px solid silver;
     border-bottom-style: none;
     background: #fefefe;
-    min-height: 90vh;
+    min-height: 95.5vh;
 }
 
 #basicData #createMaterialHeader {
     padding: 0px;
     margin: 2px;
+}
+
+button {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background: #54a227;
+    color: white;
+    border-radius: 40%;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px #19654c;
 }
 
 #newPasswordBar {
