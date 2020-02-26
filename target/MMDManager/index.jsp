@@ -3,7 +3,6 @@
 <head>
     <title>Material Master Data Manager</title>
     <meta charset="ISO-8859-1">
-    <script type='text/javascript' src='javaScript/loginJs.js'></script>
     <link rel="stylesheet" href="css/login_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -13,11 +12,10 @@
     <div id="createMaterialHeader">
         <h2><i><b>Material Master Data Creator</b></i></h2>
         <div id="newPasswordBar">
-            <p><button type="submit" class="fa fa-check"></button></p>
             <p><a href="">New Password</a></p>
         </div>
     </div>
-    <div class="tabcontent">
+    <form class="tabcontent" action="MaterialCreator" method="post">
         <label for="client">Client</label><br>
         <select type="text" name="client" id="client">
             <option>Commerzbank AG S.A. Branch in Lodz</option>
@@ -29,13 +27,14 @@
         <label for="userPassword">Password</label><br>
         <input type="password" id="userPassword" name="userPassword"><br>
         <label for="isAdmin">Admin</label><br>
-        <input type="text" id="isAdmin" name="isAdmin">
-    </div>
+        <input type="text" id="isAdmin" name="isAdmin"><br>
+        <input type="submit" class="fa fa-check"></input>
+    </form>
 </div>
 </div>
 <footer>
     <p><a>© Created by Lorem Ipsum. 2017</a></p>
 </footer>
 </body>
-
+<script src='javaScript/loginJs.js'></script>
 </html>

@@ -23,7 +23,7 @@ body {
     margin: 2px;
 }
 
-button {
+input[type="submit"] {
     margin: 0px;
     padding: 0px;
     border: none;
@@ -52,7 +52,7 @@ button {
 
 #basicData #createMaterialHeader h2 {
     margin: 0px;
-    padding: 5px;
+    padding: 10px;
     background: linear-gradient(#cfdeed, #b0c7dd);
 }
 
