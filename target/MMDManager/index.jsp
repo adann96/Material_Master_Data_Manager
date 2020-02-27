@@ -1,12 +1,11 @@
+<%@ page contentType="text/html; ISO-8859-1" language="java" %>
 <html>
-
 <head>
     <title>Material Master Data Manager</title>
     <meta charset="ISO-8859-1">
     <link rel="stylesheet" href="css/login_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
 <div id="basicData">
     <div id="createMaterialHeader">
@@ -15,7 +14,7 @@
             <p><a href="">New Password</a></p>
         </div>
     </div>
-    <form class="tabcontent" action="MaterialCreator" method="post">
+    <form class="tabcontent" action="MaterialCreator" method="POST">
         <label for="client">Client</label><br>
         <select type="text" name="client" id="client">
             <option>Commerzbank AG S.A. Branch in Lodz</option>
@@ -28,12 +27,12 @@
         <input type="password" id="userPassword" name="userPassword"><br>
         <label for="isAdmin">Admin</label><br>
         <input type="text" id="isAdmin" name="isAdmin"><br>
-        <input type="submit" class="fa fa-check"></input>
+        <input type="submit" class="fa fa-check">
     </form>
 </div>
 </div>
 <footer>
-    <p><a>Â© Created by Lorem Ipsum. 2017</a></p>
+    <p><a>© Created by Lorem Ipsum. 2017</a></p>
 </footer>
 </body>
 <script src='javaScript/loginJs.js'></script>
