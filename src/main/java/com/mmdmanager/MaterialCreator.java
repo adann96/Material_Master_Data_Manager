@@ -12,27 +12,40 @@ import java.sql.*;
 
 @WebServlet("/MaterialCreator")
 public class MaterialCreator extends HttpServlet {
-    Connection dbConnection;
-    PreparedStatement getCredentialsFromDb;
-    ResultSet userCredentialsReceived;
-    String userCredentials = "SELECT USER_ID, FIRST_NAME, LAST_NAME, SEX, COMPANY_NAME, IS_ADMIN, ACC_PASSWORD FROM USERS " +
-            "WHERE COMPANY_NAME =? AND USER_ID =? AND ACC_PASSWORD =? AND IS_ADMIN =?";
+    int i = 0;
+    Connection connection;
+    Statement statementCreation;
+    ResultSet receivedPersData;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter printWriter = response.getWriter();
 
-        doGet(request,response);
+        doGet(request, response);
         String company_name = request.getParameter("client");
         String user_id = request.getParameter("userID");
         String acc_password = request.getParameter("userPassword");
         String is_admin = request.getParameter("isAdmin");
 
-        if (company_name.equals("Infosys Consulting") && user_id.equals("ADMIN1") && acc_password.equals("Q@3wertyuiop") && is_admin.equals("Y")) {
-            HttpSession httpSession = request.getSession();
-            response.sendRedirect("/MaterialCreator.jsp");
-        }
-        else {
-            response.sendRedirect("/None");
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "mmdmanager", "NHY67ujm");
+            statementCreation = connection.createStatement();
+            receivedPersData = statementCreation.executeQuery("SELECT COMPANY_NAME, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE COMPANY_NAME='" + company_name + "' " + "AND USER_ID='" + user_id + "' " + "AND ACC_PASSWORD='" + acc_password + "' " + "AND IS_ADMIN='" + is_admin + "'");
+
+            if (receivedPersData.next() == true) {
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("user_id", user_id);
+                response.sendRedirect("MaterialCreator.jsp?name="+user_id.toLowerCase()+"");
+            }
+            else {
+                response.sendRedirect("index.jsp");
+            }
+
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -41,16 +54,57 @@ public class MaterialCreator extends HttpServlet {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
-            Class.forName ("oracle.jdbc.driver.OracleDriver");
-            dbConnection = DriverManager.getConnection ("jdbc:oracle:thin:@localhost:1521:orcl", "MMDMANAGER", "NHY67ujm");
-            getCredentialsFromDb = dbConnection.prepareStatement(userCredentials);
+            do {
+                if (receivedPersData.next()) {
+                    response.sendRedirect("MaterialCreator.jsp");
+                }
+                else if (!(receivedPersData.getString().equals(company_name)) || !(receivedPersData.getString().equals(admin)) || !(receivedPersData.getString().equals(user_id)) && receivedPersData.getString().equals(acc_password)) {
+                    //alerta się zrobi, tzn. okienko się uruchomi z napisem "Wrong credentials!", formularz się wyczyści, nie będzie iteracji, bo UserID i Password jest ok
+                    //https://stackoverflow.com/questions/24176684/how-to-show-alert-in-a-jsp-from-a-servlet-and-then-redirect-to-another-jsp
+                }
+                else if (receivedPersData.getString().equals(company_name) && receivedPersData.getString().equals(admin) && receivedPersData.getString().equals(user_id) && !(receivedPersData.getString().equals(acc_password))) {
+                    //też alert jsowy, który tym razem pokaże, że jest złe hasło
+                    //jak jest złe hasło, a wszystko pozostałe ok, to rozpoczynamy iterację
+                    i+=1;
+                    if (i == 3) {
+                        //Też wyjebie alert, że trzy razy źle wpisane hasło
+                        //Przy okazji też skasuje ziomkowi konto, w sumie tu można emaila jebnąć do admina też taki i taki użytkownik został skasowany.
+                    }
+                }
+                else {
+                    //alerta się zrobi, tzn. okienko się uruchomi z napisem "Wrong credentials!", formularz się wyczyści, nie będzie iteracji
+                    //https://stackoverflow.com/questions/24176684/how-to-show-alert-in-a-jsp-from-a-servlet-and-then-redirect-to-another-jsp
+                }
+            } while (!(receivedPersData.getString().equals(company_name)) || !(receivedPersData.getString().equals(admin)) || !(receivedPersData.getString().equals(user_id)) ||!(receivedPersData.getString().equals(acc_password)));
+        }
 
-                getCredentialsFromDb.setString(1, company_name);
-                getCredentialsFromDb.setString(2, user_id);
-                getCredentialsFromDb.setString(3, acc_password);
-                getCredentialsFromDb.setString(4, is_admin);
-
-            userCredentialsReceived = getCredentialsFromDb.executeQuery();
-*/
-
+ */
