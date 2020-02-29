@@ -1,5 +1,6 @@
 package com.mmdmanager;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import java.sql.*;
 
 @WebServlet("/MaterialCreator")
 public class MaterialCreator extends HttpServlet {
+    String someMessage = "hjdfjsahfjhfkufjky";
     int i = 0;
     Connection connection;
     Statement statementCreation;
@@ -39,7 +41,7 @@ public class MaterialCreator extends HttpServlet {
                 response.sendRedirect("MaterialCreator.jsp?name="+user_id.toLowerCase()+"");
             }
             else {
-                response.sendRedirect("index.jsp");
+                //response.sendRedirect("index.jsp");
             }
 
         } catch (ClassNotFoundException ex) {

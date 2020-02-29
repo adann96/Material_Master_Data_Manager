@@ -1,7 +1,7 @@
 html {
     background: black;
     color: #333;
-    font-family: "arial", "times", "sans-serif";
+    font-family: "calibri", "times", "sans-serif";
 }
 
 body {
@@ -23,7 +23,7 @@ body {
     margin: 2px;
 }
 
-input[type="submit"] {
+button[type="submit"] {
     margin: 0px;
     padding: 0px;
     border: none;
@@ -56,28 +56,41 @@ input[type="submit"] {
     background: linear-gradient(#cfdeed, #b0c7dd);
 }
 
+fieldset {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
 .tabcontent {
     display: list-item;
     width: 800px;
-    padding: 10px;
+    padding: 0px;
     border-top: none;
     margin: 2px;
     background: #e9f0f6;
     max-height: 96vh;
 }
 
-.tabcontent select, .tabcontent input {
+.tabcontent select,
+.tabcontent input {
     border: none;
     box-shadow: 0px 0px 2px black;
-    padding: 5px 10px;
-    border-radius: 25px 25px 25px 25px;
+    padding: 2px;
+    border-radius: 3px;
     background: rgba(255, 255, 255, 0.6);
-    margin: 10px 0px 10px 0px;
-    outline:none;
+    margin: 0px 10px 0px 10px;
+    outline: none;
+}
+
+.tabcontent label {
+    margin: 5px;
+    padding: 5px;
+    display: inline-block;
 }
 
 .tabcontent #isAdmin {
-    width: 30px;
+    width: 20px;
     text-align: center;
 }
 

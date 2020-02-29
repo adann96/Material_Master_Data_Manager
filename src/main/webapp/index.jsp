@@ -9,25 +9,27 @@
 <body>
 <div id="basicData">
     <div id="createMaterialHeader">
-        <h2><i><b>Material Master Data Creator</b></i></h2>
-        <div id="newPasswordBar">
-            <p><a href="">New Password</a></p>
-        </div>
+        <h2><b>Material Master Data Manager</b></h2>
     </div>
     <form class="tabcontent" action="MaterialCreator" method="POST">
-        <label for="client">Client</label><br>
-        <select type="text" name="client" id="client">
-            <option>Commerzbank AG S.A. Branch in Lodz</option>
-            <option>Daikin Airconditioning Poland Sp. z o.o.</option>
-            <option>Infosys Consulting</option>
-        </select><br>
-        <label for="userID">User ID</label><br>
-        <input type="text" id="userID" name="userID"><br>
-        <label for="userPassword">Password</label><br>
-        <input type="password" id="userPassword" name="userPassword"><br>
-        <label for="isAdmin">Admin</label><br>
-        <input type="text" id="isAdmin" name="isAdmin"><br>
-        <input type="submit" class="fa fa-check">
+        <fieldset>
+            <div id="newPasswordBar">
+                <p><button type="submit" class="fa fa-check"></button></p>
+                <p><a href="">New Password</a></p>
+            </div>
+            <label for="client">Client</label><br>
+            <select type="text" name="client" id="client">
+                <option>Commerzbank AG S.A. Branch in Lodz</option>
+                <option>Daikin Airconditioning Poland Sp. z o.o.</option>
+                <option>Infosys Consulting</option>
+            </select><br>
+            <label for="userID">User ID</label><br>
+            <input type="text" id="userID" name="userID"><br>
+            <label for="userPassword">Password</label><br>
+            <input type="password" id="userPassword" name="userPassword"><br>
+            <label for="isAdmin">Admin</label><br>
+            <input type="text" id="isAdmin" name="isAdmin"><br>
+        </fieldset>
     </form>
 </div>
 </div>
