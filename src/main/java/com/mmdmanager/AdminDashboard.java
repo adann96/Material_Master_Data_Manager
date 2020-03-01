@@ -21,12 +21,13 @@ public class AdminDashboard extends HttpServlet {
         doGet(request,response);
         String admin_id = request.getParameter("userID");
         String acc_password = request.getParameter("userPassword");
+        admin_id = admin_id.toUpperCase();
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "mmdmanager", "NHY67ujm");
             statementCreation = connection.createStatement();
-            receivedPersonalData = statementCreation.executeQuery("SELECT COMPANY_NAME, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE USER_ID='" + admin_id + "' " + "AND ACC_PASSWORD='" + acc_password + "' AND IS_ADMIN = 'Y'");
+            receivedPersonalData = statementCreation.executeQuery("SELECT COMPANY_ID, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE USER_ID='" + admin_id + "' " + "AND ACC_PASSWORD='" + acc_password + "' AND IS_ADMIN = 'Y'");
 
             if (receivedPersonalData.next()) {
                 HttpSession httpSession = request.getSession();

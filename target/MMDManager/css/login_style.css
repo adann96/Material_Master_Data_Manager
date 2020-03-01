@@ -90,6 +90,7 @@ fieldset {
     background: rgba(255, 255, 255, 0.6);
     margin: 0px 10px 0px 10px;
     outline: none;
+    width: 100px;
 }
 
 .tabcontent label {

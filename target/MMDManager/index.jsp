@@ -22,11 +22,7 @@
     <form class="tabcontent" id="userLoginForm" action="MaterialCreator" method="POST">
         <fieldset>
             <label for="client">Client</label><br>
-            <select type="text" name="client" id="client" onkeydown="return event.key != 'Enter';" required>
-                <option>Commerzbank AG S.A. Branch in Lodz</option>
-                <option>Daikin Airconditioning Poland Sp. z o.o.</option>
-                <option>Infosys Consulting</option>
-            </select><br>
+            <input type="text" name="client" id="client" onkeydown="return event.key != 'Enter';" required><br>
             <label for="userID">User ID</label><br>
             <input type="text" id="userID" name="userID" onkeydown="return event.key != 'Enter';" required><br>
             <label for="userPassword">Password</label><br>

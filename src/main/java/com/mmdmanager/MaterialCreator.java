@@ -20,15 +20,16 @@ public class MaterialCreator extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
-        String company_name = request.getParameter("client");
+        String company_id = request.getParameter("client");
         String user_id = request.getParameter("userID");
         String acc_password = request.getParameter("userPassword");
+        user_id = user_id.toUpperCase();
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "mmdmanager", "NHY67ujm");
             statementCreation = connection.createStatement();
-            receivedPersonalData = statementCreation.executeQuery("SELECT COMPANY_NAME, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE COMPANY_NAME='" + company_name + "' " + "AND USER_ID='" + user_id + "' " + "AND ACC_PASSWORD='" + acc_password + "' AND IS_ADMIN = 'N'");
+            receivedPersonalData = statementCreation.executeQuery("SELECT COMPANY_ID, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE COMPANY_ID='" + Integer.valueOf(company_id) + "' " + "AND USER_ID='" + user_id + "' " + "AND ACC_PASSWORD='" + acc_password + "' AND IS_ADMIN = 'N'");
 
             if (receivedPersonalData.next() == true) {
                 HttpSession httpSession = request.getSession();
