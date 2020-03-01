@@ -1,6 +1,5 @@
 package com.mmdmanager;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,40 +12,40 @@ import java.sql.*;
 
 @WebServlet("/MaterialCreator")
 public class MaterialCreator extends HttpServlet {
-    String someMessage = "hjdfjsahfjhfkufjky";
+    long createdSessionTime;
     int i = 0;
     Connection connection;
     Statement statementCreation;
-    ResultSet receivedPersData;
+    ResultSet receivedPersonalData;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter printWriter = response.getWriter();
-
         doGet(request, response);
         String company_name = request.getParameter("client");
         String user_id = request.getParameter("userID");
         String acc_password = request.getParameter("userPassword");
-        String is_admin = request.getParameter("isAdmin");
-
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "mmdmanager", "NHY67ujm");
             statementCreation = connection.createStatement();
-            receivedPersData = statementCreation.executeQuery("SELECT COMPANY_NAME, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE COMPANY_NAME='" + company_name + "' " + "AND USER_ID='" + user_id + "' " + "AND ACC_PASSWORD='" + acc_password + "' " + "AND IS_ADMIN='" + is_admin + "'");
+            receivedPersonalData = statementCreation.executeQuery("SELECT COMPANY_NAME, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE COMPANY_NAME='" + company_name + "' " + "AND USER_ID='" + user_id + "' " + "AND ACC_PASSWORD='" + acc_password + "' AND IS_ADMIN = 'N'");
 
-            if (receivedPersData.next() == true) {
+            if (receivedPersonalData.next() == true) {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("user_id", user_id);
-                response.sendRedirect("MaterialCreator.jsp?name="+user_id.toLowerCase()+"");
+                httpSession.setAttribute("createdSessionTime", createdSessionTime);
+                createdSessionTime = httpSession.getCreationTime();
+                response.sendRedirect("MaterialCreator.jsp?name="+user_id.toLowerCase()+"?t="+createdSessionTime+"");
             }
             else {
-                //response.sendRedirect("index.jsp");
+                response.sendRedirect("http://localhost:8090/Login/index.jsp");
             }
 
-        } catch (ClassNotFoundException ex) {
+        }
+        catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             ex.printStackTrace();
         }
     }

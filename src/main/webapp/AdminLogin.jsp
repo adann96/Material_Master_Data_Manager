@@ -1,32 +1,24 @@
-<%@ page contentType="text/html; ISO-8859-1" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <head>
     <title>Material Master Data Manager</title>
     <meta charset="ISO-8859-1">
     <link rel="stylesheet" href="css/login_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
-
 <body>
 <section id="basicData">
     <div id="createMaterialHeader">
-        <h2><b>Material Master Data Manager - USER Login</b></h2>
+        <h2><b>Material Master Data Manager - ADMIN Login</b></h2>
     </div>
-    <form id="transactionsLoginForm" action="AdminLogin" method="POST">
+    <form id="transactionsLoginForm" action="UserLogin" method="POST">
         <p><button type="submit" class="fa fa-check"></button></p>
         <p><input type="text" id="transactions" name="transactions" required></p>
         <p><button type="button" class="fas fa-unlock"></button></p>
         <p><button type="button" class="fas fa-question"></button></p>
     </form>
-    <form class="tabcontent" id="userLoginForm" action="MaterialCreator" method="POST">
+    <form class="tabcontent" id="userLoginForm" action="AdminDashboard" method="POST">
         <fieldset>
-            <label for="client">Client</label><br>
-            <select type="text" name="client" id="client" onkeydown="return event.key != 'Enter';" required>
-                <option>Commerzbank AG S.A. Branch in Lodz</option>
-                <option>Daikin Airconditioning Poland Sp. z o.o.</option>
-                <option>Infosys Consulting</option>
-            </select><br>
             <label for="userID">User ID</label><br>
             <input type="text" id="userID" name="userID" onkeydown="return event.key != 'Enter';" required><br>
             <label for="userPassword">Password</label><br>
@@ -36,9 +28,10 @@
     </form>
 </section>
 <footer>
-    <p><a>© Created by Lorem Ipsum. 2017</a></p>
+    <p><a>Â© Created by Lorem Ipsum. 2017</a></p>
 </footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src='javaScript/loginUser.js'></script>
+<script src='javaScript/loginAdmin.js'></script>
 </html>
+
