@@ -1,6 +1,8 @@
 document.getElementById("client").selectedIndex = -1;
 
 const newPassReq = document.getElementsByClassName("fas fa-question");
+const userID = document.getElementById("userID");
+const userLoginButton = document.getElementsByClassName("userLoginButton");
 
 newPassReq[0].addEventListener('click', function () {
     setTimeout(function() {
@@ -10,5 +12,3 @@ newPassReq[0].addEventListener('click', function () {
             "Index No: 212305");
     }, 500);
 });
-
-

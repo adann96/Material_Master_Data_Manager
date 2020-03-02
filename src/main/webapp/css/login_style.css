@@ -109,6 +109,13 @@ fieldset {
     color: #333;
 }
 
+#transactionsLoginForm fieldset {
+    width: 100%;
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+}
+
 footer {
     width: 100%;
     background: linear-gradient(#cfdeed, #b0c7dd);

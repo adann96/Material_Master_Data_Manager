@@ -14,10 +14,12 @@
         <h2><b>Material Master Data Manager - USER Login</b></h2>
     </div>
     <form id="transactionsLoginForm" action="AdminLogin" method="POST">
-        <p><button type="submit" class="fa fa-check"></button></p>
-        <p><input type="text" id="transactions" name="transactions" required></p>
-        <p><button type="button" class="fas fa-unlock"></button></p>
-        <p><button type="button" class="fas fa-question"></button></p>
+        <fieldset>
+            <p><button type="submit" class="fa fa-check"></button></p>
+            <p><input type="text" id="transactions" name="transactions" required></p>
+            <p><button type="button" class="fas fa-unlock"></button></p>
+            <p><button type="button" class="fas fa-question"></button></p>
+        </fieldset>
     </form>
     <form class="tabcontent" id="userLoginForm" action="MaterialCreator" method="POST">
         <fieldset>

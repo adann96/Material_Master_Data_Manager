@@ -13,13 +13,14 @@ import java.sql.*;
 @WebServlet("/MaterialCreator")
 public class MaterialCreator extends HttpServlet {
     long createdSessionTime;
-    int i = 0;
+    int enterWrongPassAttempts = 0;
     Connection connection;
     Statement statementCreation;
     ResultSet receivedPersonalData;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
+
         String company_id = request.getParameter("client");
         String user_id = request.getParameter("userID");
         String acc_password = request.getParameter("userPassword");
@@ -37,6 +38,9 @@ public class MaterialCreator extends HttpServlet {
                 httpSession.setAttribute("createdSessionTime", createdSessionTime);
                 createdSessionTime = httpSession.getCreationTime();
                 response.sendRedirect("MaterialCreator.jsp?name="+user_id.toLowerCase()+"?t="+createdSessionTime+"");
+                System.out.println(company_id.equals(receivedPersonalData.getString(1)) + " | " +
+                        user_id.equals(receivedPersonalData.getString(2)) + " | " +
+                        !acc_password.equals(receivedPersonalData.getString(3)));
             }
             else {
                 response.sendRedirect("http://localhost:8090/Login/index.jsp");
