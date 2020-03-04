@@ -10,10 +10,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet("/MaterialCreator")
-public class MaterialCreator extends HttpServlet {
+@WebServlet("/MaterialDashboard")
+public class MaterialDashboard extends HttpServlet {
     long createdSessionTime;
-    int enterWrongPassAttempts = 0;
     Connection connection;
     Statement statementCreation;
     ResultSet receivedPersonalData;
@@ -37,7 +36,7 @@ public class MaterialCreator extends HttpServlet {
                 httpSession.setAttribute("user_id", user_id);
                 httpSession.setAttribute("createdSessionTime", createdSessionTime);
                 createdSessionTime = httpSession.getCreationTime();
-                response.sendRedirect("MaterialCreator.jsp?name="+user_id.toLowerCase()+"?t="+createdSessionTime+"");
+                response.sendRedirect("MaterialDashboard.jsp?name="+user_id.toLowerCase()+"?t="+createdSessionTime+"");
                 System.out.println(company_id.equals(receivedPersonalData.getString(1)) + " | " +
                         user_id.equals(receivedPersonalData.getString(2)) + " | " +
                         !acc_password.equals(receivedPersonalData.getString(3)));
@@ -91,7 +90,7 @@ public class MaterialCreator extends HttpServlet {
 /*
             do {
                 if (receivedPersData.next()) {
-                    response.sendRedirect("MaterialCreator.jsp");
+                    response.sendRedirect("MaterialDashboard.jsp");
                 }
                 else if (!(receivedPersData.getString().equals(company_name)) || !(receivedPersData.getString().equals(admin)) || !(receivedPersData.getString().equals(user_id)) && receivedPersData.getString().equals(acc_password)) {
                     //alerta się zrobi, tzn. okienko się uruchomi z napisem "Wrong credentials!", formularz się wyczyści, nie będzie iteracji, bo UserID i Password jest ok

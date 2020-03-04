@@ -21,7 +21,7 @@
             <p><button type="button" class="fas fa-question"></button></p>
         </fieldset>
     </form>
-    <form class="tabcontent" id="userLoginForm" action="MaterialCreator" method="POST">
+    <form class="tabcontent" id="userLoginForm" action="MaterialDashboard" method="POST">
         <fieldset>
             <label for="client">Client</label><br>
             <input type="text" name="client" id="client" onkeydown="return event.key != 'Enter';" required><br>
