@@ -21,7 +21,7 @@
     </form>
     <form class="tabcontent" id="userLoginForm" action="AdminDashboard" method="POST">
         <fieldset>
-            <label for="userID">User ID</label><br>
+            <label for="userID">Admin ID</label><br>
             <input type="text" id="userID" name="userID" onkeydown="return event.key != 'Enter';" required><br>
             <label for="userPassword">Password</label><br>
             <input type="password" id="userPassword" name="userPassword" onkeydown="return event.key != 'Enter';" required><br>

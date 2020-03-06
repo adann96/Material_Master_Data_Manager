@@ -1,4 +1,8 @@
-package com.mmdmanager;
+package com.mmdmanager.servlets;
+
+import com.mmdmanager.dao.AdminDAO;
+import com.mmdmanager.dao.AdminDAOImpl;
+import com.mmdmanager.others.Admin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +15,44 @@ import java.sql.*;
 
 @WebServlet("/AdminDashboard")
 public class AdminDashboard extends HttpServlet {
+    long createdSessionTime;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+
+        try {
+            AdminDAO adminDAO = new AdminDAOImpl();
+
+            String admin_id = request.getParameter("userID");
+            String acc_password = request.getParameter("userPassword");
+
+            admin_id = admin_id.toUpperCase();
+
+            Admin admin = adminDAO.getAdmin(admin_id,acc_password);
+
+            if (admin!=null && (admin.getUser_id()!=null && admin.getAcc_password()!=null)) {
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("admin_id", admin_id);
+                httpSession.setAttribute("createdSessionTime", createdSessionTime);
+                createdSessionTime = httpSession.getCreationTime();
+                response.sendRedirect("AdminDashboard.jsp?name="+admin_id.toLowerCase()+"?t="+createdSessionTime+"");
+            }
+            else if (admin!=null && admin.getUser_id()!=null) {
+                response.sendRedirect("None");
+            }
+        }
+        catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+}
+
+
+/*
     long createdSessionTime;
     int i = 0;
     Connection connection;
@@ -47,8 +89,4 @@ public class AdminDashboard extends HttpServlet {
             ex.printStackTrace();
         }
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-}
+ */

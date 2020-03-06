@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: admin
+  com.mmdmanager.others.User: admin
   Date: 01/03/2020
   Time: 18:21
   To change this template use File | Settings | File Templates.
