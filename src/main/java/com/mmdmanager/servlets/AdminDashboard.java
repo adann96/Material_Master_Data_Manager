@@ -16,20 +16,23 @@ import java.sql.*;
 @WebServlet("/AdminDashboard")
 public class AdminDashboard extends HttpServlet {
     long createdSessionTime;
+    AdminDAO adminDAO;
+    String admin_id, acc_password;
+    Admin admin;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
 
+        adminDAO = new AdminDAOImpl();
+
+        admin_id = request.getParameter("userID");
+        acc_password = request.getParameter("userPassword");
+
+        admin_id = admin_id.toUpperCase();
+
+        admin = adminDAO.getAdmin(admin_id,acc_password);
+
         try {
-            AdminDAO adminDAO = new AdminDAOImpl();
-
-            String admin_id = request.getParameter("userID");
-            String acc_password = request.getParameter("userPassword");
-
-            admin_id = admin_id.toUpperCase();
-
-            Admin admin = adminDAO.getAdmin(admin_id,acc_password);
-
             if (admin!=null && (admin.getUser_id()!=null && admin.getAcc_password()!=null)) {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("admin_id", admin_id);

@@ -7,31 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="75d8da49-39f2-4a7f-b4a5-1f90d15ca1e7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/dao/AdminDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/dao/AdminDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/dao/UserDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/dao/UserDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/oracle/ConnectionProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/oracle/Provider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/others/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/others/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mmdmanager/AdminDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/servlets/AdminDashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mmdmanager/AdminLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/servlets/AdminLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mmdmanager/MaterialDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/servlets/MaterialDashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mmdmanager/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/servlets/UserLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AdminDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AdminDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AdminLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AdminLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/MMDManager/AdminDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/MMDManager/AdminDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/MMDManager/AdminLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/MMDManager/AdminLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/MMDManager/WEB-INF/classes/com/mmdmanager/AdminDashboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/MMDManager/WEB-INF/classes/com/mmdmanager/AdminLogin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/MMDManager/WEB-INF/classes/com/mmdmanager/MaterialDashboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/MMDManager/WEB-INF/classes/com/mmdmanager/UserLogin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mmdmanager/AdminDashboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mmdmanager/AdminLogin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mmdmanager/MaterialDashboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mmdmanager/UserLogin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mmdmanager/servlets/AdminDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mmdmanager/servlets/AdminDashboard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +207,7 @@
       <workItem from="1583090146093" duration="3121000" />
       <workItem from="1583166637127" duration="7289000" />
       <workItem from="1583431650570" duration="5630000" />
-      <workItem from="1583515395795" duration="3633000" />
+      <workItem from="1583515395795" duration="3950000" />
     </task>
     <servers />
   </component>
