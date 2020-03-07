@@ -2,7 +2,6 @@ package com.mmdmanager.servlets;
 
 import com.mmdmanager.others.User;
 import com.mmdmanager.dao.UserDAO;
-import com.mmdmanager.dao.UserDAOImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,20 +14,23 @@ import java.io.IOException;
 @WebServlet("/MaterialDashboard")
 public class MaterialDashboard extends HttpServlet {
     long createdSessionTime;
+    UserDAO userDAO;
+    String company_id, user_id, acc_password;
+    User user;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
 
         try {
-            UserDAO userDAO = new UserDAOImpl();
+            userDAO = new UserDAO();
 
-            String company_id = request.getParameter("client");
-            String user_id = request.getParameter("userID");
-            String acc_password = request.getParameter("userPassword");
+            company_id = request.getParameter("client");
+            user_id = request.getParameter("userID");
+            acc_password = request.getParameter("userPassword");
 
             user_id = user_id.toUpperCase();
 
-            User user = userDAO.getUser(company_id, user_id, acc_password);
+            user = userDAO.getUser(company_id, user_id, acc_password);
 
             if (user!=null && (user.getCompany_id()!=null && user.getUser_id()!=null && user.getAcc_password()!=null)) {
                 HttpSession httpSession = request.getSession();
@@ -50,123 +52,3 @@ public class MaterialDashboard extends HttpServlet {
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-long createdSessionTime;
-    Connection connection;
-    Statement statementCreation;
-    ResultSet receivedPersonalData;
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-
-        String company_id = request.getParameter("client");
-        String user_id = request.getParameter("userID");
-        String acc_password = request.getParameter("userPassword");
-        user_id = user_id.toUpperCase();
-
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "mmdmanager", "NHY67ujm");
-            statementCreation = connection.createStatement();
-            receivedPersonalData = statementCreation.executeQuery("SELECT COMPANY_ID, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE COMPANY_ID='" + Integer.valueOf(company_id) + "' " + "AND USER_ID='" + user_id + "' " + "AND ACC_PASSWORD='" + acc_password + "' AND IS_ADMIN = 'N'");
-
-            if (receivedPersonalData.next() == true) {
-                HttpSession httpSession = request.getSession();
-                httpSession.setAttribute("user_id", user_id);
-                httpSession.setAttribute("createdSessionTime", createdSessionTime);
-                createdSessionTime = httpSession.getCreationTime();
-                response.sendRedirect("MaterialDashboard.jsp?name="+user_id.toLowerCase()+"?t="+createdSessionTime+"");
-                System.out.println(company_id.equals(receivedPersonalData.getString(1)) + " | " +
-                        user_id.equals(receivedPersonalData.getString(2)) + " | " +
-                        !acc_password.equals(receivedPersonalData.getString(3)));
-            }
-            else {
-                response.sendRedirect("http://localhost:8090/Login/index.jsp");
-            }
-
-        }
-        catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-            do {
-                if (receivedPersData.next()) {
-                    response.sendRedirect("MaterialDashboard.jsp");
-                }
-                else if (!(receivedPersData.getString().equals(company_name)) || !(receivedPersData.getString().equals(admin)) || !(receivedPersData.getString().equals(user_id)) && receivedPersData.getString().equals(acc_password)) {
-                    //alerta się zrobi, tzn. okienko się uruchomi z napisem "Wrong credentials!", formularz się wyczyści, nie będzie iteracji, bo UserID i Password jest ok
-                    //https://stackoverflow.com/questions/24176684/how-to-show-alert-in-a-jsp-from-a-servlet-and-then-redirect-to-another-jsp
-                }
-                else if (receivedPersData.getString().equals(company_name) && receivedPersData.getString().equals(admin) && receivedPersData.getString().equals(user_id) && !(receivedPersData.getString().equals(acc_password))) {
-                    //też alert jsowy, który tym razem pokaże, że jest złe hasło
-                    //jak jest złe hasło, a wszystko pozostałe ok, to rozpoczynamy iterację
-                    i+=1;
-                    if (i == 3) {
-                        //Też wyjebie alert, że trzy razy źle wpisane hasło
-                        //Przy okazji też skasuje ziomkowi konto, w sumie tu można emaila jebnąć do admina też taki i taki użytkownik został skasowany.
-                    }
-                }
-                else {
-                    //alerta się zrobi, tzn. okienko się uruchomi z napisem "Wrong credentials!", formularz się wyczyści, nie będzie iteracji
-                    //https://stackoverflow.com/questions/24176684/how-to-show-alert-in-a-jsp-from-a-servlet-and-then-redirect-to-another-jsp
-                }
-            } while (!(receivedPersData.getString().equals(company_name)) || !(receivedPersData.getString().equals(admin)) || !(receivedPersData.getString().equals(user_id)) ||!(receivedPersData.getString().equals(acc_password)));
-        }
-
- */
