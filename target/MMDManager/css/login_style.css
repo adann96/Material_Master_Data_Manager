@@ -11,16 +11,15 @@ body {
     background: #fefefe;
 }
 
-#basicData {
-    border: 1px solid silver;
+section {
     border-bottom-style: none;
     background: #fefefe;
-    min-height: 96vh;
+    height: 100vh;
 }
 
-#basicData #createMaterialHeader {
+section #createMaterialHeader {
     padding: 0px;
-    margin: 2px;
+    margin: 0px;
 }
 
 button[type="submit"], button[type="button"] {
@@ -50,7 +49,7 @@ button[class="userLoginButton"] {
 
 #transactionsLoginForm {
     background: #cfdde8;
-    margin: 2px;
+    margin: 0px;
 }
 
 #transactionsLoginForm p {
@@ -63,7 +62,7 @@ button[class="userLoginButton"] {
     color: #333;
 }
 
-#basicData #createMaterialHeader h2 {
+section #createMaterialHeader h2 {
     margin: 0px;
     padding: 10px;
     background: linear-gradient(#cfdeed, #b0c7dd);
@@ -76,7 +75,7 @@ fieldset {
 }
 
 .tabcontent {
-    margin: 2px;
+    margin: 0px;
     background: #e9f0f6;
 }
 
@@ -113,28 +112,4 @@ fieldset {
     display: flex;
     margin: 0px;
     padding: 0px;
-}
-
-footer {
-    width: 100%;
-    background: linear-gradient(#cfdeed, #b0c7dd);
-    margin: 0px;
-    padding: 0px;
-    height: 4vh;
-    display: table;
-}
-
-footer p {
-    padding: 5px;
-    margin: 0px;
-    display: table-cell;
-    vertical-align: middle;
-}
-
-footer p a {
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 14px;
-    font-style: italic;
-    margin: 2px;
 }

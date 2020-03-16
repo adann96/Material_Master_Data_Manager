@@ -2,8 +2,10 @@ package com.mmdmanager.servlets;
 
 import com.mmdmanager.dao.AdminDAO;
 import com.mmdmanager.dao.CompaniesDAO;
+import com.mmdmanager.dao.SessionDAO;
 import com.mmdmanager.others.Admin;
 import com.mmdmanager.others.Companies;
+import com.mmdmanager.others.Session;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,77 +21,63 @@ import java.util.List;
 
 @WebServlet("/AdminDashboard")
 public class AdminDashboard extends HttpServlet {
+    private static final long serialVersionUID = 1;
     long createdSessionTime;
-    AdminDAO adminDAO;
-    String admin_id, acc_password;
-    Admin admin;
 
-    private static final long serialVersionUID = 1L;
     private CompaniesDAO companiesDAO;
+    private AdminDAO adminDAO;
+
+    private String admin_id, acc_password;
+    private Admin admin;
+
+    private String redirection = "AdminDashboard.jsp";
 
     public void init() {
-        String jdbcURL = getServletContext().getInitParameter("jdbcURL");
-        String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
-        String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
-
-        companiesDAO = new CompaniesDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        companiesDAO = new CompaniesDAO();
     }
 
-    private void listComp(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        List<Companies> listComp = companiesDAO.listAllCompanies();
-
-        for (Companies comp : listComp) {   // foreach grade in grades
-            System.out.print(comp.getCompany_short_name()); // print that grade
-        }
-
-        request.setAttribute("listComp", listComp);
-        System.out.println();
-        RequestDispatcher dispatcher = request.getRequestDispatcher("AdminDashboard.jsp");
-        dispatcher.forward(request, response);
+    private void listCompanies(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        HttpSession httpSession = request.getSession();
+        List<Companies> listCompanies = companiesDAO.allCompanies();
+        httpSession.setAttribute("listCompanies", listCompanies);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
-
         adminDAO = new AdminDAO();
 
         admin_id = request.getParameter("userID");
         acc_password = request.getParameter("userPassword");
 
         admin_id = admin_id.toUpperCase();
-
         admin = adminDAO.getAdmin(admin_id,acc_password);
 
         try {
             if (admin!=null && (admin.getUser_id()!=null && admin.getAcc_password()!=null)) {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("admin_id", admin_id);
-                httpSession.setAttribute("createdSessionTime", createdSessionTime);
-                createdSessionTime = httpSession.getCreationTime();
-                List<Companies> listComp = companiesDAO.listAllCompanies();
 
-                for (Companies comp : listComp) {   // foreach grade in grades
-                    System.out.print(comp.getCompany_short_name()); // print that grade
+                try {
+                    listCompanies(request,response);
+                }
+                catch (SQLException e) {
+                    e.printStackTrace();
                 }
 
-                request.setAttribute("listComp", listComp);
-                response.sendRedirect("AdminDashboard.jsp?name="+admin_id.toLowerCase()+"?t="+createdSessionTime);
+                httpSession.setAttribute("createdSessionTime", createdSessionTime);
+                createdSessionTime = httpSession.getCreationTime();
+                response.sendRedirect(redirection+"?name="+admin_id.toLowerCase()+"?t="+createdSessionTime);
             }
             else if (admin!=null && admin.getUser_id()!=null) {
                 response.sendRedirect("None");
             }
         }
-        catch (NullPointerException | SQLException ex) {
+        catch (NullPointerException ex) {
             ex.printStackTrace();
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            listComp(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
     }
 }

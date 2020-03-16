@@ -1,5 +1,7 @@
 package com.mmdmanager.servlets;
 
+import com.mmdmanager.dao.SessionDAO;
+import com.mmdmanager.others.Session;
 import com.mmdmanager.others.User;
 import com.mmdmanager.dao.UserDAO;
 
@@ -10,19 +12,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
 @WebServlet("/MaterialDashboard")
 public class MaterialDashboard extends HttpServlet {
-    long createdSessionTime;
-    UserDAO userDAO;
-    String company_id, user_id, acc_password;
-    User user;
+    private long createdSessionTime;
+    private UserDAO userDAO;
+    private SessionDAO sessionDAO;
+
+    private String company_id, user_id, acc_password;
+
+    public Session session;
+    private User user;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
 
         try {
             userDAO = new UserDAO();
+            sessionDAO = new SessionDAO();
 
             company_id = request.getParameter("client");
             user_id = request.getParameter("userID");
@@ -37,13 +47,14 @@ public class MaterialDashboard extends HttpServlet {
                 httpSession.setAttribute("user_id", user_id);
                 httpSession.setAttribute("createdSessionTime", createdSessionTime);
                 createdSessionTime = httpSession.getCreationTime();
+                session = sessionDAO.getSession(user_id,new Timestamp(httpSession.getCreationTime()));
                 response.sendRedirect("MaterialDashboard.jsp?name="+user_id.toLowerCase()+"?t="+createdSessionTime+"");
             }
             else if (user!=null && (user.getCompany_id()!=null && user.getUser_id()!=null)) {
                 response.sendRedirect("None");
             }
         }
-        catch (NullPointerException ex) {
+        catch (NullPointerException | SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

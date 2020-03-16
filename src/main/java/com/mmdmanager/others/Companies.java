@@ -6,15 +6,21 @@ public class Companies {
     private String company_short_name;
     private String company_country;
 
-    public Companies(int company_id, String company_name, String company_short_name, String company_country) {
-        this.company_id = company_id;
+    public Companies() {
+
+    }
+
+    public Companies(String company_name, String company_short_name, String company_country) {
         this.company_name = company_name;
         this.company_short_name = company_short_name;
         this.company_country = company_country;
     }
 
-    public Companies() {
-
+    public Companies(int company_id, String company_name, String company_short_name, String company_country) {
+        this.company_id = company_id;
+        this.company_name = company_name;
+        this.company_short_name = company_short_name;
+        this.company_country = company_country;
     }
 
     public int getCompany_id() {

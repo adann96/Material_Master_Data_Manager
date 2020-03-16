@@ -12,7 +12,7 @@ public class UserDAO {
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
 
-    public User getUser(String company_id, String user_id, String acc_password) {
+    public User getUser(String company_id, String user_id, String acc_password) throws SQLException {
         User user = new User();
 
         try {
@@ -32,6 +32,8 @@ public class UserDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        resultSet.close();
+        connection.close();
         return user;
     }
 }

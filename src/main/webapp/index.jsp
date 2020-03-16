@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<section id="basicData">
+<section>
     <div id="createMaterialHeader">
         <h2><b>Material Master Data Manager - USER Login</b></h2>
     </div>
@@ -33,9 +33,6 @@
         </fieldset>
     </form>
 </section>
-<footer>
-    <p><a>© Created by Lorem Ipsum. 2017</a></p>
-</footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src='javaScript/loginUser.js'></script>

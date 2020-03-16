@@ -1,7 +1,6 @@
 package com.mmdmanager.others;
 
 public class User {
-
     private String company_id;
     private String user_id;
     private String acc_password;
