@@ -15,10 +15,10 @@ public class UserLogin extends HttpServlet {
 
         try {
             if (transaction_admin_name.toLowerCase().equals("/user")) {
-                response.sendRedirect("http://localhost:8090/Login/index.jsp");
+                response.sendRedirect("http://localhost:8090/MMDManager/index.jsp");
             }
             else {
-                response.sendRedirect("http://localhost:8090/Login/AdminLogin.jsp");
+                response.sendRedirect("http://localhost:8090/MMDManager/AdminLogin.jsp");
             }
         }
         catch (Exception ex) {

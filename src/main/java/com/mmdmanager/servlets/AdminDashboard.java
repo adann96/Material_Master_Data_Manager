@@ -1,20 +1,16 @@
 package com.mmdmanager.servlets;
 
 import com.mmdmanager.dao.AdminDAO;
-import com.mmdmanager.dao.CompaniesDAO;
-import com.mmdmanager.dao.SessionDAO;
+import com.mmdmanager.dao.LogonsDAO;
 import com.mmdmanager.others.Admin;
-import com.mmdmanager.others.Companies;
-import com.mmdmanager.others.Session;
+import com.mmdmanager.others.Logons;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,7 +20,7 @@ public class AdminDashboard extends HttpServlet {
     private static final long serialVersionUID = 1;
     long createdSessionTime;
 
-    private CompaniesDAO companiesDAO;
+    private LogonsDAO logonsDAO;
     private AdminDAO adminDAO;
 
     private String admin_id, acc_password;
@@ -33,13 +29,13 @@ public class AdminDashboard extends HttpServlet {
     private String redirection = "AdminDashboard.jsp";
 
     public void init() {
-        companiesDAO = new CompaniesDAO();
+        logonsDAO = new LogonsDAO();
     }
 
-    private void listCompanies(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+    private void listLogons(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         HttpSession httpSession = request.getSession();
-        List<Companies> listCompanies = companiesDAO.allCompanies();
-        httpSession.setAttribute("listCompanies", listCompanies);
+        List<Logons> listLogons = logonsDAO.allLogons();
+        httpSession.setAttribute("listLogons", listLogons);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,7 +54,7 @@ public class AdminDashboard extends HttpServlet {
                 httpSession.setAttribute("admin_id", admin_id);
 
                 try {
-                    listCompanies(request,response);
+                    listLogons(request,response);
                 }
                 catch (SQLException e) {
                     e.printStackTrace();

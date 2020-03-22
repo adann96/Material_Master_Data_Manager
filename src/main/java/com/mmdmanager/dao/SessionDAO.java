@@ -9,7 +9,6 @@ import java.sql.*;
 public class SessionDAO {
     static Connection connection;
     static PreparedStatement preparedStatement;
-    ResultSet resultSet;
 
     public Session getSession(String user_id, Timestamp start_session) throws SQLException {
         Session session = new Session();
@@ -24,7 +23,23 @@ public class SessionDAO {
 
             session.setUser_id(user_id);
             session.setStart_session(start_session);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        connection.close();
+        return session;
+    }
 
+    public Session closeSession(Timestamp end_of_session) throws SQLException {
+        Session session = new Session();
+
+        try {
+            connection = ConnectionProvider.getConnection();
+            preparedStatement = connection.prepareStatement("UPDATE LOGONS SET END_OF_SESSION = ? WHERE LOGIN_ID = (select MAX(LOGIN_ID) from LOGONS)");
+            preparedStatement.setTimestamp(1, end_of_session);
+            preparedStatement.executeUpdate();
+
+            session.setEnd_of_session(end_of_session);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

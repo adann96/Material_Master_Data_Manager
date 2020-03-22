@@ -1,0 +1,20 @@
+table {
+    border: 1px solid #5175ff;
+    margin: 0 auto;
+}
+
+table thead {
+    background: #cbd6ff;
+    margin: 0 auto;
+}
+
+table tbody {
+    background: #f0c6ff;
+    margin: 0 auto;
+}
+
+table tbody tr td, table thead tr th {
+    padding: 10px;
+    text-align: center;
+}
+

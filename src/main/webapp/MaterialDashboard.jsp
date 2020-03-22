@@ -4,6 +4,10 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Hello User!</h1>
+<form action="UserLogout" method="get">
+    <fieldset>
+        <button type="submit">Log Out</button>
+    </fieldset>
+</form>
 </body>
 </html>
