@@ -1,20 +1,118 @@
+html {
+    background: black;
+    color: #333;
+    font-family: "calibri", "times", "sans-serif";
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    color: #333;
+    background: #fefefe;
+}
+
+section {
+    border-bottom-style: none;
+    background: #fefefe;
+}
+
+section #materialHeader {
+    padding: 0px;
+    margin: 0px;
+}
+
+section #materialHeader h2 {
+    margin: 0px;
+    padding: 10px;
+    background: linear-gradient(#cfdeed, #b0c7dd);
+}
+
+button[type="submit"],
+button[type="button"] {
+    padding: 4px 7px 4px 7px;
+    border: none;
+    border-radius: 4%;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px grey;
+}
+
+button[class="userLoginButton"] {
+    padding: 4px;
+    margin: 15px 10px 0px 10px;
+    font-family: "calibri", "times", "sans-serif";
+    font-size: 15px;
+}
+
+#hamburger {
+    cursor: pointer;
+    padding: 10px;
+}
+
+#menuToggle {
+    width: 100%;
+    background: #cfdde8;
+    z-index: 999;
+}
+
+nav {
+    width: 100%;
+    background: lightblue;
+    display: flex;
+    position: absolute;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+
+nav ul h1 {
+    margin: 5px;
+    padding: 0px;
+}
+
+nav ul li {
+    font-size: 12.5px;
+    list-style-type: none;
+}
+
+.dashData {
+    margin: 5px;
+    background: #cfdde8;
+}
+
+#sectionDash {
+    display: flex;
+}
+
+#leftPanel, #rightPanel {
+    width: 20%;
+}
+
+#midPanel {
+    width: 60%;
+}
+
 table {
-    border: 1px solid #5175ff;
+    border: none;
     margin: 0 auto;
+    width: 100%;
 }
 
 table thead {
-    background: #cbd6ff;
     margin: 0 auto;
 }
 
 table tbody {
-    background: #f0c6ff;
+    background: #accbdc;
     margin: 0 auto;
 }
 
 table tbody tr td, table thead tr th {
-    padding: 10px;
     text-align: center;
+    padding: 20px;
 }
 
