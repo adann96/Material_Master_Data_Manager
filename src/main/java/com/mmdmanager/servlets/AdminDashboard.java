@@ -5,6 +5,7 @@ import com.mmdmanager.dao.LogonsDAO;
 import com.mmdmanager.others.Admin;
 import com.mmdmanager.others.Logons;
 
+import javax.management.MBeanServerConnection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,12 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/AdminDashboard")
 public class AdminDashboard extends HttpServlet {
     private static final long serialVersionUID = 1;
     long createdSessionTime;
+    private Date date = new java.util.Date();
 
     private LogonsDAO logonsDAO;
     private AdminDAO adminDAO;
@@ -60,6 +63,7 @@ public class AdminDashboard extends HttpServlet {
                     e.printStackTrace();
                 }
 
+                httpSession.setAttribute("date", date);
                 httpSession.setAttribute("createdSessionTime", createdSessionTime);
                 createdSessionTime = httpSession.getCreationTime();
                 response.sendRedirect(redirection+"?name="+admin_id.toLowerCase()+"?t="+createdSessionTime);

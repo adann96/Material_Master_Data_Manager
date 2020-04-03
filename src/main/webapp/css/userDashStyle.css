@@ -1,0 +1,219 @@
+html {
+    background: black;
+    font-family: "calibri", "times", "sans-serif";
+    color: #f2f2f2;
+    height: 100vh;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    background: #2a2b3d;
+}
+
+header {
+    border-bottom-style: none;
+    background: #6f6486 !important;
+    padding: 0px;
+    margin: 0px;
+}
+
+header .main-color {
+    color: #ffc107;
+}
+
+header h2 {
+    margin: 0px;
+    padding: 10px;
+}
+
+button[type="submit"] {
+    padding: 4px 7px 4px 7px;
+    border: none;
+    border-radius: 4%;
+    outline: none;
+    cursor: pointer;
+}
+
+#materialHeader {
+    padding: 0px;
+    margin: 0px;
+}
+
+#materialHeader h2 {
+    margin: 0px;
+    padding: 10px;
+}
+
+nav #createMaterialOptions {
+    background: #3e405b;
+    width: 100%;
+}
+
+nav #createMaterialOptions p {
+    margin: 5px 0px 5px 5px;
+    padding: 15px;
+}
+
+nav #createMaterialOptions p a {
+    text-decoration: none;
+    color: #333;
+}
+
+fieldset {
+    border: none;
+    margin: 0px;
+    padding: 0px 0px 0px 0px;
+    display: flex;
+}
+
+.tab {
+    overflow: hidden;
+    margin: 15px;
+}
+
+.tab button {
+    background: #3e405b;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: 0.1s;
+    font-size: 12px;
+    padding: 5px 15px 5px 15px;
+    border-top-left-radius: 16px;
+}
+
+.tab button:hover {
+    background: #6f6486;
+    border-top-left-radius: 16px;
+}
+
+.tab button.active {
+    background-color: #6f6486;
+    border-top-left-radius: 16px;
+}
+
+.tabcontent {
+    width: 500px;
+    padding: 20px;
+    border-top: none;
+    margin: 15px;
+    background: #3e405b;
+}
+
+form {
+    font-size: 15px;
+    width: 500px;
+}
+
+form label {
+    margin: 5px;
+    padding: 5px;
+    display: inline-block;
+}
+
+select {
+    height: 20px;
+}
+
+form input,
+select {
+    border: none;
+    box-shadow: 0px 0px 2px black;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.6);
+    margin: 0px 10px 0px 10px;
+    outline: none;
+}
+
+form .batch,
+form .materialGroup,
+form select[name="capacityUnitOfMeasure"],
+form select[name="inverter"],
+form select[name="powerSupply"],
+form select[name="ceMark"],
+form select[name="salesOemProduct"],
+form select[name="buyOemProduct"],
+form select[name="indoorOutdoor"],
+form select[name="productHierarchy1"],
+form select[name="productHierarchy2"],
+form select[name="productHierarchy3"],
+form select[name="application"],
+form select[name="mode"],
+form select[name="refrigerant"],
+form select[name="frequency"],
+form select[name="source"],
+form select[name="packingStyle"],
+form select[name="dgIndicatorProfile"],
+form select[name="businessPilar"]{
+    width: 100px;
+    margin: 5px 0px 0px 0px;
+}
+
+form input[name="grossWeight"],
+form input[name="netWeight"],
+form input[name="length"],
+form input[name="width"],
+form input[name="height"],
+form input[name="volume"] {
+    width: 90px;
+}
+
+form #remark {
+    margin: 5px;
+    outline: none;
+    background: #fff09e;
+    border-radius: 3px;
+    border: 1px solid grey;
+    margin: 10px 10px 10px 10px;
+}
+
+form input[name="eskNumber"],
+form input[name="productNumber"],
+form input[name="materialName"],
+form input[name="grossWeight"],
+form input[name="netWeight"],
+form input[name="length"],
+form input[name="width"],
+form input[name="height"],
+form input[name="volume"],
+form input[name="capacityUnitOfMeasure"],
+form input[name="inverter"],
+form input[name="powerSupply"],
+form input[name="ceMark"],
+form input[name="refrigerantWeight"],
+form input[name="frequency"],
+form input[name="salesBrand"],
+form input[name="factory"],
+select {
+    background: #d3d3d3;
+}
+
+hr {
+    border: 1px solid grey;
+    padding: 0px;
+}
+
+footer {
+    width: 100%;
+    background: linear-gradient(#cfdeed, #b0c7dd);
+    margin: 0px;
+    padding: 0px;
+    height: 4vh;
+    display: table;
+}
+
+footer p {
+    padding: 5px;
+    margin: 0px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+footer p a {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    font-style: italic;
+    margin: 2px;
+}

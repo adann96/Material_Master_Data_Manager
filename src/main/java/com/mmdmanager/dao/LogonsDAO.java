@@ -12,8 +12,6 @@ public class LogonsDAO {
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
 
-    public LogonsDAO() {}
-
     public List<Logons> allLogons() {
         List<Logons> logons = new ArrayList<>();
 

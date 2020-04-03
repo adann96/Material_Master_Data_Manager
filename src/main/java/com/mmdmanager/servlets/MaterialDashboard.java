@@ -47,7 +47,7 @@ public class MaterialDashboard extends HttpServlet {
                 httpSession.setAttribute("user_id", user_id);
                 httpSession.setAttribute("createdSessionTime", createdSessionTime);
                 createdSessionTime = httpSession.getCreationTime();
-                session = sessionDAO.getSession(user_id,new Timestamp(httpSession.getCreationTime()));
+                //session = sessionDAO.getSession(user_id,new Timestamp(httpSession.getCreationTime()));
                 response.sendRedirect("MaterialDashboard.jsp?name="+user_id.toLowerCase()+"?t="+createdSessionTime+"");
             }
             else if (user!=null && (user.getCompany_id()!=null && user.getUser_id()!=null)) {

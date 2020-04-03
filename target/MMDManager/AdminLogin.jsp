@@ -7,10 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
 <body>
-<section>
-    <div id="createMaterialHeader">
-        <h2><b>Material Master Data Manager - ADMIN Login</b></h2>
-    </div>
+    <header>
+        <h2><b>admin<span class="main-color">Login</span></b></h2>
+    </header>
     <form id="transactionsLoginForm" action="UserLogin" method="POST">
         <fieldset>
             <p><button type="submit" class="fa fa-check"></button></p>
@@ -28,7 +27,6 @@
             <button type="submit" class="userLoginButton">Log In</button>
         </fieldset>
     </form>
-</section>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src='javaScript/loginAdmin.js'></script>

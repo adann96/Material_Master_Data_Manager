@@ -1,11 +1,8 @@
 package com.mmdmanager.servlets;
 
 import com.mmdmanager.dao.SessionDAO;
-import com.mmdmanager.dao.UserDAO;
 import com.mmdmanager.others.Session;
-import com.mmdmanager.others.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,13 +29,13 @@ public class UserLogout extends HttpServlet {
             HttpSession httpSession = request.getSession(false);
             if (httpSession != null) {
                 closeSessionTime = httpSession.getLastAccessedTime();
-                session = sessionDAO.closeSession(new Timestamp(closeSessionTime));
+                //session = sessionDAO.closeSession(new Timestamp(closeSessionTime));
                 httpSession.removeAttribute("user_id");
                 httpSession.removeAttribute("createdSessionTime");
                 response.sendRedirect("index.jsp");
             }
         }
-        catch (NullPointerException | SQLException ex) {
+        catch (NullPointerException  ex) {
             System.out.println(ex.getMessage());
         }
     }

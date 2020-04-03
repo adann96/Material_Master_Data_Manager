@@ -1,25 +1,31 @@
 html {
     background: black;
-    color: #333;
     font-family: "calibri", "times", "sans-serif";
+    color: #f2f2f2;
+    height: 100vh;
 }
 
 body {
     padding: 0px;
     margin: 0px;
-    color: #333;
-    background: #fefefe;
+    background: #2a2b3d;
 }
 
-section {
+header {
     border-bottom-style: none;
-    background: #fefefe;
-    height: 100vh;
-}
-
-section #createMaterialHeader {
+    background: #3e405b;
     padding: 0px;
     margin: 0px;
+}
+
+header .main-color {
+    color: #ffc107;
+}
+
+header h2 {
+    margin: 0px;
+    padding: 10px;
+    background-color: #6f6486 !important;
 }
 
 button[type="submit"], button[type="button"] {
@@ -28,7 +34,6 @@ button[type="submit"], button[type="button"] {
     border-radius: 4%;
     outline: none;
     cursor: pointer;
-    box-shadow: 0px 0px 5px grey;
 }
 
 button[class="userLoginButton"] {
@@ -44,17 +49,16 @@ button[class="userLoginButton"] {
     border: none;
     border-radius: 4%;
     outline: none;
-    box-shadow: 0px 0px 5px grey;
 }
 
 #transactionsLoginForm {
-    background: #cfdde8;
+    background: #3e405b;
     margin: 0px;
 }
 
 #transactionsLoginForm p {
     margin: 5px 0px 5px 5px;
-    padding: 5px;
+    padding: 15px;
 }
 
 #transactionsLoginForm p a {
@@ -62,7 +66,7 @@ button[class="userLoginButton"] {
     color: #333;
 }
 
-section #createMaterialHeader h2 {
+section header h2 {
     margin: 0px;
     padding: 10px;
     background: linear-gradient(#cfdeed, #b0c7dd);
@@ -76,7 +80,8 @@ fieldset {
 
 .tabcontent {
     margin: 0px;
-    background: #e9f0f6;
+    background: #3e405b;
+    margin: 10px;
 }
 
 .tabcontent select,
@@ -102,9 +107,7 @@ fieldset {
 }
 
 .tabcontent label {
-    color: #aaa;
-    font-size: 12px;
-    color: #333;
+    font-size: 14px;
 }
 
 #transactionsLoginForm fieldset {
