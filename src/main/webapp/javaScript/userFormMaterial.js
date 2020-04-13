@@ -4,66 +4,6 @@ document.getElementsByClassName("batch")[0].selectedIndex = -1;
 document.getElementsByClassName("batch")[1].selectedIndex = -1;
 document.getElementsByClassName("materialGroup")[0].selectedIndex = -1;
 
-document.getElementById("button1").addEventListener("click", function(event) {
-    openTab(event, "generalData");
-});
-
-document.getElementById("button2").addEventListener("click", function(event) {
-    openTab(event, "materialData");
-});
-
-document.getElementById("button3").addEventListener("click", function(event) {
-    openTab(event, "weigthsAndDimensions");
-});
-
-document.getElementById("button4").addEventListener("click", function(event) {
-    openTab(event, "technicalData");
-});
-
-document.getElementById("button5").addEventListener("click", function(event) {
-    openTab(event, "logisticsData");
-});
-
-function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-        if (tabName != "generalData") {
-            tablinks[0].style.backgroundColor = "#3e405b";
-        } else {
-            tablinks[0].style.backgroundColor = "#6f6486";
-        }
-    }
-    document.getElementById(tabName).style.display = "block";
-    event.currentTarget.className += " active";
-}
-
-window.onload = function() {
-    var i, tabcontent, tablinks;
-
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-
-    document.getElementById("generalData").style.display = "block";
-    event.currentTarget.className += " active";
-    tablinks[0].style.backgroundColor = "#6f6486";
-};
-
 const $select1 = $("#select1"),
     $select2 = $("#select2"),
     $options = $select2.find("option");

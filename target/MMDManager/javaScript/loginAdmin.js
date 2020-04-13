@@ -1,6 +1,6 @@
-const newPassReq = document.getElementsByClassName("fas fa-question");
+const userLoginButton = document.getElementById("getInfoAboutProject");
 
-newPassReq[0].addEventListener('click', function () {
+userLoginButton.addEventListener('click', function () {
     setTimeout(function() {
         alert("Title: Material Master Data Manager \n" +
             "Reason: Engineer's Thesis \n" +

@@ -1,10 +1,7 @@
 document.getElementById("client").selectedIndex = -1;
+const userLoginButton = document.getElementById("getInfoAboutProject");
 
-const newPassReq = document.getElementsByClassName("fas fa-question");
-const userID = document.getElementById("userID");
-const userLoginButton = document.getElementsByClassName("userLoginButton");
-
-newPassReq[0].addEventListener('click', function () {
+userLoginButton.addEventListener('click', function () {
     setTimeout(function() {
         alert("Title: Material Master Data Manager \n" +
             "Reason: Engineer's Thesis \n" +

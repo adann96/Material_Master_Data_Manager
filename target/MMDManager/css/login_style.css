@@ -1,118 +1,71 @@
 html {
-    background: black;
-    font-family: "calibri", "times", "sans-serif";
     color: #f2f2f2;
-    height: 100vh;
+    background: #34354b;
 }
 
 body {
     padding: 0px;
     margin: 0px;
-    background: #2a2b3d;
-}
-
-header {
-    border-bottom-style: none;
-    background: #3e405b;
-    padding: 0px;
-    margin: 0px;
+    font-family: "Calibri", sans-serif !important;
 }
 
 header .main-color {
     color: #ffc107;
 }
 
-header h2 {
+header.navbar {
+    background-color: #857b9d !important;
+}
+
+nav.navbar {
+    background: #484b6a;
+}
+
+form {
     margin: 0px;
-    padding: 10px;
-    background-color: #6f6486 !important;
+    padding: 0px;
+    display: flex;
 }
 
-button[type="submit"], button[type="button"] {
-    padding: 4px 7px 4px 7px;
-    border: none;
-    border-radius: 4%;
-    outline: none;
-    cursor: pointer;
+nav form fieldset ul li {
+    list-style-type: none;
 }
 
-button[class="userLoginButton"] {
-    padding: 4px;
-    margin: 15px 10px 0px 10px;
-    font-family: "calibri", "times", "sans-serif";
-    font-size: 15px;
+button.btn {
+    background-color: #857b9d !important;
 }
 
-#transactions {
-    margin: 0px;
-    padding: 3px 7px 3px 7px;
-    border: none;
-    border-radius: 4%;
-    outline: none;
+div.container {
+    max-width: 100%;
+    background: #34354b;
 }
 
-#transactionsLoginForm {
-    background: #3e405b;
-    margin: 0px;
-}
-
-#transactionsLoginForm p {
-    margin: 5px 0px 5px 5px;
-    padding: 15px;
-}
-
-#transactionsLoginForm p a {
-    text-decoration: none;
-    color: #333;
-}
-
-section header h2 {
-    margin: 0px;
-    padding: 10px;
-    background: linear-gradient(#cfdeed, #b0c7dd);
-}
-
-fieldset {
-    border: none;
-    margin: 0px;
-    padding: 0px 0px 15px 0px;
-}
-
-.tabcontent {
-    margin: 0px;
-    background: #3e405b;
-    margin: 10px;
-}
-
-.tabcontent select,
-.tabcontent input {
-    border: none;
-    box-shadow: 0px 0px 2px black;
-    padding: 3px;
-    border-radius: 3px;
-    background: rgba(255, 255, 255, 0.6);
-    margin: 0px 10px 0px 10px;
-    outline: none;
-    width: 100px;
+div.row {
+    background: #484b6a;
 }
 
 .tabcontent label {
     margin: 5px;
-    padding: 5px;
     display: inline-block;
 }
 
-.tabcontent select option {
-    border-radius: 25px 0px 0px 25px;
+.tabcontent button {
+    margin: 5px;
 }
 
-.tabcontent label {
-    font-size: 14px;
+.tabcontent input {
+    border: none;
+    box-shadow: 0px 0px 2px black;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.6);
+    outline: none;
+    padding: 3px;
+    margin: 5px;
 }
 
-#transactionsLoginForm fieldset {
-    width: 100%;
-    display: flex;
-    margin: 0px;
-    padding: 0px;
+.navbar input {
+    border: none;
+    box-shadow: 0px 0px 2px black;
+    border-radius: 3px;
+    outline: none;
 }

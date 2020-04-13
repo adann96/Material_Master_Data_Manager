@@ -53,6 +53,9 @@ public class MaterialDashboard extends HttpServlet {
             else if (user!=null && (user.getCompany_id()!=null && user.getUser_id()!=null)) {
                 response.sendRedirect("None");
             }
+            company_id = "";
+            user_id="";
+            acc_password="";
         }
         catch (NullPointerException | SQLException ex) {
             System.out.println(ex.getMessage());

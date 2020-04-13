@@ -1,180 +1,62 @@
 html {
-    background: silver;
-    font-family: "calibri", "times", "sans-serif";
+    color: #f2f2f2;
+    background: #34354b;
 }
 
 body {
     padding: 0px;
     margin: 0px;
-    color: #f2f2f2;
-    background: #2a2b3d;
-}
-
-header {
-    border-bottom-style: none;
-    background: #2a2b3d;
-    padding: 0px;
-    margin: 0px;
+    font-family: "Calibri", sans-serif !important;
 }
 
 header .main-color {
     color: #ffc107;
 }
 
-header h2 {
-    margin: 0px;
-    padding: 10px;
-    background-color: #6f6486 !important;
+header.navbar {
+    background-color: #857b9d !important;
 }
 
-button[type="submit"],
-button[type="button"] {
-    padding: 4px 7px 4px 7px;
-    border: none;
-    border-radius: 4%;
-    outline: none;
-    cursor: pointer;
-    box-shadow: 0px 0px 5px grey;
-    transition: 0.2s;
-    transition-timing-function: ease-in-out;
+nav.navbar,
+div.crudButtons {
+    background: #484b6a;
 }
 
-button[type="submit"]:hover {
-    box-shadow: 0px 0px 5px black;
-}
-
-button[class="userLoginButton"] {
-    padding: 4px;
-    margin: 15px 10px 0px 10px;
-    font-family: "calibri", "times", "sans-serif";
-}
-
-#hamburger {
-    cursor: pointer;
-}
-
-#menuToggle {
-    width: 100%;
-    background: #3e405b;
-    z-index: 999;
-}
-
-#navMainPanel ul {
-    width: 100%;
+form {
     margin: 0px;
     padding: 0px;
     display: flex;
-    font-size: 18px !important;
 }
 
-#navMainPanel ul li {
-    list-style-type: none;
-    padding: 15px;
-}
-
-#navTogglePanel {
-    width: 100%;
-    background: #6f6486 !important;
-    display: flex;
-    position: absolute;
-    box-shadow: 0px 1px 0px white;
-}
-
-#navTogglePanel ul {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    padding: 10px;
-}
-
-#navTogglePanel ul h1 {
-    margin: 5px;
-    padding: 0px;
-}
-
-#navTogglePanel ul li {
+nav form fieldset ul li,
+nav ul li {
     list-style-type: none;
 }
 
-#navTogglePanel ul li a {
-    list-style-type: none;
-    font-size: 14px;
-    margin: 5px;
-    text-decoration: none;
-    color: #f2f2f2;
+button.btn {
+    background-color: #857b9d !important;
 }
 
-#navTogglePanel ul li a:hover {
-    color: #ffffff;
+section {
+    background: #34354b;
 }
 
-#welcomeContent {
-    margin: 20px 20px 10px 20px;
+.welcome {
+    color: #ccc;
+    background: #34354b;
 }
 
-#welcomeContent h2, #welcomeContent p {
-    margin: 0px;
+.col {
+    background: #484b6a;
+    padding: 35px;
+    margin: 48px 48px 0px 48px;
+}
+.welcome h2 {
+    font-family: Calibri;
+    font-weight: 100;
+    margin-top: 0;
 }
 
-#welcomeContent h2 {
-    padding: 30px 20px 5px 20px;
-}
-
-#welcomeContent p {
-    padding: 5px 20px 30px 20px;
-}
-
-
-#sectionDash {
-    overflow: hidden;
-}
-
-.dashData {
-    background: white;
-    border-radius: 2px;
-    overflow: hidden;
-    background: #3e405b;
-}
-
-#sectionDash {
-    display: flex;
-}
-
-#leftPanel,
-#rightPanel {
-    width: 20%;
-}
-
-#rightPanel {
-    margin: 10px 20px 20px 10px;
-}
-
-#leftPanel {
-    margin: 10px 10px 20px 20px;
-}
-
-#midPanel {
-    width: 60%;
-    margin: 10px 10px;
-}
-
-table {
-    border: none;
-    margin: 0 auto;
-    width: 100%;
-}
-
-table thead {
-    margin: 0 auto;
-    background: #6f6486 !important;
-}
-
-table tbody {
-    margin: 0 auto;
-}
-
-table tbody tr td,
-table thead tr th {
-    text-align: center;
-    padding: 5px;
+.box {
+    background: #484b6a;
 }
