@@ -21,7 +21,7 @@
 <header class="m-0 p-2 navbar">
     <h2 class="m-0 p-2 navbar-brand"><b class="text-light">user<span class="main-color">Login</span> - Material Creation</b></h2>
 </header>
-<nav class="m-0 p-2 navbar navbar">
+<nav class="m-0 p-2 navbar">
     <form action="UserLogout" method="get">
         <fieldset>
             <ul class="m-0 p-0 navbar d-flex">
@@ -79,21 +79,21 @@
                                 <input type="text" name="materialName" id="materialName" required><br>
                                 <label for="remark">Remark: </label><br>
                                 <textarea name="remark" id="remark" rows="3" cols="30"></textarea><br>
-                                <!--
                                 <label>Batch:<br>
-                                    <select class="batch">
-                                        <option value="de">DE</option>
-                                        <option value="pl">PL</option>
-                                        <option value="hu">HU</option>
-                                        <option value="gb">GB</option>
+                                    <select class="batch" name="batchCountry">
+                                        <option value="DE">DE</option>
+                                        <option value="PL">PL</option>
+                                        <option value="HU">HU</option>
+                                        <option value="GB">GB</option>
                                     </select>
-                                    <select class="batch">
-                                        <option value="ohone">01</option>
-                                        <option value="ohtwo">02</option>
-                                        <option value="ohthree">03</option>
-                                        <option value="ohfour">04</option>
+                                    <select class="batch" name="batchNumber">
+                                        <option value="1">01</option>
+                                        <option value="2">02</option>
+                                        <option value="3">03</option>
+                                        <option value="4">04</option>
                                     </select>
                                 </label>
+                                <!--
                                 <br>
                                 <label>Material Group:<br>
                                     <select class="materialGroup" name="firstLevelMG" id="select1">

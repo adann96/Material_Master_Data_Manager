@@ -22,7 +22,8 @@ public class Materials extends HttpServlet {
     private String requestedBy;
     private Timestamp requestDateTime;
     private Integer eskNumber;
-    private String requestType, requestSubType, remark;
+    private String requestType, requestSubType, remark, batchContainsSth;
+    private StringBuilder batch;
 
     private String inputSave, inputSend;
     static Connection connection = null;
@@ -39,7 +40,7 @@ public class Materials extends HttpServlet {
                 resultSet = statement.executeQuery("select max(request_number)+1 from materials");
 
                 while(resultSet.next()) {
-                    preparedStatement = connection.prepareStatement("insert into materials(material_name,product_number,user_id,request_Number,request_by,request_datetime,esk_number,request_type,request_sub_type,remark) values (?,?,?,?,?,?,?,?,?,?)");
+                    preparedStatement = connection.prepareStatement("insert into materials(material_name,product_number,user_id,request_Number,request_by,request_datetime,esk_number,request_type,request_sub_type,remark,batch_number) values (?,?,?,?,?,?,?,?,?,?,?)");
 
                     connection.setAutoCommit(false);
                     for (Iterator<Material> iterator = materialList.iterator(); iterator.hasNext();) {
@@ -54,10 +55,10 @@ public class Materials extends HttpServlet {
                         preparedStatement.setString(8, material.getRequestType());
                         preparedStatement.setString(9,material.getRequestSubType());
                         preparedStatement.setString(10,material.getRemark());
+                        preparedStatement.setString(11,String.valueOf(material.getBatchNumber()));
                         preparedStatement.addBatch();
                     }
-                    int[] updateCounts = preparedStatement.executeBatch();
-                    System.out.println(Arrays.toString(updateCounts));
+                    preparedStatement.executeBatch();
                     connection.commit();
                     connection.setAutoCommit(true);
                 }
@@ -92,8 +93,19 @@ public class Materials extends HttpServlet {
                     requestType = request.getParameter("requestType");
                     requestSubType = request.getParameter("requestSubType");
                     remark = request.getParameter("remark");
+                    batchContainsSth = request.getParameter("batchCountry");
 
-                    materialList.add(new Material(materialName,productNumber,employeeID,requestedBy,requestDateTime,eskNumber,requestType,requestSubType,remark));
+                    if (batchContainsSth == null) {
+                        batch = new StringBuilder();
+                    }
+                    else {
+                        batch = new StringBuilder().
+                                append(request.getParameter("batchCountry")).
+                                append("0").
+                                append(request.getParameter("batchNumber"));
+                    }
+
+                    materialList.add(new Material(materialName,productNumber,employeeID,requestedBy,requestDateTime,eskNumber,requestType,requestSubType,remark, batch));
                     httpSession.setAttribute("materialList",materialList);
 
                     response.sendRedirect("http://localhost:8090/MMDManager/MaterialDashboard.jsp");
@@ -103,7 +115,7 @@ public class Materials extends HttpServlet {
             statement.close();
             connection.close();
         }
-        catch (Exception ex) {
+        catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

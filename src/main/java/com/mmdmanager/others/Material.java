@@ -9,8 +9,9 @@ public class Material {
     private Integer eskNumber;
     private String requestType, requestSubType;
     private String remark;
+    private StringBuilder batchNumber;
 
-    public Material(String materialName, String productNumber, String employeeID, String requestedBy, Timestamp requestDateTime, Integer eskNumber, String requestType, String requestSubType, String remark) {
+    public Material(String materialName, String productNumber, String employeeID, String requestedBy, Timestamp requestDateTime, Integer eskNumber, String requestType, String requestSubType, String remark, StringBuilder batchNumber) {
         this.materialName = materialName;
         this.productNumber = productNumber;
         this.employeeID = employeeID;
@@ -20,6 +21,11 @@ public class Material {
         this.requestType = requestType;
         this.requestSubType = requestSubType;
         this.remark = remark;
+        this.batchNumber = batchNumber;
+    }
+
+    public StringBuilder getBatchNumber() {
+        return batchNumber;
     }
 
     public String getRemark() {
@@ -42,7 +48,9 @@ public class Material {
         return requestedBy;
     }
 
-    public Timestamp getRequestDateTime() { return requestDateTime; }
+    public Timestamp getRequestDateTime() {
+        return requestDateTime;
+    }
 
     public Integer getEskNumber() {
         return eskNumber;
