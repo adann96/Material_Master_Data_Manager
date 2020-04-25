@@ -93,11 +93,10 @@
                                         <option value="4">04</option>
                                     </select>
                                 </label>
-                                <!--
                                 <br>
                                 <label>Material Group:<br>
                                     <select class="materialGroup" name="firstLevelMG" id="select1">
-                                        <option value="1">210 - HOUSEHOLD</option>
+                                        <option value="210 - HOUSEHOLD">210 - HOUSEHOLD</option>
                                     </select>
                                     <select class="materialGroup" name="secondLevelMG" id="select2">
                                     </select>
@@ -111,10 +110,9 @@
                                     </select>
                                 </label>
                             </div>
-                            <div class="tab-pane fade" id="nav-weightsAndDimensions" role="tabpanel" aria-labelledby="nav-weightsAndDimensions-tab"><label for="grossWeight">Gross Weight (Kg): </label><br>
+                            <div class="tab-pane fade" id="nav-weightsAndDimensions" role="tabpanel" aria-labelledby="nav-weightsAndDimensions-tab">
+                                <label for="grossWeight">Gross Weight (Kg): </label><br>
                                 <input type="number" step="0.001" name="grossWeight" id="grossWeight" required><br>
-                                <label for="netWeight">Net Weight (Kg): </label><br>
-                                <input type="number" step="0.001" name="netWeight" id="netWeight" required><br>
                                 <label for="length">Length (M): </label><br>
                                 <input type="number" step="0.001" name="length" id="length" required><br>
                                 <label for="width">Width (M): </label><br>
@@ -123,6 +121,7 @@
                                 <input type="number" step="0.001" name="height" id="height" required><br>
                                 <label for="volume">Volume (M<sup>³</sup>): </label><br>
                                 <input type="number" step="0.001" name="volume" id="volume" required><br>
+                                <!--
                             </div>
                             <div class="tab-pane fade" id="nav-technicalData" role="tabpanel" aria-labelledby="nav-technicalData-tab">
                                 <label>Capacity Unit of Measure:<br>

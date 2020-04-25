@@ -23,7 +23,11 @@ public class Materials extends HttpServlet {
     private Timestamp requestDateTime;
     private Integer eskNumber;
     private String requestType, requestSubType, remark, batchContainsSth;
-    private StringBuilder batch;
+    private StringBuilder batch, materialGroup;
+    private String materialGroupStr, productHierarchyStr;
+    private StringBuilder strArray, materialDescription;
+    private String[] materialDescriptionArr;
+    private Double grossWeight, netWeight, materialLength, materialWidth, materialHeight, materialVolume;
 
     private String inputSave, inputSend;
     static Connection connection = null;
@@ -40,7 +44,7 @@ public class Materials extends HttpServlet {
                 resultSet = statement.executeQuery("select max(request_number)+1 from materials");
 
                 while(resultSet.next()) {
-                    preparedStatement = connection.prepareStatement("insert into materials(material_name,product_number,user_id,request_Number,request_by,request_datetime,esk_number,request_type,request_sub_type,remark,batch_number) values (?,?,?,?,?,?,?,?,?,?,?)");
+                    preparedStatement = connection.prepareStatement("insert into materials(material_name,product_number,user_id,request_Number,request_by,request_datetime,esk_number,request_type,request_sub_type,remark,batch_number, material_group, product_hierarchy, material_description, gross_Weight, net_Weight, material_Length, material_Width, material_Height, material_Volume) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                     connection.setAutoCommit(false);
                     for (Iterator<Material> iterator = materialList.iterator(); iterator.hasNext();) {
@@ -56,6 +60,15 @@ public class Materials extends HttpServlet {
                         preparedStatement.setString(9,material.getRequestSubType());
                         preparedStatement.setString(10,material.getRemark());
                         preparedStatement.setString(11,String.valueOf(material.getBatchNumber()));
+                        preparedStatement.setString(12,material.getMaterialGroup());
+                        preparedStatement.setString(13,material.getProductHierarchy());
+                        preparedStatement.setString(14,material.getMaterialDescription());
+                        preparedStatement.setDouble(15,material.getGrossWeight());
+                        preparedStatement.setDouble(16,material.getNetWeight());
+                        preparedStatement.setDouble(17,material.getMaterialLength());
+                        preparedStatement.setDouble(18,material.getMaterialWidth());
+                        preparedStatement.setDouble(19,material.getMaterialHeight());
+                        preparedStatement.setDouble(20,material.getMaterialVolume());
                         preparedStatement.addBatch();
                     }
                     preparedStatement.executeBatch();
@@ -105,7 +118,40 @@ public class Materials extends HttpServlet {
                                 append(request.getParameter("batchNumber"));
                     }
 
-                    materialList.add(new Material(materialName,productNumber,employeeID,requestedBy,requestDateTime,eskNumber,requestType,requestSubType,remark, batch));
+                    materialGroup = new StringBuilder().append(request.getParameter("firstLevelMG"));
+                    materialGroupStr = String.valueOf(materialGroup.substring(0,3));
+                    materialGroupStr.concat(request.getParameter("secondLevelMG").substring(0,6));
+
+                    productHierarchyStr = materialGroupStr
+                            .concat(request.getParameter("productHierarchy1").substring(0,3))
+                            .concat(request.getParameter("productHierarchy2").substring(0,3))
+                            .concat(request.getParameter("productHierarchy3").substring(0,3));
+
+                    strArray = new StringBuilder().append(request.getParameter("firstLevelMG"))
+                            .append(" - ").append(request.getParameter("secondLevelMG"))
+                            .append(" - ").append(request.getParameter("productHierarchy1"))
+                            .append(" - ").append(request.getParameter("productHierarchy2"))
+                            .append(" - ").append(request.getParameter("productHierarchy3"));
+
+                    materialDescriptionArr = String.valueOf(strArray).split(" - ");
+
+                    materialDescription = new StringBuilder();
+                    for (int i = 0; i<materialDescriptionArr.length; i++) {
+                        if ((i%2) !=0) {
+                            materialDescription.append(materialDescriptionArr[i]);
+                            if (i < materialDescriptionArr.length-1) {
+                                materialDescription.append("<");
+                            }
+                        }
+                    }
+
+                    grossWeight = Double.valueOf(request.getParameter("grossWeight"));
+                    materialLength = Double.valueOf(request.getParameter("length"));
+                    materialWidth = Double.valueOf(request.getParameter("width"));
+                    materialHeight = Double.valueOf(request.getParameter("height"));
+                    materialVolume = Double.valueOf(request.getParameter("volume"));
+
+                    materialList.add(new Material(materialName,productNumber,employeeID,requestedBy,requestDateTime,eskNumber,requestType,requestSubType,remark, batch, materialGroupStr, productHierarchyStr, String.valueOf(materialDescription), grossWeight, materialLength, materialWidth, materialHeight, materialVolume));
                     httpSession.setAttribute("materialList",materialList);
 
                     response.sendRedirect("http://localhost:8090/MMDManager/MaterialDashboard.jsp");

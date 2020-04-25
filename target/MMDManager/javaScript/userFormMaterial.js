@@ -197,81 +197,81 @@ function changeMatGroup() {
     }
 }
 
-const prodHierSeriaRay = ["001 - ASH-09BIR", "002 - ASH-12BIR"];
+const prodHierSeriaRay = ["001 - ASH09BIR", "002 - ASH12BIR"];
 const prodHierSeriaVision = [
-    "001 - ASH-09BIV",
-    "002 - ASH-12BIV",
-    "003 - ASH-18BIV",
-    "004 - ASH-24BIV"
+    "001 - ASH09BIV",
+    "002 - ASH12BIV",
+    "003 - ASH18BIV",
+    "004 - ASH24BIV"
 ];
 const prodHierSeriaFocusPlus = [
-    "001 - ASH-09BIF2",
-    "002 - ASH-13BIF2",
-    "003 - ASH-18BIF2",
-    "004 - ASH-24BIF2"
+    "001 - ASH09BIF2",
+    "002 - ASH13BIF2",
+    "003 - ASH18BIF2",
+    "004 - ASH24BIF2"
 ];
 const prodHierSeriaSpectrum = [
-    "001 - ASH-09BIS/W",
-    "002 - ASH-13BIS/W",
-    "003 - ASH-18BIS/W",
-    "004 - ASH-24BIS/W",
-    "005 - ASH-09BIS/B",
-    "007 - ASH-13BIS/B",
-    "008 - ASH-18BIS/B",
-    "009 - ASH-24BIS/B"
+    "001 - ASH09BIS/W",
+    "002 - ASH13BIS/W",
+    "003 - ASH18BIS/W",
+    "004 - ASH24BIS/W",
+    "005 - ASH09BIS/B",
+    "007 - ASH13BIS/B",
+    "008 - ASH18BIS/B",
+    "009 - ASH24BIS/B"
 ];
 const prodHierSeriaSpectrumPlus = [
-    "001 - ASH-09BIS2/W",
-    "002 - ASH-13BIS2/W",
-    "003 - ASH-18BIS2/W",
-    "004 - ASH-24BIS2/W"
+    "001 - ASH09BIS2/W",
+    "002 - ASH13BIS2/W",
+    "003 - ASH18BIS2/W",
+    "004 - ASH24BIS2/W"
 ];
 const prodHierSeriaKonsola = [
-    "001 - ASP-09BI",
-    "002 - ASP-12BI",
-    "003 - ASP-18BI"
+    "001 - ASP09BI",
+    "002 - ASP12BI",
+    "003 - ASP18BI"
 ];
 const prodHierSeriaUniSplit = [
-    "001 - ASC-12BI",
-    "002 - ASC-18BI",
-    "003 - ASC-24BI",
-    "004 - ASC-30BI",
-    "005 - ASC-36BI",
-    "006 - ASC-42BI",
-    "007 - ASC-48BI",
-    "008 - ASC-60BI"
+    "001 - ASC12BI",
+    "002 - ASC18BI",
+    "003 - ASC24BI",
+    "004 - ASC30BI",
+    "005 - ASC36BI",
+    "006 - ASC42BI",
+    "007 - ASC48BI",
+    "008 - ASC60BI"
 ];
 const prodHierNa = [
-    "001 - ASF-12BI",
-    "002 - ASF-18BI",
-    "003 - ASF-24BI",
-    "004 - AASF-30BI",
-    "005 - ASF-36BI",
-    "006 - ASF-42BI",
-    "007 - ASF-48BI",
-    "008 - ASF-60BI"
+    "001 - ASF12BI",
+    "002 - ASF18BI",
+    "003 - ASF24BI",
+    "004 - AASF30BI",
+    "005 - ASF36BI",
+    "006 - ASF42BI",
+    "007 - ASF48BI",
+    "008 - ASF60BI"
 ];
 const prodHierSeriaUniSplit2 = [
-    "001 - ASD-12BI",
-    "002 - ASD-18BI",
-    "003 - ASD-24BI",
-    "004 - AASD-30BI",
-    "005 - ASD-36BI",
-    "006 - ASD-42BI",
-    "007 - ASD-48BI",
-    "008 - ASD-60BI"
+    "001 - ASD12BI",
+    "002 - ASD18BI",
+    "003 - ASD24BI",
+    "004 - AASD30BI",
+    "005 - ASD36BI",
+    "006 - ASD42BI",
+    "007 - ASD48BI",
+    "008 - ASD60BI"
 ];
-const prodHierComMod = ["001 - SCMI-01.4"];
+const prodHierComMod = ["001 - SCMI01.4"];
 const prodHierSeriaMultiVariable = [
-    "001 - MV-E14BI",
-    "002 - MV-E18BI",
-    "003 - MV-E21BI",
-    "004 - MV-E24BI",
-    "005 - MV-E28BI",
-    "006 - MV-E36BI",
-    "007 - MV-E42BI"
+    "001 - MVE14BI",
+    "002 - MVE18BI",
+    "003 - MVE21BI",
+    "004 - MVE24BI",
+    "005 - MVE28BI",
+    "006 - MVE36BI",
+    "007 - MVE42BI"
 ];
-const prodHierSeriaChpms = ["001 - MS-E48AIN", "002 - MS-E56AIN"];
+const prodHierSeriaChpms = ["001 - MSE48AIN", "002 - MSE56AIN"];
 const prodHierSeriaMultiVariableIu = [
     "001 - WMU",
     "002 - CONS",
@@ -279,27 +279,27 @@ const prodHierSeriaMultiVariableIu = [
     "004 - CHU",
     "005 - FCU"
 ];
-const prodHierSeriaHIGHSpringChannel = ["001 - ASDH-96AI"];
-const prodHierSeriaWindow = ["001 - ASW-09BI", "002 - ASW-12BI"];
-const prodHierRac = ["001 - ASV-25AS", "002 - ASV-35AS"];
+const prodHierSeriaHIGHSpringChannel = ["001 - ASDH96AI"];
+const prodHierSeriaWindow = ["001 - ASW09BI", "002 - ASW12BI"];
+const prodHierRac = ["001 - ASV25AS", "002 - ASV35AS"];
 const prodHierSeriaBoat = [
-    "001 - ASB-05A",
-    "002 - ASB-09A",
-    "003 - ASB-12A",
-    "004 - ASB-16A"
+    "001 - ASB05A",
+    "002 - ASB09A",
+    "003 - ASB12A",
+    "004 - ASB16A"
 ];
-const prodHierPac = ["001 - AMC-11P", "002 - AMC-14P"];
-const prodHierPdryers = ["001 - CFO-16P", "002 - CFO-20P", "003 - CFO-40P"];
-const prodHierAirFilter = ["001 - SP-45A"];
+const prodHierPac = ["001 - AMC11P", "002 - AMC14P"];
+const prodHierPdryers = ["001 - CFO16P", "002 - CFO20P", "003 - CFO40P"];
+const prodHierAirFilter = ["001 - SP45A"];
 const prodHierOasWc = [
-    "001 - SWC-02",
-    "002 - SWC-03",
-    "003 - SMG-01",
-    "004 - SCC-16",
-    "005 - SCC-36"
+    "001 - SWC02",
+    "002 - SWC03",
+    "003 - SMG01",
+    "004 - SCC16",
+    "005 - SCC36"
 ];
 const prodHierCentralCon = ["001 - EWPE", "002 - G2S"];
-const prodHierDtfmSunit = ["001 - SDT-MV", "002 - SDT-ASH"];
+const prodHierDtfmSunit = ["001 - SDTMV", "002 - SDTASH"];
 
 select3.addEventListener("change", changeMatGroup2);
 
@@ -536,66 +536,66 @@ select4.addEventListener("change", changeMatGroup3);
 
 function changeMatGroup3() {
     if (
-        select4.options[select4.selectedIndex].text == "001 - ASH-09BIR" ||
-        select4.options[select4.selectedIndex].text == "002 - ASH-12BIR" ||
-        select4.options[select4.selectedIndex].text == "001 - ASH-09BIV" ||
-        select4.options[select4.selectedIndex].text == "002 - ASH-12BIV" ||
-        select4.options[select4.selectedIndex].text == "003 - ASH-18BIV" ||
-        select4.options[select4.selectedIndex].text == "004 - ASH-24BIV" ||
-        select4.options[select4.selectedIndex].text == "001 - ASH-09BIF2" ||
-        (select4.options[select4.selectedIndex].text == "002 - ASH-13BIF2")  ||
-        (select4.options[select4.selectedIndex].text == "003 - ASH-18BIF2")  ||
-        (select4.options[select4.selectedIndex].text == "004 - ASH-24BIF2")  ||
-        (select4.options[select4.selectedIndex].text == "001 - ASH-09BIS/W")  ||
-        (select4.options[select4.selectedIndex].text == "002 - ASH-13BIS/W")  ||
-        (select4.options[select4.selectedIndex].text == "003 - ASH-18BIS/W")  ||
-        (select4.options[select4.selectedIndex].text == "004 - ASH-24BIS/W") ||
-        (select4.options[select4.selectedIndex].text == "005 - ASH-09BIS/B")  ||
-        (select4.options[select4.selectedIndex].text == "006 - ASH-13BIS/B")  ||
-        (select4.options[select4.selectedIndex].text == "007 - ASH-18BIS/B")  ||
-        (select4.options[select4.selectedIndex].text == "008 - ASH-24BIS/B")  ||
-        (select4.options[select4.selectedIndex].text == "001 - ASH-09BIS2/W")  ||
-        (select4.options[select4.selectedIndex].text == "002 - ASH-13BIS2/W")  ||
-        (select4.options[select4.selectedIndex].text == "003 - ASH-18BIS2/W")  ||
-        (select4.options[select4.selectedIndex].text == "004 - ASH-24BIS2/W")  ||
-        (select4.options[select4.selectedIndex].text == "001 - ASP-09BI") ||
-        select4.options[select4.selectedIndex].text == "002 - ASP-12BI" ||
-        select4.options[select4.selectedIndex].text == "003 - ASP-18BI" ||
-        select4.options[select4.selectedIndex].text == "001 - ASC-12BI" ||
-        select4.options[select4.selectedIndex].text == "002 - ASC-18BI" ||
-        select4.options[select4.selectedIndex].text == "003 - ASC-24BI" ||
-        select4.options[select4.selectedIndex].text == "004 - ASC-30BI" ||
-        select4.options[select4.selectedIndex].text == "005 - ASC-36BI" ||
-        select4.options[select4.selectedIndex].text == "006 - ASC-42BI" ||
-        select4.options[select4.selectedIndex].text == "007 - ASC-48BI" ||
-        select4.options[select4.selectedIndex].text == "008 - ASC-60BI" ||
-        select4.options[select4.selectedIndex].text == "001 - ASF-12BI" ||
-        select4.options[select4.selectedIndex].text == "002 - ASF-18BI" ||
-        select4.options[select4.selectedIndex].text == "003 - ASF-24BI" ||
-        select4.options[select4.selectedIndex].text == "004 - ASF-30BI" ||
-        select4.options[select4.selectedIndex].text == "005 - ASF-36BI" ||
-        select4.options[select4.selectedIndex].text == "006 - ASF-42BI" ||
-        select4.options[select4.selectedIndex].text == "007 - ASF-48BI" ||
-        select4.options[select4.selectedIndex].text == "008 - ASF-60BI" ||
-        select4.options[select4.selectedIndex].text == "001 - ASD-12BI" ||
-        select4.options[select4.selectedIndex].text == "002 - ASD-18BI" ||
-        select4.options[select4.selectedIndex].text == "003 - ASD-24BI" ||
-        select4.options[select4.selectedIndex].text == "004 - ASD-30BI" ||
-        select4.options[select4.selectedIndex].text == "005 - ASD-36BI" ||
-        select4.options[select4.selectedIndex].text == "006 - ASD-42BI" ||
-        select4.options[select4.selectedIndex].text == "007 - ASD-48BI" ||
-        select4.options[select4.selectedIndex].text == "008 - ASD-60BI" ||
-        select4.options[select4.selectedIndex].text == "001 - MV-E14BI" ||
-        select4.options[select4.selectedIndex].text == "002 -MV-E18BI" ||
-        select4.options[select4.selectedIndex].text == "003 -MV-E21BI" ||
-        select4.options[select4.selectedIndex].text == "004 -MV-E24BI" ||
-        select4.options[select4.selectedIndex].text == "005 -MV-E28BI" ||
-        select4.options[select4.selectedIndex].text == "006 -MV-E36BI" ||
-        select4.options[select4.selectedIndex].text == "007 -MV-E42BI" ||
-        select4.options[select4.selectedIndex].text == "001 - ASW-09BI" ||
-        select4.options[select4.selectedIndex].text == "002 - ASW-12BI" ||
-        select4.options[select4.selectedIndex].text == "001 - AMC-11P" ||
-        select4.options[select4.selectedIndex].text == "002 - AMC-14P"
+        select4.options[select4.selectedIndex].text == "001 - ASH09BIR" ||
+        select4.options[select4.selectedIndex].text == "002 - ASH12BIR" ||
+        select4.options[select4.selectedIndex].text == "001 - ASH09BIV" ||
+        select4.options[select4.selectedIndex].text == "002 - ASH12BIV" ||
+        select4.options[select4.selectedIndex].text == "003 - ASH18BIV" ||
+        select4.options[select4.selectedIndex].text == "004 - ASH24BIV" ||
+        select4.options[select4.selectedIndex].text == "001 - ASH09BIF2" ||
+        (select4.options[select4.selectedIndex].text == "002 - ASH13BIF2")  ||
+        (select4.options[select4.selectedIndex].text == "003 - ASH18BIF2")  ||
+        (select4.options[select4.selectedIndex].text == "004 - ASH24BIF2")  ||
+        (select4.options[select4.selectedIndex].text == "001 - ASH09BIS/W")  ||
+        (select4.options[select4.selectedIndex].text == "002 - ASH13BIS/W")  ||
+        (select4.options[select4.selectedIndex].text == "003 - ASH18BIS/W")  ||
+        (select4.options[select4.selectedIndex].text == "004 - ASH24BIS/W") ||
+        (select4.options[select4.selectedIndex].text == "005 - ASH09BIS/B")  ||
+        (select4.options[select4.selectedIndex].text == "006 - ASH13BIS/B")  ||
+        (select4.options[select4.selectedIndex].text == "007 - ASH18BIS/B")  ||
+        (select4.options[select4.selectedIndex].text == "008 - ASH24BIS/B")  ||
+        (select4.options[select4.selectedIndex].text == "001 - ASH09BIS2/W")  ||
+        (select4.options[select4.selectedIndex].text == "002 - ASH13BIS2/W")  ||
+        (select4.options[select4.selectedIndex].text == "003 - ASH18BIS2/W")  ||
+        (select4.options[select4.selectedIndex].text == "004 - ASH24BIS2/W")  ||
+        (select4.options[select4.selectedIndex].text == "001 - ASP09BI") ||
+        select4.options[select4.selectedIndex].text == "002 - ASP12BI" ||
+        select4.options[select4.selectedIndex].text == "003 - ASP18BI" ||
+        select4.options[select4.selectedIndex].text == "001 - ASC12BI" ||
+        select4.options[select4.selectedIndex].text == "002 - ASC18BI" ||
+        select4.options[select4.selectedIndex].text == "003 - ASC24BI" ||
+        select4.options[select4.selectedIndex].text == "004 - ASC30BI" ||
+        select4.options[select4.selectedIndex].text == "005 - ASC36BI" ||
+        select4.options[select4.selectedIndex].text == "006 - ASC42BI" ||
+        select4.options[select4.selectedIndex].text == "007 - ASC48BI" ||
+        select4.options[select4.selectedIndex].text == "008 - ASC60BI" ||
+        select4.options[select4.selectedIndex].text == "001 - ASF12BI" ||
+        select4.options[select4.selectedIndex].text == "002 - ASF18BI" ||
+        select4.options[select4.selectedIndex].text == "003 - ASF24BI" ||
+        select4.options[select4.selectedIndex].text == "004 - ASF30BI" ||
+        select4.options[select4.selectedIndex].text == "005 - ASF36BI" ||
+        select4.options[select4.selectedIndex].text == "006 - ASF42BI" ||
+        select4.options[select4.selectedIndex].text == "007 - ASF48BI" ||
+        select4.options[select4.selectedIndex].text == "008 - ASF60BI" ||
+        select4.options[select4.selectedIndex].text == "001 - ASD12BI" ||
+        select4.options[select4.selectedIndex].text == "002 - ASD18BI" ||
+        select4.options[select4.selectedIndex].text == "003 - ASD24BI" ||
+        select4.options[select4.selectedIndex].text == "004 - ASD30BI" ||
+        select4.options[select4.selectedIndex].text == "005 - ASD36BI" ||
+        select4.options[select4.selectedIndex].text == "006 - ASD42BI" ||
+        select4.options[select4.selectedIndex].text == "007 - ASD48BI" ||
+        select4.options[select4.selectedIndex].text == "008 - ASD60BI" ||
+        select4.options[select4.selectedIndex].text == "001 - MVE14BI" ||
+        select4.options[select4.selectedIndex].text == "002 - MVE18BI" ||
+        select4.options[select4.selectedIndex].text == "003 - MVE21BI" ||
+        select4.options[select4.selectedIndex].text == "004 - MVE24BI" ||
+        select4.options[select4.selectedIndex].text == "005 - MVE28BI" ||
+        select4.options[select4.selectedIndex].text == "006 - MVE36BI" ||
+        select4.options[select4.selectedIndex].text == "007 - MVE42BI" ||
+        select4.options[select4.selectedIndex].text == "001 - ASW09BI" ||
+        select4.options[select4.selectedIndex].text == "002 - ASW12BI" ||
+        select4.options[select4.selectedIndex].text == "001 - AMC11P" ||
+        select4.options[select4.selectedIndex].text == "002 - AMC14P"
     ) {
         select5.options.length = 0;
         for (var i = 0; i <= enClass.length - 1; i++) {
