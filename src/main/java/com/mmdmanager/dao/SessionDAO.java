@@ -2,48 +2,40 @@ package com.mmdmanager.dao;
 
 import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.Session;
-import com.mmdmanager.others.User;
+import java.sql.CallableStatement;
 
 import java.sql.*;
 
 public class SessionDAO {
     static Connection connection;
     static PreparedStatement preparedStatement;
+    static CallableStatement callableStatement;
 
-    public Session getSession(String user_id, Timestamp start_session) throws SQLException {
+    public Session startSession(String user_id) throws SQLException {
         Session session = new Session();
-
         try {
             connection = ConnectionProvider.getConnection();
-
-            preparedStatement = connection.prepareStatement("INSERT INTO LOGONS (USER_ID, START_SESSION) VALUES (?,?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO LOGONS (USER_ID) VALUES (?)");
             preparedStatement.setString(1, user_id);
-            preparedStatement.setTimestamp(2, start_session);
-            preparedStatement.executeUpdate();
-
+            preparedStatement.execute();
             session.setUser_id(user_id);
-            session.setStart_session(start_session);
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         connection.close();
         return session;
     }
 
-    public Session closeSession(Timestamp end_of_session) throws SQLException {
-        Session session = new Session();
-
+    public String closeSession() throws SQLException {
         try {
             connection = ConnectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("UPDATE LOGONS SET END_OF_SESSION = ? WHERE LOGIN_ID = (select MAX(LOGIN_ID) from LOGONS)");
-            preparedStatement.setTimestamp(1, end_of_session);
-            preparedStatement.executeUpdate();
-
-            session.setEnd_of_session(end_of_session);
+            callableStatement = connection.prepareCall("{call close_session}");
+            callableStatement.execute();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         connection.close();
-        return session;
+        return "Session closed successfully!";
     }
 }

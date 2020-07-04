@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @WebServlet("/MaterialDashboard")
 public class MaterialDashboard extends HttpServlet {
-    private long createdSessionTime;
     private UserDAO userDAO;
     private SessionDAO sessionDAO;
 
@@ -39,16 +38,16 @@ public class MaterialDashboard extends HttpServlet {
             acc_password = request.getParameter("userPassword");
 
             user_id = user_id.toUpperCase();
-
             user = userDAO.getUser(company_id, user_id, acc_password);
 
             if (user!=null && (user.getCompany_id()!=null && user.getUser_id()!=null && user.getAcc_password()!=null)) {
                 HttpSession httpSession = request.getSession();
+
                 httpSession.setAttribute("user_id", user_id);
-                httpSession.setAttribute("createdSessionTime", createdSessionTime);
-                createdSessionTime = httpSession.getCreationTime();
-                //session = sessionDAO.getSession(user_id,new Timestamp(httpSession.getCreationTime()));
-                response.sendRedirect("MaterialDashboard.jsp?name="+user_id.toLowerCase()+"?t="+createdSessionTime+"");
+                httpSession.setAttribute("createdSessionTime", httpSession.getCreationTime());
+                session = sessionDAO.startSession(user_id);
+
+                response.sendRedirect("MaterialDashboard.jsp?name="+user_id.toLowerCase()+"?t="+httpSession.getCreationTime()+"");
             }
             else if (user!=null && (user.getCompany_id()!=null && user.getUser_id()!=null)) {
                 response.sendRedirect("None");

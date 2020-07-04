@@ -17,7 +17,7 @@ public class LogonsDAO {
 
         try {
             connection = ConnectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("select login_id, user_id, first_name, last_name, company_short_name, start_session, end_of_session from logons natural join users natural join clients order by 1 desc");
+            preparedStatement = connection.prepareStatement("select logon_id, user_id, first_name, last_name, company_short_name, start_session, end_of_session from logons natural join users natural join clients order by 1 desc");
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()) {

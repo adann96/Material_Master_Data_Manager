@@ -45,8 +45,8 @@ public class AdminDashboard extends HttpServlet {
         doGet(request, response);
         adminDAO = new AdminDAO();
 
-        admin_id = request.getParameter("userID");
-        acc_password = request.getParameter("userPassword");
+        admin_id = request.getParameter("adminID");
+        acc_password = request.getParameter("adminPassword");
 
         admin_id = admin_id.toUpperCase();
         admin = adminDAO.getAdmin(admin_id,acc_password);

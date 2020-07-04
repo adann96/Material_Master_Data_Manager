@@ -99,6 +99,7 @@ input[name="length"],
 input[name="width"],
 input[name="height"],
 input[name="volume"],
+input[name="compressorType"],
 input[name="refrigerantWeight"],
 input[name="frequency"],
 input[name="salesBrand"],
@@ -128,7 +129,7 @@ select[class="buyOemProduct"],
 select[class="indoorOutdoor"],
 select[class="dgIndicatorProfile"],
 select[class="businessPilar"],
-select[class="source"]
+select[class="sourceCountryOfOrg"]
 {
     border: none;
     box-shadow: 0px 0px 2px black;
