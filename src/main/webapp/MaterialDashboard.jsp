@@ -336,39 +336,34 @@
                                     <tr>
                                         <th scope="col">Material Name</th>
                                         <th scope="col">Product Number</th>
-                                        <th scope="col">Requested By</th>
                                         <th scope="col">Employee ID</th>
                                         <th scope="col">Requested Date</th>
                                         <th scope="col">Request Subtype</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="material" items="${materialList}">
                                         <tr>
                                             <th scope="row">
-                                                <c:out value="${material.getMaterialName()}" />
+                                                <p>Something</p>
                                             </th>
                                             <td>
-                                                <c:out value="${material.getProductNumber()}" />
+                                                <p>Something</p>
                                             </td>
                                             <td>
-                                                <c:out value="${material.getRequestedBy()}" />
+                                                <p>Something</p>
                                             </td>
                                             <td>
-                                                <c:out value="${material.getEmployeeID()}" />
+                                                <p>Something</p>
                                             </td>
                                             <td>
-                                                <c:out value="${material.getRequestDateTime()}" />
-                                            </td>
-                                            <td>
-                                                <c:out value="${material.getRequestSubType()}" />
+                                                <p>Something</p>
                                             </td>
                                         </tr>
-                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
-                            <input type="submit" value="send" name="send">
+                            <label for="sendMaterial">Send</label>
+                            <input type="submit" id="sendMaterial" value="send" name="send">Send</input>
                         </fieldset>
                     </form>
                 </div>
