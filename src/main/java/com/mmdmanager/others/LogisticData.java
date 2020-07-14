@@ -17,6 +17,12 @@ public class LogisticData {
         this.source = source;
     }
 
+    @Override
+    public String toString() {
+        return packingStyle + "," + salesOemProduct + "," + buyOemProduct + "," + indoorOutdoor + "," + dgIndicatorProfile
+                + "," + businessPilar + "," + source + "," + salesBrand + "," + destinationMarket + "," + factory;
+    }
+
     public String getSource() {
         return source;
     }

@@ -14,5 +14,10 @@ public class Material {
         this.technicalData = technicalData;
         this.logisticData = logisticData;
     }
+
+    @Override
+    public String toString() {
+        return generalData + "," + materialData + "," + weigthsAndDimensions + "," + technicalData + "," + logisticData;
+    }
 }
 

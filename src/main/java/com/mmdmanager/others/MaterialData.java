@@ -13,6 +13,11 @@ public class MaterialData {
         this.batchNumber = batchNumber;
     }
 
+    @Override
+    public String toString() {
+        return productNumber + "," + materialName + "," + remark + "," + materialGroup + "," + productHierarchy + "," + batchNumber;
+    }
+
     public String getProductNumber() {
         return productNumber;
     }

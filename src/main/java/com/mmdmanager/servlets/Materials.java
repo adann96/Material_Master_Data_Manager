@@ -1,43 +1,44 @@
 package com.mmdmanager.servlets;
 
 import com.mmdmanager.dao.MaterialDAO;
-import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
 @WebServlet("/Materials")
 public class Materials extends HttpServlet {
     private ArrayList<Material> materialList = new ArrayList<>();
+    private Iterator<Material> iterator;
+
+    String[] excelHeaders = new String[] {"Id",	"Request Number",	"(E)SK Number",	"Request type",	"Creation type",	"Request by",	"Request date",	"Product Number",	"Material Name",	"Remark",	"Material Group",	"Product Hierachy",	"Batch",	"Gross weight (Kg)",	"Net weight (Kg)",	"Length (M)",	"Width (M)",	"Height (M)",	"Volume (M³)",	"Capacity Unit of Measure",	"Inverter",	"Power Supply",	"CE-mark",	"Application",	"Mode",	"Refrigerant",	"Compressor type",	"Refrigerant Weight (Kg)",	"Frequency",	"Packing style",	"Sales OEM product",	"Buy OEM product",	"Indoor / outdoor",	"DG Indicator Profile",	"Business Pilar",	"Source / Country of Origin",	"Sales Brand",	"Destination Market",	"Factory",	"MRP type",	"SNP planner",	"Poscode",	"",	"Batch determination"};
+
+    XSSFWorkbook workbook = new XSSFWorkbook();
+    XSSFSheet sheet;
+    XSSFRow row;
 
     private GeneralData generalData;
     private MaterialData materialData;
     private WeigthsAndDimensions weigthsAndDimensions;
     private TechnicalData technicalData;
     private LogisticData logisticData;
-    private Material material;
 
-    private MaterialDAO materialDAO = new MaterialDAO();
+    private String materialProperties = new String();
 
-    private String materialName, productNumber, employeeID, requestType, requestSubType, remark, batchContainsSth, factory, materialGroupStr, productHierarchyStr, salesBrand, source;
-    private Timestamp requestDateTime;
-    private Integer eskNumber;
-    private StringBuilder strArray, materialDescription, destinationMarket, batch, materialGroup;
-    private String[] materialDescriptionArr;
-    private Double grossWeight, materialLength, materialWidth, materialHeight, materialVolume, refrigerantWeight, frequency;
-    private byte capacityUnitOfMeasure, inverter, powerSupply, ceMark, application, mode, refrigerant, compressorType, packingStyle, salesOemProduct, buyOemProduct, indoorOutdoor, dgIndicatorProfile, businessPilar;
+    private final MaterialDAO materialDAO = new MaterialDAO();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String inputSend = request.getParameter("send");
@@ -45,7 +46,42 @@ public class Materials extends HttpServlet {
 
         try {
             if (inputSend.equals("send")) {
-                materialList = materialDAO.getMaterialList(materialList, generalData, materialData, weigthsAndDimensions, technicalData, logisticData);
+                //materialList = materialDAO.getMaterialList(materialList);
+                iterator = materialList.iterator();
+
+                while(iterator.hasNext()) {
+                    materialProperties = String.valueOf(iterator.next());
+                }
+                String[] tokensVal = materialProperties.split(",");
+
+                int counter = 0;
+                String[][] array = new String[materialList.size()][37];
+                while (iterator.hasNext()) {
+                    array[counter] = String.valueOf(iterator.next()).split(",");
+                    counter++;
+                }
+
+                try {
+                    sheet = workbook.createSheet("Request");
+                    row = sheet.createRow(0);
+                    for(byte i = 0; i<excelHeaders.length; i++) {
+                        XSSFCell cell = row.createCell(i);
+                        cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        cell.setCellValue(excelHeaders[i]);
+                    }
+                    for (byte n = 1; n < materialList.size() + 1; n++) {
+                        row = sheet.createRow(n);
+                        for (byte y = 2; y < array.length+2; y++) {
+                            XSSFCell cell = row.createCell(y);
+                            cell.setCellValue(array[n-1][y-2]);
+                        }
+                    }
+                    FileOutputStream outputStream = new FileOutputStream("C:\\Users\\admin\\Desktop\\Test1.xlsx");
+                    workbook.write(outputStream);
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
             httpSession.removeAttribute("materialList");
             materialList.clear();
@@ -63,20 +99,21 @@ public class Materials extends HttpServlet {
             if (inputSave.equals("save")) {
 
                 /*General Data*/
-                employeeID = String.valueOf(httpSession.getAttribute("user_id"));
-                requestDateTime = new Timestamp(System.currentTimeMillis());
-                eskNumber = Integer.valueOf(request.getParameter("eskNumber"));
-                requestType = request.getParameter("requestType");
-                requestSubType = request.getParameter("requestSubType");
+                String employeeID = String.valueOf(httpSession.getAttribute("user_id"));
+                Timestamp requestDateTime = new Timestamp(System.currentTimeMillis());
+                Integer eskNumber = Integer.valueOf(request.getParameter("eskNumber"));
+                String requestType = request.getParameter("requestType");
+                String requestSubType = request.getParameter("requestSubType");
 
-                generalData = new GeneralData(eskNumber,employeeID,requestType,requestSubType,requestDateTime);
+                generalData = new GeneralData(eskNumber, employeeID, requestType, requestSubType, requestDateTime);
 
                 /*Material Data*/
-                productNumber = request.getParameter("productNumber");
-                materialName = request.getParameter("materialName");
-                remark = request.getParameter("remark");
+                String productNumber = request.getParameter("productNumber");
+                String materialName = request.getParameter("materialName");
+                String remark = request.getParameter("remark");
 
-                batchContainsSth = request.getParameter("batchCountry");
+                String batchContainsSth = request.getParameter("batchCountry");
+                StringBuilder batch;
                 if (batchContainsSth == null) {
                     batch = new StringBuilder();
                 }
@@ -87,25 +124,25 @@ public class Materials extends HttpServlet {
                             append(request.getParameter("batchNumber"));
                 }
 
-                materialGroup = new StringBuilder().
+                StringBuilder materialGroup = new StringBuilder().
                         append(request.getParameter("firstLevelMG"));
-                materialGroupStr = String.valueOf(materialGroup.substring(0,3));
+                String materialGroupStr = String.valueOf(materialGroup.substring(0, 3));
                 materialGroupStr = materialGroupStr.concat(request.getParameter("secondLevelMG").substring(0,3));
-                productHierarchyStr = materialGroupStr
-                        .concat(request.getParameter("productHierarchy1").substring(0,3))
-                        .concat(request.getParameter("productHierarchy2").substring(0,3))
-                        .concat(request.getParameter("productHierarchy3").substring(0,3));
+                String productHierarchyStr = materialGroupStr
+                        .concat(request.getParameter("productHierarchy1").substring(0, 3))
+                        .concat(request.getParameter("productHierarchy2").substring(0, 3))
+                        .concat(request.getParameter("productHierarchy3").substring(0, 3));
 
-                strArray = new StringBuilder().append(request.getParameter("firstLevelMG"))
+                StringBuilder strArray = new StringBuilder().append(request.getParameter("firstLevelMG"))
                         .append(" - ").append(request.getParameter("secondLevelMG"))
                         .append(" - ").append(request.getParameter("productHierarchy1"))
                         .append(" - ").append(request.getParameter("productHierarchy2"))
                         .append(" - ").append(request.getParameter("productHierarchy3"));
 
-                materialDescriptionArr = String.valueOf(strArray).split(" - ");
+                String[] materialDescriptionArr = String.valueOf(strArray).split(" - ");
 
-                materialDescription = new StringBuilder();
-                for (int i = 0; i<materialDescriptionArr.length; i++) {
+                StringBuilder materialDescription = new StringBuilder();
+                for (int i = 0; i< materialDescriptionArr.length; i++) {
                     if ((i%2) !=0) {
                         materialDescription.append(materialDescriptionArr[i]);
                         if (i < materialDescriptionArr.length-1) {
@@ -113,50 +150,51 @@ public class Materials extends HttpServlet {
                         }
                     }
                 }
-                materialData = new MaterialData(productNumber,materialName,remark,batch,materialGroupStr,productHierarchyStr);
+                materialData = new MaterialData(productNumber, materialName, remark, batch, materialGroupStr, productHierarchyStr);
 
                 /*W&D*/
-                grossWeight = Double.valueOf(request.getParameter("grossWeight"));
-                materialLength = Double.valueOf(request.getParameter("length"));
-                materialWidth = Double.valueOf(request.getParameter("width"));
-                materialHeight = Double.valueOf(request.getParameter("height"));
-                materialVolume = Double.valueOf(request.getParameter("volume"));
-                weigthsAndDimensions = new WeigthsAndDimensions(grossWeight,grossWeight,materialLength,materialWidth,materialHeight,materialVolume);
+                Double grossWeight = Double.valueOf(request.getParameter("grossWeight"));
+                Double materialLength = Double.valueOf(request.getParameter("length"));
+                Double materialWidth = Double.valueOf(request.getParameter("width"));
+                Double materialHeight = Double.valueOf(request.getParameter("height"));
+                Double materialVolume = Double.valueOf(request.getParameter("volume"));
+                weigthsAndDimensions = new WeigthsAndDimensions(grossWeight, grossWeight, materialLength, materialWidth, materialHeight, materialVolume);
 
                 /*Technical Data*/
-                capacityUnitOfMeasure = Byte.parseByte(request.getParameter("capacityUnitOfMeasure"));
-                inverter = Byte.parseByte(request.getParameter("inverter"));
-                powerSupply = Byte.parseByte(request.getParameter("powerSupply"));
-                ceMark = Byte.parseByte(request.getParameter("ceMark"));
-                application = Byte.parseByte(request.getParameter("application"));
-                mode = Byte.parseByte(request.getParameter("mode"));
-                refrigerant = Byte.parseByte(request.getParameter("refrigerant"));
-                refrigerantWeight = Double.valueOf(request.getParameter("refrigerantWeight"));
-                frequency = Double.valueOf(request.getParameter("frequency"));
-                compressorType = Byte.parseByte(request.getParameter("compressorType"));
-                technicalData = new TechnicalData(capacityUnitOfMeasure,inverter,powerSupply,ceMark,application,mode,refrigerant,compressorType,refrigerantWeight,frequency);
+                byte capacityUnitOfMeasure = Byte.parseByte(request.getParameter("capacityUnitOfMeasure"));
+                byte inverter = Byte.parseByte(request.getParameter("inverter"));
+                byte powerSupply = Byte.parseByte(request.getParameter("powerSupply"));
+                byte ceMark = Byte.parseByte(request.getParameter("ceMark"));
+                byte application = Byte.parseByte(request.getParameter("application"));
+                byte mode = Byte.parseByte(request.getParameter("mode"));
+                byte refrigerant = Byte.parseByte(request.getParameter("refrigerant"));
+                Double refrigerantWeight = Double.valueOf(request.getParameter("refrigerantWeight"));
+                Double frequency = Double.valueOf(request.getParameter("frequency"));
+                byte compressorType = Byte.parseByte(request.getParameter("compressorType"));
+                technicalData = new TechnicalData(capacityUnitOfMeasure, inverter, powerSupply, ceMark, application, mode, refrigerant, compressorType, refrigerantWeight, frequency);
 
                 /*Logistic Data*/
-                packingStyle = Byte.parseByte(request.getParameter("packingStyle"));
-                salesOemProduct = Byte.parseByte(request.getParameter("salesOemProduct"));
-                buyOemProduct = Byte.parseByte(request.getParameter("buyOemProduct"));
-                indoorOutdoor = Byte.parseByte(request.getParameter("indoorOutdoor"));
-                dgIndicatorProfile = Byte.parseByte(request.getParameter("dgIndicatorProfile"));
-                salesBrand = String.valueOf(request.getParameter("salesBrand"));
-                businessPilar = Byte.parseByte(request.getParameter("businessPilar"));
-                source = String.valueOf(request.getParameter("sourceCountryOfOrg"));
-                factory = String.valueOf(request.getParameter("factory"));
+                byte packingStyle = Byte.parseByte(request.getParameter("packingStyle"));
+                byte salesOemProduct = Byte.parseByte(request.getParameter("salesOemProduct"));
+                byte buyOemProduct = Byte.parseByte(request.getParameter("buyOemProduct"));
+                byte indoorOutdoor = Byte.parseByte(request.getParameter("indoorOutdoor"));
+                byte dgIndicatorProfile = Byte.parseByte(request.getParameter("dgIndicatorProfile"));
+                String salesBrand = String.valueOf(request.getParameter("salesBrand"));
+                byte businessPilar = Byte.parseByte(request.getParameter("businessPilar"));
+                String source = String.valueOf(request.getParameter("sourceCountryOfOrg"));
+                String factory = String.valueOf(request.getParameter("factory"));
 
                 String destMarketTab[] = request.getParameterValues("destMarket");
-                destinationMarket = new StringBuilder();
+                StringBuilder destinationMarket = new StringBuilder();
                 for (byte i = 0; i < destMarketTab.length; i++) {
                     if (destMarketTab[i] != null || !destMarketTab[i].equals("null")) {
-                        destinationMarket.append(destMarketTab[i]).append(",");
+                        destinationMarket.append(destMarketTab[i]).append("-");
                     }
                 }
-                logisticData = new LogisticData(packingStyle,salesOemProduct,buyOemProduct,indoorOutdoor,dgIndicatorProfile,salesBrand,businessPilar,source,String.valueOf(destinationMarket),factory);
+                destinationMarket.deleteCharAt(destinationMarket.length()-1);
+                logisticData = new LogisticData(packingStyle, salesOemProduct, buyOemProduct, indoorOutdoor, dgIndicatorProfile, salesBrand, businessPilar, source,String.valueOf(destinationMarket), factory);
 
-                material = new Material(generalData,materialData,weigthsAndDimensions,technicalData,logisticData);
+                Material material = new Material(generalData, materialData, weigthsAndDimensions, technicalData, logisticData);
                 materialList.add(material);
 
                 httpSession.setAttribute("materialList",materialList);

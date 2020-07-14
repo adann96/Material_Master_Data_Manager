@@ -101,15 +101,15 @@
                             </div>
                             <div class="tab-pane fade" id="nav-weightsAndDimensions" role="tabpanel" aria-labelledby="nav-weightsAndDimensions-tab">
                                 <label for="grossWeight">Gross Weight (Kg): </label><br>
-                                <input type="number" step="0.001" name="grossWeight" id="grossWeight" required><br>
+                                <input type="number" step="0.001" value="0.034" name="grossWeight" id="grossWeight" required><br>
                                 <label for="length">Length (M): </label><br>
-                                <input type="number" step="0.001" name="length" id="length" required><br>
+                                <input type="number" step="0.001" value="0.034" name="length" id="length" required><br>
                                 <label for="width">Width (M): </label><br>
-                                <input type="number" step="0.001" name="width" id="width" required><br>
+                                <input type="number" step="0.001" value="0.034" name="width" id="width" required><br>
                                 <label for="height">Height (M): </label><br>
-                                <input type="number" step="0.001" name="height" id="height" required><br>
+                                <input type="number" step="0.001" value="0.034" name="height" id="height" required><br>
                                 <label for="volume">Volume (M<sup>³</sup>): </label><br>
-                                <input type="number" step="0.001" name="volume" id="volume" required><br>
+                                <input type="number" step="0.001" value="0.034" name="volume" id="volume" required><br>
                             </div>
                             <div class="tab-pane fade" id="nav-technicalData" role="tabpanel" aria-labelledby="nav-technicalData-tab">
                                 <label>Capacity Unit of Measure:<br>
@@ -187,10 +187,10 @@
                                 </label><br>
 
                                 <label for="refrigerantWeight">Refrigerant Weight (Kg):</label><br>
-                                <input type="number" step="0.001" id="refrigerantWeight" name="refrigerantWeight"><br>
+                                <input type="number" step="0.001" value="0.034" id="refrigerantWeight" name="refrigerantWeight"><br>
 
                                 <label for="frequency">Frequency:<br></label><br>
-                                <input type="number" step="0.001" id="frequency" name="frequency"><br>
+                                <input type="number" step="0.001" value="0.034" id="frequency" name="frequency"><br>
 
                                 <label>Compressor type:<br>
                                     <select class="compressorType" name="compressorType">

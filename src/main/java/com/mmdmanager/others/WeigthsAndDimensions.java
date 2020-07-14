@@ -12,6 +12,11 @@ public class WeigthsAndDimensions {
         this.materialVolume = materialVolume;
     }
 
+    @Override
+    public String toString() {
+        return grossWeight + "," + netWeight + "," + materialLength + "," + materialWidth + "," + materialHeight + "," + materialVolume;
+    }
+
     public Double getNetWeight() {
         return grossWeight * 0.8;
     }

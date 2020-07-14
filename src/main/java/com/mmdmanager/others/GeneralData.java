@@ -15,6 +15,11 @@ public class GeneralData {
         this.requestDateTime = requestDateTime;
     }
 
+    @Override
+    public String toString() {
+        return eskNumber + "," + requestType + "," + requestSubType + "," + employeeID + "," + requestDateTime;
+    }
+
     public String getEmployeeID() {
         return employeeID;
     }

@@ -17,6 +17,12 @@ public class TechnicalData {
         this.frequency = frequency;
     }
 
+    @Override
+    public String toString() {
+        return capacityUnitOfMeasure + "," + inverter + "," + powerSupply + "," + ceMark + "," + application + ","
+                + mode + "," + refrigerant + "," + compressorType + "," + refrigerantWeight + "," + frequency;
+    }
+
     public byte getCapacityUnitOfMeasure() {
         return capacityUnitOfMeasure;
     }
