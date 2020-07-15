@@ -18,7 +18,7 @@ public class MaterialDAO {
             connection = ConnectionProvider.getConnection();
             while(!connection.isClosed()) {
                 //preparedStatement = connection.prepareStatement("insert into materials(material_name,product_number,user_id,request_datetime,esk_number,request_type,request_sub_type,remark,batch_number, product_hierarchy, gross_Weight, net_Weight, material_Length, material_Width, material_Height, material_Volume, Capacity_Unit_Of_Measure, inverter, POWER_SUPPLY, CEMARK, REFR_APPLICATION, REFR_MODE, REFRIGERANT_TYPE, REFRIGERANT_WEIGHT, FREQUENCY, COMPRESSOR_TYPE, PACKAGING_STYLE, SALES_OEM_PRODUCT, BUY_OEM_PRODUCT, INDOOR_OUTDOOR, DG_INDICATOR_PROFILE, SALES_BRAND, BUSINESS_PILAR, MATERIAL_SOURCE, FACTORY_NAME, DESTINATION_MARKET) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-                callableStatement = connection.prepareCall("{call insertMaterialIntoDb(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                callableStatement = connection.prepareCall("{call insertMaterialIntoDb(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 
                 connection.setAutoCommit(false);
                 Iterator<Material> iterator = materialList.iterator();
@@ -36,10 +36,12 @@ public class MaterialDAO {
                     callableStatement.setString(8, array[counter][7]);
                     callableStatement.setString(9, array[counter][10]);
                     callableStatement.setString(10, array[counter][9]);
-                    callableStatement.setString(32, String.valueOf(array[counter][34]));
-                    callableStatement.setString(34, String.valueOf(array[counter][33]));
-                    callableStatement.setString(35, String.valueOf(array[counter][36]));
-                    callableStatement.setString(36, String.valueOf(array[counter][35]));
+                    callableStatement.setString(32, array[counter][34]);
+                    callableStatement.setString(34, array[counter][33]);
+                    callableStatement.setString(35, array[counter][36].replace("-",","));
+                    callableStatement.setString(36, array[counter][35]);
+                    callableStatement.setString(37, array[counter][37]);
+                    callableStatement.setString(38, array[counter][38]);
                     
                     //Set Timestamp
                     callableStatement.setTimestamp(4, Timestamp.valueOf(array[counter][4]));

@@ -2,9 +2,9 @@ package com.mmdmanager.others;
 
 public class LogisticData {
     private byte packingStyle, salesOemProduct, buyOemProduct, indoorOutdoor, dgIndicatorProfile, businessPilar;
-    private String source, salesBrand, destinationMarket, factory;
+    private String source, salesBrand, destinationMarket, factory, mrpType, snpPlanner;
 
-    public LogisticData(byte packingStyle, byte salesOemProduct, byte buyOemProduct, byte indoorOutdoor, byte dgIndicatorProfile, String salesBrand, byte businessPilar, String source, String destinationMarket, String factory) {
+    public LogisticData(byte packingStyle, byte salesOemProduct, byte buyOemProduct, byte indoorOutdoor, byte dgIndicatorProfile, String salesBrand, byte businessPilar, String source, String destinationMarket, String factory, String mrpType, String snpPlanner) {
         this.packingStyle = packingStyle;
         this.salesOemProduct = salesOemProduct;
         this.buyOemProduct = buyOemProduct;
@@ -15,12 +15,14 @@ public class LogisticData {
         this.factory = factory;
         this.salesBrand = salesBrand;
         this.source = source;
+        this.mrpType = mrpType;
+        this.snpPlanner = snpPlanner;
     }
 
     @Override
     public String toString() {
         return packingStyle + "," + salesOemProduct + "," + buyOemProduct + "," + indoorOutdoor + "," + dgIndicatorProfile
-                + "," + businessPilar + "," + source + "," + salesBrand + "," + destinationMarket + "," + factory;
+                + "," + businessPilar + "," + source + "," + salesBrand + "," + destinationMarket + "," + factory + "," + mrpType + "," + snpPlanner;
     }
 
     public String getSource() {
@@ -57,6 +59,14 @@ public class LogisticData {
 
     public String getDestinationMarket() {
         return destinationMarket;
+    }
+
+    public String getMrpType() {
+        return mrpType;
+    }
+
+    public String getSnpPlanner() {
+        return snpPlanner;
     }
 
     public String getFactory() {

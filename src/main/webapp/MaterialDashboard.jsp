@@ -320,6 +320,26 @@
                                     <input type="checkbox" name="destMarket" value="TJ">TJ
                                     <input type="checkbox" name="destMarket" value="UA">UA
                                 </label>
+                                <label>MRP Type: <br>
+                                    <select class="mrpType" name="mrpType">
+                                        <option value="ND">No Planning</option>
+                                        <option value="PD">MRP</option>
+                                        <option value="R1">Time-phased planning</option>
+                                        <option value="VB">Manual reorder point planning</option>
+                                        <option value="VM">Automatic reorder point planning</option>
+                                        <option value="VV">Forecast-based planning</option>
+                                    </select>
+                                </label><br>
+                                <label>SNP Planner: <br>
+                                    <select class="snpPlanner" name="snpPlanner">
+                                        <option value="APO-DP">Demand Planning</option>
+                                        <option value="APO-SNP">Supply Network Planning</option>
+                                        <option value="APO-SDM">Supply and Demand Matching</option>
+                                        <option value="APO-PPDS">Production Planning and Detailed Scheduling</option>
+                                        <option value="APO-GATP">Global Available-to-Promise</option>
+                                        <option value="APO-TPVS">Transportation Planning and Vehicle Scheduling</option>
+                                    </select>
+                                </label><br>
                                 <input type="submit" value="save" name="save">
                             </div>
                         </div>

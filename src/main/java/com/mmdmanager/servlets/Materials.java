@@ -1,6 +1,7 @@
 package com.mmdmanager.servlets;
 
 import com.mmdmanager.dao.MaterialDAO;
+import com.mmdmanager.dao.WorkbookDAO;
 import com.mmdmanager.others.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -22,13 +23,6 @@ import java.util.Iterator;
 @WebServlet("/Materials")
 public class Materials extends HttpServlet {
     private ArrayList<Material> materialList = new ArrayList<>();
-    private Iterator<Material> iterator;
-
-    String[] excelHeaders = new String[] {"Id",	"Request Number",	"(E)SK Number",	"Request type",	"Creation type",	"Request by",	"Request date",	"Product Number",	"Material Name",	"Remark",	"Material Group",	"Product Hierachy",	"Batch",	"Gross weight (Kg)",	"Net weight (Kg)",	"Length (M)",	"Width (M)",	"Height (M)",	"Volume (M³)",	"Capacity Unit of Measure",	"Inverter",	"Power Supply",	"CE-mark",	"Application",	"Mode",	"Refrigerant",	"Compressor type",	"Refrigerant Weight (Kg)",	"Frequency",	"Packing style",	"Sales OEM product",	"Buy OEM product",	"Indoor / outdoor",	"DG Indicator Profile",	"Business Pilar",	"Source / Country of Origin",	"Sales Brand",	"Destination Market",	"Factory",	"MRP type",	"SNP planner",	"Poscode",	"",	"Batch determination"};
-
-    XSSFWorkbook workbook = new XSSFWorkbook();
-    XSSFSheet sheet;
-    XSSFRow row;
 
     private GeneralData generalData;
     private MaterialData materialData;
@@ -36,9 +30,10 @@ public class Materials extends HttpServlet {
     private TechnicalData technicalData;
     private LogisticData logisticData;
 
-    private String materialProperties = new String();
+    XSSFWorkbook workbook = new XSSFWorkbook();
 
     private final MaterialDAO materialDAO = new MaterialDAO();
+    private final WorkbookDAO workbookDAO = new WorkbookDAO();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String inputSend = request.getParameter("send");
@@ -47,41 +42,7 @@ public class Materials extends HttpServlet {
         try {
             if (inputSend.equals("send")) {
                 //materialList = materialDAO.getMaterialList(materialList);
-                iterator = materialList.iterator();
-
-                while(iterator.hasNext()) {
-                    materialProperties = String.valueOf(iterator.next());
-                }
-                String[] tokensVal = materialProperties.split(",");
-
-                int counter = 0;
-                String[][] array = new String[materialList.size()][37];
-                while (iterator.hasNext()) {
-                    array[counter] = String.valueOf(iterator.next()).split(",");
-                    counter++;
-                }
-
-                try {
-                    sheet = workbook.createSheet("Request");
-                    row = sheet.createRow(0);
-                    for(byte i = 0; i<excelHeaders.length; i++) {
-                        XSSFCell cell = row.createCell(i);
-                        cell.setCellType(XSSFCell.CELL_TYPE_STRING);
-                        cell.setCellValue(excelHeaders[i]);
-                    }
-                    for (byte n = 1; n < materialList.size() + 1; n++) {
-                        row = sheet.createRow(n);
-                        for (byte y = 2; y < array.length+2; y++) {
-                            XSSFCell cell = row.createCell(y);
-                            cell.setCellValue(array[n-1][y-2]);
-                        }
-                    }
-                    FileOutputStream outputStream = new FileOutputStream("C:\\Users\\admin\\Desktop\\Test1.xlsx");
-                    workbook.write(outputStream);
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                workbook = workbookDAO.getWorkbook(materialList);
             }
             httpSession.removeAttribute("materialList");
             materialList.clear();
@@ -133,12 +94,11 @@ public class Materials extends HttpServlet {
                         .concat(request.getParameter("productHierarchy2").substring(0, 3))
                         .concat(request.getParameter("productHierarchy3").substring(0, 3));
 
-                StringBuilder strArray = new StringBuilder().append(request.getParameter("firstLevelMG"))
-                        .append(" - ").append(request.getParameter("secondLevelMG"))
-                        .append(" - ").append(request.getParameter("productHierarchy1"))
-                        .append(" - ").append(request.getParameter("productHierarchy2"))
-                        .append(" - ").append(request.getParameter("productHierarchy3"));
-
+                String strArray = request.getParameter("firstLevelMG") +
+                        " - " + request.getParameter("secondLevelMG") +
+                        " - " + request.getParameter("productHierarchy1") +
+                        " - " + request.getParameter("productHierarchy2") +
+                        " - " + request.getParameter("productHierarchy3");
                 String[] materialDescriptionArr = String.valueOf(strArray).split(" - ");
 
                 StringBuilder materialDescription = new StringBuilder();
@@ -184,7 +144,7 @@ public class Materials extends HttpServlet {
                 String source = String.valueOf(request.getParameter("sourceCountryOfOrg"));
                 String factory = String.valueOf(request.getParameter("factory"));
 
-                String destMarketTab[] = request.getParameterValues("destMarket");
+                String[] destMarketTab = request.getParameterValues("destMarket");
                 StringBuilder destinationMarket = new StringBuilder();
                 for (byte i = 0; i < destMarketTab.length; i++) {
                     if (destMarketTab[i] != null || !destMarketTab[i].equals("null")) {
@@ -192,7 +152,9 @@ public class Materials extends HttpServlet {
                     }
                 }
                 destinationMarket.deleteCharAt(destinationMarket.length()-1);
-                logisticData = new LogisticData(packingStyle, salesOemProduct, buyOemProduct, indoorOutdoor, dgIndicatorProfile, salesBrand, businessPilar, source,String.valueOf(destinationMarket), factory);
+                String mrpType = request.getParameter("mrpType");
+                String snpPlanner = request.getParameter("snpPlanner");
+                logisticData = new LogisticData(packingStyle, salesOemProduct, buyOemProduct, indoorOutdoor, dgIndicatorProfile, salesBrand, businessPilar, source,String.valueOf(destinationMarket), factory, mrpType, snpPlanner);
 
                 Material material = new Material(generalData, materialData, weigthsAndDimensions, technicalData, logisticData);
                 materialList.add(material);
