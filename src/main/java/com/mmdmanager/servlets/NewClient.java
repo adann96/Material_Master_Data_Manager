@@ -7,14 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/BackToLogin")
-public class BackToLogin extends HttpServlet {
+@WebServlet("/NewClient")
+public class NewClient extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
-        response.sendRedirect("index.jsp");
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("NewClient.jsp");
     }
 }

@@ -12,14 +12,14 @@ public class AdminDAO {
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
 
-    public Admin getAdmin(String user_id, String acc_password) {
+    public Admin getAdmin(String user_id, String acc_password) throws SQLException {
         Admin admin = new Admin();
 
         try {
             connection = ConnectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT COMPANY_ID, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE USER_ID=? AND ACC_PASSWORD=? AND IS_ADMIN = 'Y'");
-            preparedStatement.setString(1, user_id);
-            preparedStatement.setString(2, acc_password);
+            preparedStatement = connection.prepareStatement("SELECT COMPANY_ID, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE USER_ID=? AND ACC_PASSWORD =? AND IS_ADMIN = 'Y'");
+            preparedStatement.setString(1,user_id);
+            preparedStatement.setString(2,acc_password);
 
             resultSet = preparedStatement.executeQuery();
 
@@ -29,8 +29,11 @@ public class AdminDAO {
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        } finally {
+            preparedStatement.close();
+            resultSet.close();
+            connection.close();
         }
-
         return admin;
     }
 }

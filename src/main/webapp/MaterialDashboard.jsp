@@ -1,29 +1,26 @@
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Material Master Data Manager</title>
+    <title>MMD Manager - User Dashboard</title>
     <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/userDashStyle.css">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script type="text/javascript" src='javaScript/bootstrap/jquery.min.js'></script>
+    <script type="text/javascript" src='javaScript/bootstrap/bootstrap.min.js'></script>
 </head>
 <body>
 <header class="m-0 p-2 navbar">
     <h2 class="m-0 p-2 navbar-brand"><b class="text-light">user<span class="main-color">Login</span> - Material Creation | You are logged in as <%= session.getAttribute("user_id") %></b></h2>
 </header>
 <nav class="m-0 p-2 navbar">
-    <form method="post">
+    <form id="matDashForm" method="post">
         <fieldset>
             <ul class="m-0 p-0 navbar d-flex">
-                <li class="m-1 p-1 nav-item"><button type="submit" class="p-1 btn btn-secondary" onclick="form.action='UserLogout';">Log Out</button></li>
-                <li class="m-1 p-1 nav-item"><button type="submit" class="p-1 btn btn-secondary" onclick="form.action='Statistics';">Stats</button></li>
+                <li class="m-1 p-1 nav-item"><button id="userLogOut" formaction="UserLogout" class="p-1 btn btn-secondary" type="submit">Log Out</button></li>
+                <li class="m-1 p-1 nav-item"><button id="showStats" class="p-1 btn btn-secondary" type="submit">Stats</button></li>
             </ul>
         </fieldset>
     </form>
@@ -392,6 +389,5 @@
     </div>
 </section>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src='javaScript/userFormMaterial.js'></script>
+<script type="text/javascript" src='javaScript/userFormMaterial.js'></script>
 </html>

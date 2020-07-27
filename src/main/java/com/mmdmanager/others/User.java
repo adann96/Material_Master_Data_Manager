@@ -5,7 +5,7 @@ public class User {
     private String company_id;
     private String acc_password;
 
-    public User(String user_id, String first_name, String middle_name, String last_name, String sex, String is_admin, String company_id, String acc_password) {
+    public User(String user_id, String first_name, String middle_name, String last_name, String sex, String company_id, String is_admin, String acc_password) {
         this.user_id = user_id;
         this.first_name = first_name;
         this.middle_name = middle_name;

@@ -12,7 +12,7 @@ public class LogonsDAO {
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
 
-    public List<Logons> allLogons() {
+    public List<Logons> allLogons() throws SQLException {
         List<Logons> logons = new ArrayList<>();
 
         try {
@@ -32,8 +32,11 @@ public class LogonsDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            preparedStatement.close();
+            resultSet.close();
+            connection.close();
         }
-
         return logons;
     }
 }

@@ -12,7 +12,7 @@ public class MaterialDAO {
     static CallableStatement callableStatement;
     byte counter = 0;
 
-    public ArrayList<Material> getMaterialList(ArrayList<Material> materialList) {
+    public ArrayList<Material> getMaterialList(ArrayList<Material> materialList) throws SQLException {
 
         try {
             connection = ConnectionProvider.getConnection();
@@ -82,12 +82,15 @@ public class MaterialDAO {
                 callableStatement.executeBatch();
                 connection.commit();
                 connection.setAutoCommit(true);
-                connection.close();
             }
         }
         catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println(ex.getSQLState());
+        }
+        finally {
+            callableStatement.close();
+            connection.close();
         }
         return materialList;
     }

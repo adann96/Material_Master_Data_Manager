@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/login_style.css">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script type="text/javascript" src='javaScript/bootstrap/jquery.min.js'></script>
+    <script type="text/javascript" src='javaScript/bootstrap/bootstrap.min.js'></script>
 </head>
 <body>
 <header class="m-0 p-2 navbar">
@@ -28,51 +25,39 @@
 </nav>
 <section>
     <div class="container p-5">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-pills py-3 px-md-5" id="pills-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="user-tab" data-toggle="tab" href="#user" role="tab" aria-controls="user" aria-selected="true">User</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="admin-tab" data-toggle="tab" href="#admin" role="tab" aria-controls="admin" aria-selected="false">Admin</a>
+                <button class="btn btn-secondary" id="pills-users-tab" data-toggle="pill" href="#pills-users" role="tab" aria-controls="pills-users" aria-selected="true">User</button>
+                <button class="btn btn-secondary" id="pills-admin-tab" data-toggle="pill" href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</button>
             </li>
         </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
-                <div class="row p-4" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="col">
-                        <form class="tabcontent" action="MaterialDashboard" method="POST">
-                            <fieldset>
-                                <label for="client" class="text-light">Client</label><br>
-                                <input type="text" name="client" id="client" onkeydown="return event.key != 'Enter';" required><br>
-                                <label for="userID" class="text-light">User ID</label><br>
-                                <input type="text" id="userID" name="userID" onkeydown="return event.key != 'Enter';" required><br>
-                                <label for="userPassword" class="text-light">Password</label><br>
-                                <input type="password" id="userPassword" name="userPassword" onkeydown="return event.key != 'Enter';" required><br>
-                                <button type="submit" class="p-1 btn btn-secondary" id="userLoginButton">Log In</button>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
+        <div class="tab-content py-0 px-md-5" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
+                <form class="tabcontent" action="MaterialDashboard" method="POST">
+                    <fieldset>
+                        <label for="client" class="text-light">Client</label><br>
+                        <input type="text" name="client" id="client" onkeydown="return event.key != 'Enter';" required><br>
+                        <label for="userID" class="text-light">User ID</label><br>
+                        <input type="text" id="userID" name="userID" onkeydown="return event.key != 'Enter';" required><br>
+                        <label for="userPassword" class="text-light">Password</label><br>
+                        <input type="password" id="userPassword" name="userPassword" onkeydown="return event.key != 'Enter';" required><br>
+                        <button type="submit" class="p-1 btn btn-secondary" id="userLoginButton">Log In</button>
+                    </fieldset>
+                </form>
             </div>
-            <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="admin-tab">
-                <div class="row p-4">
-                    <div class="col">
-                        <form class="tabcontent" action="AdminDashboard" method="POST">
-                            <fieldset>
-                                <label for="adminID" class="text-light">Admin ID</label><br>
-                                <input type="text" id="adminID" name="adminID" onkeydown="return event.key != 'Enter';" required><br>
-                                <label for="adminPassword" class="text-light">Password</label><br>
-                                <input type="password" id="adminPassword" name="adminPassword" onkeydown="return event.key != 'Enter';" required><br>
-                                <button type="submit" class="p-1 btn btn-secondary" id="adminLoginButton">Log In</button>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
+            <div class="tab-pane fade" id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">
+                <form class="tabcontent" action="AdminDashboard" method="POST">
+                    <fieldset>
+                        <label for="adminID" class="text-light">Admin ID</label><br>
+                        <input type="text" id="adminID" name="adminID" onkeydown="return event.key != 'Enter';" required><br>
+                        <label for="adminPassword" class="text-light">Password</label><br>
+                        <input type="password" id="adminPassword" name="adminPassword" onkeydown="return event.key != 'Enter';" required><br>
+                        <button type="submit" class="p-1 btn btn-secondary" value="addUserToDb" name="adminLoginButton" id="adminLoginButton">Log In</button>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
 </section>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src='javaScript/bootstrap/bootstrap.min.js'></script>
 </html>

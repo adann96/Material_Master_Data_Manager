@@ -17,8 +17,12 @@ header.navbar {
     background-color: #857b9d !important;
 }
 
-nav.navbar {
+nav.navbar, #pills-tabContent, #pills-tab {
     background: #484b6a;
+}
+
+#pills-tabContent {
+    border-radius: 3px;
 }
 
 form {
@@ -29,10 +33,6 @@ form {
 
 nav form fieldset ul li {
     list-style-type: none;
-}
-
-button.btn {
-    background-color: #857b9d !important;
 }
 
 div.container {
@@ -68,4 +68,12 @@ div.row {
     box-shadow: 0px 0px 2px black;
     border-radius: 3px;
     outline: none;
+}
+
+section form fieldset {
+    padding: 0px 0px 10px 0px;
+}
+
+.tab-content {
+    background-color: #484b6a;
 }

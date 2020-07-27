@@ -103,7 +103,10 @@ input[name="compressorType"],
 input[name="refrigerantWeight"],
 input[name="frequency"],
 input[name="salesBrand"],
-input[name="factory"]{
+input[name="factory"],
+select[class="mrpType"],
+select[class="snpPlanner"]
+{
     border: none;
     box-shadow: 0px 0px 2px black;
     border-radius: 3px;

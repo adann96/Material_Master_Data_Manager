@@ -33,10 +33,6 @@ nav ul li {
     list-style-type: none;
 }
 
-button.btn {
-    background-color: #857b9d !important;
-}
-
 section {
     background: #34354b;
 }
@@ -59,4 +55,8 @@ section {
 
 .box {
     background: #484b6a;
+}
+
+.container {
+    padding: 48px 48px 0px 48px;
 }

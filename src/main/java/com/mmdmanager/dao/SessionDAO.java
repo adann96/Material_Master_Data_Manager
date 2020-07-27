@@ -23,6 +23,7 @@ public class SessionDAO {
         catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        preparedStatement.close();
         connection.close();
         return session;
     }
@@ -34,8 +35,10 @@ public class SessionDAO {
             callableStatement.execute();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        } finally {
+            preparedStatement.close();
+            connection.close();
         }
-        connection.close();
         return "Session closed successfully!";
     }
 }
