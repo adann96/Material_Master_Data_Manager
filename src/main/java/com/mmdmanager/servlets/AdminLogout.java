@@ -16,6 +16,8 @@ public class AdminLogout extends HttpServlet {
             if (httpSession != null) {
                 httpSession.removeAttribute("listLogons");
                 httpSession.removeAttribute("listUsers");
+                httpSession.removeAttribute("listClients");
+                httpSession.invalidate();
                 response.sendRedirect("index.jsp");
             }
         }

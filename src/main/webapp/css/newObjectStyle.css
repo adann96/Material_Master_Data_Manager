@@ -8,4 +8,5 @@ select[name="sex"]
     background: rgba(250, 250, 250, 0.9);
     outline: none;
     padding: 3px;
+    margin: 5px;
 }

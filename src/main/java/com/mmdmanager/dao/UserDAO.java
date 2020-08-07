@@ -1,5 +1,6 @@
 package com.mmdmanager.dao;
 
+import com.mmdmanager.oracle.ClosureProvider;
 import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.User;
 
@@ -7,10 +8,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO extends ClosureProvider {
     static Connection connection;
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
+    boolean isClosed;
+    ClosureProvider closureProvider = new ClosureProvider();
 
     public User getUser(String company_id, String user_id, String acc_password) throws SQLException {
         User user = new User();
@@ -29,12 +32,12 @@ public class UserDAO {
                 user.setUser_id(resultSet.getString(2));
                 user.setAcc_password(resultSet.getString(3));
             }
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            preparedStatement.close();
-            resultSet.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.areAllConnectionsClosed(preparedStatement,resultSet,connection);
         }
         return user;
     }
@@ -59,9 +62,9 @@ public class UserDAO {
         }
         catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            preparedStatement.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.isConnectionClosed(preparedStatement,connection);
         }
         return rowAdded;
     }
@@ -78,9 +81,9 @@ public class UserDAO {
         }
         catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            preparedStatement.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.isConnectionClosed(preparedStatement,connection);
         }
         return rowDeleted;
     };
@@ -107,9 +110,7 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            preparedStatement.close();
-            resultSet.close();
-            connection.close();
+            isClosed = closureProvider.areAllConnectionsClosed(preparedStatement,resultSet,connection);
         }
         return users;
     }

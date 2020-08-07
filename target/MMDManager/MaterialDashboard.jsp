@@ -65,7 +65,7 @@
                                 <input type="text" name="materialName" id="materialName" required><br>
                                 <label for="remark">Remark: </label><br>
                                 <textarea name="remark" id="remark" rows="3" cols="30"></textarea><br>
-                                <label>Batch:<br>
+                                <label>Batch: </label><br>
                                     <select class="batch" name="batchCountry">
                                         <option value="DE">DE</option>
                                         <option value="PL">PL</option>
@@ -78,23 +78,21 @@
                                         <option value="3">03</option>
                                         <option value="4">04</option>
                                     </select>
-                                </label>
                                 <br>
-                                <label>Material Group:<br>
+                                <label>Material Group: </label><br>
                                     <select class="materialGroup" name="firstLevelMG" id="select1">
                                         <option value="210 - HOUSEHOLD">210 - HOUSEHOLD</option>
                                     </select>
                                     <select class="materialGroup" name="secondLevelMG" id="select2">
                                     </select>
-                                </label></br>
-                                <label>Product Hierarchy:<br>
+                                </br>
+                                <label>Product Hierarchy: </label><br>
                                     <select class="materialGroup" name="productHierarchy1" id="select3">
                                     </select>
                                     <select class="materialGroup" name="productHierarchy2" id="select4">
                                     </select>
                                     <select class="materialGroup" name="productHierarchy3" id="select5">
                                     </select>
-                                </label>
                             </div>
                             <div class="tab-pane fade" id="nav-weightsAndDimensions" role="tabpanel" aria-labelledby="nav-weightsAndDimensions-tab">
                                 <label for="grossWeight">Gross Weight (Kg): </label><br>
@@ -109,22 +107,22 @@
                                 <input type="number" step="0.001" value="0.034" name="volume" id="volume" required><br>
                             </div>
                             <div class="tab-pane fade" id="nav-technicalData" role="tabpanel" aria-labelledby="nav-technicalData-tab">
-                                <label>Capacity Unit of Measure:<br>
+                                <label>Capacity Unit of Measure: </label><br>
                                     <select class="capacityUnitOfMeasure" name="capacityUnitOfMeasure">
                                         <option value="1">Wh</option>
                                         <option value="2">kWh</option>
                                         <option value="3">eV</option>
                                         <option value="4">cal</option>
                                     </select>
-                                </label><br>
-                                <label>Inverter:<br>
+                                <br>
+                                <label>Inverter: </label><br>
                                     <select class="inverter" name="inverter">
                                         <option value="1">N</option>
                                         <option value="2">Y</option>
                                     </select>
-                                </label><br>
+                                <br>
 
-                                <label>Power Supply:<br>
+                                <label>Power Supply: </label><br>
                                     <select class="powerSupply" name="powerSupply">
                                         <option value="1">+12V1</option>
                                         <option value="2">+12V2</option>
@@ -136,17 +134,17 @@
                                         <option value="8">V1</option>
                                         <option value="9">V1.5</option>
                                     </select>
-                                </label><br>
+                                <br>
 
-                                <label>CE-mark:<br>
+                                <label>CE-mark: </label><br>
                                     <select class="ceMark" name="ceMark">
                                         <option value="1">Y</option>
                                         <option value="2">N</option>
                                         <option value="3">N/A</option>
                                     </select>
-                                </label><br>
+                                <br>
 
-                                <label>Application:<br>
+                                <label>Application: </label><br>
                                     <select class="application" name="application">
                                         <option value="1">Food processing, preservation and distribution</option>
                                         <option value="2">Chemical and process industries</option>
@@ -155,9 +153,9 @@
                                         <option value="5">Industrial, such as in textiles, manufacturing, photographic, computer rooms etc.</option>
                                         <option value="6">Comfort – commercial, residential etc.</option>
                                     </select>
-                                </label><br>
+                                <br>
 
-                                <label>Mode:<br>
+                                <label>Mode: </label><br>
                                     <select class="mode" name="mode">
                                         <option value="1">Normal Mode</option>
                                         <option value="2">Extra Fridge Mode</option>
@@ -165,9 +163,9 @@
                                         <option value="4">Vacation Mode</option>
                                         <option value="5">Home Alone Mode</option>
                                     </select>
-                                </label><br>
+                                <br>
 
-                                <label>Refrigerant: <br>
+                                <label>Refrigerant: </label><br>
                                     <select class="refrigerant" name="refrigerant">
                                         <option value="1">CFCs-R11</option>
                                         <option value="2">CFCs-R12</option>
@@ -181,7 +179,7 @@
                                         <option value="10">HFCs-R407C</option>
                                         <option value="11">HFCs-R410a</option>
                                     </select>
-                                </label><br>
+                                <br>
 
                                 <label for="refrigerantWeight">Refrigerant Weight (Kg):</label><br>
                                 <input type="number" step="0.001" value="0.034" id="refrigerantWeight" name="refrigerantWeight"><br>
@@ -189,18 +187,18 @@
                                 <label for="frequency">Frequency:<br></label><br>
                                 <input type="number" step="0.001" value="0.034" id="frequency" name="frequency"><br>
 
-                                <label>Compressor type:<br>
+                                <label>Compressor type: </label><br>
                                     <select class="compressorType" name="compressorType">
                                         <option value="1">Piston compressors</option>
                                         <option value="2">Vane compressors</option>
                                         <option value="3">Scroll compressors</option>
                                         <option value="4">N/A</option>
                                     </select>
-                                </label><br>
+                                <br>
 
                             </div>
                             <div class="tab-pane fade" id="nav-logisticData" role="tabpanel" aria-labelledby="nav-logisticData-tab">
-                                <label>Packing style: <br>
+                                <label>Packing style: </label><br>
                                     <select class="packingStyle" name="packingStyle">
                                         <option value="1">Canada</option>
                                         <option value="2">Hungary</option>
@@ -213,29 +211,29 @@
                                         <option value="9">Belgium</option>
                                         <option value="10">Italy</option>
                                     </select>
-                                </label><br>
-                                <label>Sales OEM Product: <br>
+                                <br>
+                                <label>Sales OEM Product: </label><br>
                                     <select class="salesOemProduct" name="salesOemProduct">
                                         <option value="1">Yes</option>
                                         <option value="2">No</option>
                                         <option value="3">N/A</option>
                                     </select>
-                                </label><br>
-                                <label>Buy OEM Product: <br>
+                                <br>
+                                <label>Buy OEM Product: </label><br>
                                     <select class="buyOemProduct" name="buyOemProduct">
                                         <option value="1">Yes</option>
                                         <option value="2">No</option>
                                         <option value="3">N/A</option>
                                     </select>
-                                </label><br>
-                                <label>Indoor / Outdoor: <br>
+                                <br>
+                                <label>Indoor / Outdoor: </label><br>
                                     <select class="indoorOutdoor" name="indoorOutdoor">
                                         <option value="1">Yes</option>
                                         <option value="2">No</option>
                                         <option value="3">N/A</option>
                                     </select>
-                                </label><br>
-                                <label>DG Indicator Profile:<br>
+                                <br>
+                                <label>DG Indicator Profile: </label><br>
                                     <select class="dgIndicatorProfile" name="dgIndicatorProfile">
                                         <option value="1">Relevant for dangerous goods</option>
                                         <option value="2">Relevant for dangerous goods and documents</option>
@@ -243,17 +241,17 @@
                                         <option value="4">Relevant for dangerous goods, checks, and documents</option>
                                         <option value="5">N/A</option>
                                     </select>
-                                </label><br>
+                                <br>
                                 <label for="salesBrand">Sales Brand: </label><br>
                                 <input type="text" name="salesBrand" id="salesBrand" required><br>
-                                <label>Business Pilar: <br>
+                                <label>Business Pilar: </label><br>
                                     <select class="businessPilar" name="businessPilar">
                                         <option value="1">N/A</option>
                                         <option value="2">Applied</option>
                                         <option value="3">Not-Applied</option>
                                     </select>
-                                </label><br>
-                                <label>Source / Country of Origin: <br>
+                                <br>
+                                <label>Source / Country of Origin: </label><br>
                                     <select class="sourceCountryOfOrg" name="sourceCountryOfOrg">
                                         <option value="TR">Turkey</option>
                                         <option value="PL">Poland</option>
@@ -262,62 +260,64 @@
                                         <option value="CR">Croatia</option>
                                         <option value="SK">Slovakia</option>
                                     </select>
-                                </label><br>
+                                <br>
                                 <label for="factory">Factory: </label><br>
                                 <input type="text" name="factory" id="factory" required><br>
-                                <label>Destination Market: <br>
-                                    <input type="checkbox" name="destMarket" value="AT">AT
-                                    <input type="checkbox" name="destMarket" value="BE">BE
-                                    <input type="checkbox" name="destMarket" value="BG">BG
-                                    <input type="checkbox" name="destMarket" value="CH">CH
-                                    <input type="checkbox" name="destMarket" value="CY">CY
-                                    <input type="checkbox" name="destMarket" value="CZ">CZ<br>
-                                    <input type="checkbox" name="destMarket" value="DE">DE
-                                    <input type="checkbox" name="destMarket" value="DK">DK
-                                    <input type="checkbox" name="destMarket" value="EE">EE
-                                    <input type="checkbox" name="destMarket" value="ES">ES
-                                    <input type="checkbox" name="destMarket" value="FI">FI
-                                    <input type="checkbox" name="destMarket" value="FR">FR<br>
-                                    <input type="checkbox" name="destMarket" value="GR">GR
-                                    <input type="checkbox" name="destMarket" value="HR">HR
-                                    <input type="checkbox" name="destMarket" value="HU">HU
-                                    <input type="checkbox" name="destMarket" value="IE">IE
-                                    <input type="checkbox" name="destMarket" value="IS">IS
-                                    <input type="checkbox" name="destMarket" value="IT">IT<br>
-                                    <input type="checkbox" name="destMarket" value="LI">LI
-                                    <input type="checkbox" name="destMarket" value="LT">LT
-                                    <input type="checkbox" name="destMarket" value="LU">LU
-                                    <input type="checkbox" name="destMarket" value="LV">LV
-                                    <input type="checkbox" name="destMarket" value="MT">MT
-                                    <input type="checkbox" name="destMarket" value="NL">NL<br>
-                                    <input type="checkbox" name="destMarket" value="NO">NO
-                                    <input type="checkbox" name="destMarket" value="PL">PL
-                                    <input type="checkbox" name="destMarket" value="PT">PT
-                                    <input type="checkbox" name="destMarket" value="RO">RO
-                                    <input type="checkbox" name="destMarket" value="SE">SE
-                                    <input type="checkbox" name="destMarket" value="SI">SI<br>
-                                    <input type="checkbox" name="destMarket" value="SK">SK
-                                    <input type="checkbox" name="destMarket" value="UK">UK
-                                    <input type="checkbox" name="destMarket" value="AL">AL
-                                    <input type="checkbox" name="destMarket" value="BA">BA
-                                    <input type="checkbox" name="destMarket" value="MD">MD
-                                    <input type="checkbox" name="destMarket" value="ME">ME<br>
-                                    <input type="checkbox" name="destMarket" value="MK">MK
-                                    <input type="checkbox" name="destMarket" value="RS">RS
-                                    <input type="checkbox" name="destMarket" value="AM">AM
-                                    <input type="checkbox" name="destMarket" value="AZ">AZ
-                                    <input type="checkbox" name="destMarket" value="GE">GE
-                                    <input type="checkbox" name="destMarket" value="KG">KG<br>
-                                    <input type="checkbox" name="destMarket" value="KA">KZ
-                                    <input type="checkbox" name="destMarket" value="TM">TM
-                                    <input type="checkbox" name="destMarket" value="TR">TR
-                                    <input type="checkbox" name="destMarket" value="UZ">UZ
-                                    <input type="checkbox" name="destMarket" value="BY">BY
-                                    <input type="checkbox" name="destMarket" value="RU">RU<br>
-                                    <input type="checkbox" name="destMarket" value="TJ">TJ
-                                    <input type="checkbox" name="destMarket" value="UA">UA
-                                </label>
-                                <label>MRP Type: <br>
+                                <label>Destination Market: </label><br>
+                                    <div class="p-1 container custom-control custom-checkbox">
+                                        <input type="checkbox" name="destMarket" value="AT">AT
+                                        <input type="checkbox" name="destMarket" value="BE">BE
+                                        <input type="checkbox" name="destMarket" value="BG">BG
+                                        <input type="checkbox" name="destMarket" value="CH">CH
+                                        <input type="checkbox" name="destMarket" value="CY">CY
+                                        <input type="checkbox" name="destMarket" value="CZ">CZ<br>
+                                        <input type="checkbox" name="destMarket" value="DE">DE
+                                        <input type="checkbox" name="destMarket" value="DK">DK
+                                        <input type="checkbox" name="destMarket" value="EE">EE
+                                        <input type="checkbox" name="destMarket" value="ES">ES
+                                        <input type="checkbox" name="destMarket" value="FI">FI
+                                        <input type="checkbox" name="destMarket" value="FR">FR<br>
+                                        <input type="checkbox" name="destMarket" value="GR">GR
+                                        <input type="checkbox" name="destMarket" value="HR">HR
+                                        <input type="checkbox" name="destMarket" value="HU">HU
+                                        <input type="checkbox" name="destMarket" value="IE">IE
+                                        <input type="checkbox" name="destMarket" value="IS">IS
+                                        <input type="checkbox" name="destMarket" value="IT">IT<br>
+                                        <input type="checkbox" name="destMarket" value="LI">LI
+                                        <input type="checkbox" name="destMarket" value="LT">LT
+                                        <input type="checkbox" name="destMarket" value="LU">LU
+                                        <input type="checkbox" name="destMarket" value="LV">LV
+                                        <input type="checkbox" name="destMarket" value="MT">MT
+                                        <input type="checkbox" name="destMarket" value="NL">NL<br>
+                                        <input type="checkbox" name="destMarket" value="NO">NO
+                                        <input type="checkbox" name="destMarket" value="PL">PL
+                                        <input type="checkbox" name="destMarket" value="PT">PT
+                                        <input type="checkbox" name="destMarket" value="RO">RO
+                                        <input type="checkbox" name="destMarket" value="SE">SE
+                                        <input type="checkbox" name="destMarket" value="SI">SI<br>
+                                        <input type="checkbox" name="destMarket" value="SK">SK
+                                        <input type="checkbox" name="destMarket" value="UK">UK
+                                        <input type="checkbox" name="destMarket" value="AL">AL
+                                        <input type="checkbox" name="destMarket" value="BA">BA
+                                        <input type="checkbox" name="destMarket" value="MD">MD
+                                        <input type="checkbox" name="destMarket" value="ME">ME<br>
+                                        <input type="checkbox" name="destMarket" value="MK">MK
+                                        <input type="checkbox" name="destMarket" value="RS">RS
+                                        <input type="checkbox" name="destMarket" value="AM">AM
+                                        <input type="checkbox" name="destMarket" value="AZ">AZ
+                                        <input type="checkbox" name="destMarket" value="GE">GE
+                                        <input type="checkbox" name="destMarket" value="KG">KG<br>
+                                        <input type="checkbox" name="destMarket" value="KA">KZ
+                                        <input type="checkbox" name="destMarket" value="TM">TM
+                                        <input type="checkbox" name="destMarket" value="TR">TR
+                                        <input type="checkbox" name="destMarket" value="UZ">UZ
+                                        <input type="checkbox" name="destMarket" value="BY">BY
+                                        <input type="checkbox" name="destMarket" value="RU">RU<br>
+                                        <input type="checkbox" name="destMarket" value="TJ">TJ
+                                        <input type="checkbox" name="destMarket" value="UA">UA
+                                    </div>
+                                <br>
+                                <label>MRP Type: </label><br>
                                     <select class="mrpType" name="mrpType">
                                         <option value="ND">No Planning</option>
                                         <option value="PD">MRP</option>
@@ -326,8 +326,8 @@
                                         <option value="VM">Automatic reorder point planning</option>
                                         <option value="VV">Forecast-based planning</option>
                                     </select>
-                                </label><br>
-                                <label>SNP Planner: <br>
+                                <br>
+                                <label>SNP Planner: </label><br>
                                     <select class="snpPlanner" name="snpPlanner">
                                         <option value="APO-DP">Demand Planning</option>
                                         <option value="APO-SNP">Supply Network Planning</option>
@@ -335,9 +335,8 @@
                                         <option value="APO-PPDS">Production Planning and Detailed Scheduling</option>
                                         <option value="APO-GATP">Global Available-to-Promise</option>
                                         <option value="APO-TPVS">Transportation Planning and Vehicle Scheduling</option>
-                                    </select>
-                                </label><br>
-                                <input type="submit" value="save" name="save">
+                                    </select><br>
+                                <input type="submit" class="m-1 btn btn-warning" value="save" name="save">
                             </div>
                         </div>
                     </form>
@@ -379,8 +378,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <label for="sendMaterial">Send</label>
-                            <input type="submit" id="sendMaterial" value="send" name="send">Send</input>
+                            <input type="submit" class="m-1 btn btn-success" id="sendMaterial" value="send" name="send">
                         </fieldset>
                     </form>
                 </div>

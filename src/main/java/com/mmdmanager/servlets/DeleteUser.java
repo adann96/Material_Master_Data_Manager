@@ -18,7 +18,9 @@ public class DeleteUser extends HttpServlet {
     UserDAO userDAO;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String encodedRedirectURL = response.encodeRedirectURL("AdminDashboard.jsp");
 
         String user_id = request.getParameter("deleteUser");
@@ -30,9 +32,5 @@ public class DeleteUser extends HttpServlet {
             ex.printStackTrace();
         }
         request.getRequestDispatcher(encodedRedirectURL).forward(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

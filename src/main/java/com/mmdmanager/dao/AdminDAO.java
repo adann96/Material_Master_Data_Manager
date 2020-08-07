@@ -1,5 +1,7 @@
 package com.mmdmanager.dao;
 
+import com.mmdmanager.oracle.Closure;
+import com.mmdmanager.oracle.ClosureProvider;
 import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.Admin;
 import java.sql.Connection;
@@ -7,13 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AdminDAO {
+public class AdminDAO extends ClosureProvider {
     static Connection connection;
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
+    boolean isClosed;
 
     public Admin getAdmin(String user_id, String acc_password) throws SQLException {
         Admin admin = new Admin();
+        ClosureProvider closureProvider = new ClosureProvider();
 
         try {
             connection = ConnectionProvider.getConnection();
@@ -27,12 +31,12 @@ public class AdminDAO {
                 admin.setUser_id(resultSet.getString(2));
                 admin.setAcc_password(resultSet.getString(3));
             }
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            preparedStatement.close();
-            resultSet.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.areAllConnectionsClosed(preparedStatement,resultSet,connection);
         }
         return admin;
     }

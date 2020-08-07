@@ -1,5 +1,7 @@
 package com.mmdmanager.dao;
 
+import com.google.gson.internal.$Gson$Preconditions;
+import com.mmdmanager.oracle.ClosureProvider;
 import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.*;
 
@@ -7,17 +9,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class MaterialDAO {
+public class MaterialDAO extends ClosureProvider {
     static Connection connection;
     static CallableStatement callableStatement;
     byte counter = 0;
+    boolean isClosed;
+    ClosureProvider closureProvider = new ClosureProvider();
 
     public ArrayList<Material> getMaterialList(ArrayList<Material> materialList) throws SQLException {
 
         try {
             connection = ConnectionProvider.getConnection();
             while(!connection.isClosed()) {
-                //preparedStatement = connection.prepareStatement("insert into materials(material_name,product_number,user_id,request_datetime,esk_number,request_type,request_sub_type,remark,batch_number, product_hierarchy, gross_Weight, net_Weight, material_Length, material_Width, material_Height, material_Volume, Capacity_Unit_Of_Measure, inverter, POWER_SUPPLY, CEMARK, REFR_APPLICATION, REFR_MODE, REFRIGERANT_TYPE, REFRIGERANT_WEIGHT, FREQUENCY, COMPRESSOR_TYPE, PACKAGING_STYLE, SALES_OEM_PRODUCT, BUY_OEM_PRODUCT, INDOOR_OUTDOOR, DG_INDICATOR_PROFILE, SALES_BRAND, BUSINESS_PILAR, MATERIAL_SOURCE, FACTORY_NAME, DESTINATION_MARKET) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 callableStatement = connection.prepareCall("{call insertMaterialIntoDb(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 
                 connection.setAutoCommit(false);
@@ -89,8 +92,7 @@ public class MaterialDAO {
             System.out.println(ex.getSQLState());
         }
         finally {
-            callableStatement.close();
-            connection.close();
+            isClosed = closureProvider.isConnectionClosed(callableStatement,connection);
         }
         return materialList;
     }

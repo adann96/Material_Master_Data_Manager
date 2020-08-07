@@ -1,5 +1,6 @@
 package com.mmdmanager.dao;
 
+import com.mmdmanager.oracle.ClosureProvider;
 import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.Logons;
 
@@ -7,10 +8,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogonsDAO {
+public class LogonsDAO extends ClosureProvider {
     static Connection connection;
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
+    boolean isClosed;
+    ClosureProvider closureProvider = new ClosureProvider();
 
     public List<Logons> allLogons() throws SQLException {
         List<Logons> logons = new ArrayList<>();
@@ -32,10 +35,9 @@ public class LogonsDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            preparedStatement.close();
-            resultSet.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.areAllConnectionsClosed(preparedStatement,resultSet,connection);
         }
         return logons;
     }

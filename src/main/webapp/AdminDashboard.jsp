@@ -140,8 +140,8 @@
                                 <c:out value="${user.getAcc_password()}" />
                             </td>
                             <td>
-                                <form method="post">
-                                    <button class="btn btn-warning btn-sm" type="submit" formaction="" name="editUser" value="<c:out value='${user.getUser_id()}'/>">Edit</button>
+                                <form method="get">
+                                    <button class="btn btn-warning btn-sm" type="submit" formaction="ModifyUser" name="editUser" value="<c:out value='${user.getUser_id()}'/>">Edit</button>
                                     <button class="btn btn-danger btn-sm" type="submit" formaction="DeleteUser" name="deleteUser" value="<c:out value='${user.getUser_id()}'/>">Delete</button>
                                 </form>
                             </td>
@@ -178,8 +178,8 @@
                                 <c:out value="${client.getCompany_country()}" />
                             </td>
                             <td>
-                                <form method="post">
-                                    <button class="btn btn-warning btn-sm" type="submit" formaction="EditUser" name="editClient" value="<c:out value='${client.getCompany_id()}'/>">Edit</button>
+                                <form method="get">
+                                    <button class="btn btn-warning btn-sm" type="submit" formaction="ModifyClient" name="modifyClient" value="<c:out value='${client.getCompany_id()}'/>">Edit</button>
                                     <button class="btn btn-danger btn-sm" type="submit" formaction="DeleteClient" name="deleteClient" value="<c:out value='${client.getCompany_id()}'/>">Delete</button>
                                 </form>
                             </td>

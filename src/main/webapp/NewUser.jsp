@@ -38,13 +38,13 @@
                     <input type="text" id="middleName" name="middleName" maxlength="15" onkeydown="return event.key != 'Enter';"><br>
                     <label class="text-light" for="lastName">Last Name:</label><br>
                     <input type="text" id="lastName" name="lastName" maxlength="30" onkeydown="return event.key != 'Enter';" required><br>
-                    <label class="text-light">Sex: <br>
+                    <label class="text-light">Sex: </label><br>
                         <select class="sex" name="sex">
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
-                    </label><br>
-                    <label class="text-light">Company: <br>
+                    <br>
+                    <label class="text-light">Company: </label><br>
                         <select class="company" name="company">
                             <option value="106">Daikin Airconditioning Poland Sp. z o.o.</option>
                             <option value="105">Nordea Bank Abp SA Oddział w Polsce</option>
@@ -54,13 +54,13 @@
                             <option value="101">Commerzbank AG S.A. Branch in Lodz</option>
                             <option value="100">Infosys Consulting</option>
                         </select>
-                    </label><br>
-                    <label class="text-light">Is Admin? <br>
+                    <br>
+                    <label class="text-light">Is Admin? </label><br>
                         <select class="isAdmin" name="isAdmin">
                             <option value="N">No</option>
                             <option value="Y">Yes</option>
                         </select>
-                    </label><br>
+                    <br>
                     <button type="submit" class="p-1 btn btn-success" value="addUserToDb" name="addUserToDb">Add User</button>
                 </fieldset>
             </form>

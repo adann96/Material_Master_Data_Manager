@@ -1,18 +1,22 @@
 package com.mmdmanager.dao;
 
+import com.mmdmanager.oracle.ClosureProvider;
 import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.Session;
 import java.sql.CallableStatement;
 
 import java.sql.*;
 
-public class SessionDAO {
+public class SessionDAO extends ClosureProvider {
     static Connection connection;
     static PreparedStatement preparedStatement;
     static CallableStatement callableStatement;
+    boolean isClosed;
+    ClosureProvider closureProvider = new ClosureProvider();
 
     public Session startSession(String user_id) throws SQLException {
         Session session = new Session();
+
         try {
             connection = ConnectionProvider.getConnection();
             preparedStatement = connection.prepareStatement("INSERT INTO LOGONS (USER_ID) VALUES (?)");
@@ -23,8 +27,9 @@ public class SessionDAO {
         catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        preparedStatement.close();
-        connection.close();
+        finally {
+            isClosed = closureProvider.isConnectionClosed(preparedStatement,connection);
+        }
         return session;
     }
 
@@ -33,11 +38,12 @@ public class SessionDAO {
             connection = ConnectionProvider.getConnection();
             callableStatement = connection.prepareCall("{call close_session}");
             callableStatement.execute();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            preparedStatement.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.isConnectionClosed(callableStatement,connection);
         }
         return "Session closed successfully!";
     }

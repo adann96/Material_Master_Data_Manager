@@ -17,8 +17,9 @@ public class DeleteClient extends HttpServlet {
     ClientDAO clientDAO;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+    }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String client_id = request.getParameter("deleteClient");
         clientDAO = new ClientDAO();
 
@@ -28,9 +29,5 @@ public class DeleteClient extends HttpServlet {
             ex.printStackTrace();
         }
         response.sendRedirect("AdminDashboard.jsp");
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

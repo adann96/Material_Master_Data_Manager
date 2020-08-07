@@ -1,5 +1,6 @@
 package com.mmdmanager.dao;
 
+import com.mmdmanager.oracle.ClosureProvider;
 import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.Client;
 import com.mmdmanager.others.User;
@@ -11,10 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientDAO {
+public class ClientDAO extends ClosureProvider {
     static Connection connection;
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
+    boolean isClosed;
+    ClosureProvider closureProvider = new ClosureProvider();
 
     public List<Client> allClients() throws SQLException {
         List<Client> clients = new ArrayList<>();
@@ -35,10 +38,9 @@ public class ClientDAO {
         }
         catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            preparedStatement.close();
-            resultSet.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.areAllConnectionsClosed(preparedStatement,resultSet,connection);
         }
         return clients;
     }
@@ -54,9 +56,9 @@ public class ClientDAO {
         }
         catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            preparedStatement.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.isConnectionClosed(preparedStatement,connection);
         }
         return rowAdded;
     }
@@ -73,9 +75,9 @@ public class ClientDAO {
         }
         catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            preparedStatement.close();
-            connection.close();
+        }
+        finally {
+            isClosed = closureProvider.isConnectionClosed(preparedStatement,connection);
         }
         return rowDeleted;
     }
