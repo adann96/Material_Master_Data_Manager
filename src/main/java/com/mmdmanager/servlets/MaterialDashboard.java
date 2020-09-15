@@ -18,43 +18,34 @@ import java.util.Date;
 
 @WebServlet("/MaterialDashboard")
 public class MaterialDashboard extends HttpServlet {
-    private UserDAO userDAO;
-    private SessionDAO sessionDAO;
-
-    private String company_id, user_id, acc_password;
-
     public Session session;
-    private User user;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
 
         try {
-            userDAO = new UserDAO();
-            sessionDAO = new SessionDAO();
+            UserDAO userDAO = new UserDAO();
+            SessionDAO sessionDAO = new SessionDAO();
 
-            company_id = request.getParameter("client");
-            user_id = request.getParameter("userID");
-            acc_password = request.getParameter("userPassword");
+            String company_id = request.getParameter("client");
+            String user_id = request.getParameter("userID");
+            String acc_password = request.getParameter("userPassword");
 
             user_id = user_id.toUpperCase();
-            user = userDAO.getUser(company_id, user_id, acc_password);
+            User user = userDAO.getUser(company_id, user_id, acc_password);
 
-            if (user!=null && (user.getCompany_id()!=null && user.getUser_id()!=null && user.getAcc_password()!=null)) {
+            if (user !=null && (user.getCompany_id()!=null && user.getUser_id()!=null && user.getAcc_password()!=null)) {
                 HttpSession httpSession = request.getSession();
 
                 httpSession.setAttribute("user_id", user_id);
                 httpSession.setAttribute("createdSessionTime", httpSession.getCreationTime());
                 session = sessionDAO.startSession(user_id);
 
-                response.sendRedirect("MaterialDashboard.jsp?name="+user_id.toLowerCase()+"?t="+httpSession.getCreationTime()+"");
+                response.sendRedirect("MaterialDashboard.jsp?name="+ user_id.toLowerCase()+"?t="+httpSession.getCreationTime()+"");
             }
-            else if (user!=null && (user.getCompany_id()!=null && user.getUser_id()!=null)) {
+            else if (user !=null && (user.getCompany_id()!=null && user.getUser_id()!=null)) {
                 response.sendRedirect("None");
             }
-            company_id = "";
-            user_id="";
-            acc_password="";
         }
         catch (NullPointerException | SQLException ex) {
             System.out.println(ex.getMessage());
@@ -65,3 +56,4 @@ public class MaterialDashboard extends HttpServlet {
 
     }
 }
+

@@ -60,9 +60,9 @@
                                 </select></div>
                             <div class="tab-pane fade" id="nav-materialData" role="tabpanel" aria-labelledby="nav-materialData-tab">
                                 <label for="productNumber">Product Number: </label><br>
-                                <input type="text" name="productNumber" id="productNumber" required><br>
+                                <input type="text" maxlength="12" name="productNumber" id="productNumber" required><br>
                                 <label for="materialName">Material Name: </label><br>
-                                <input type="text" name="materialName" id="materialName" required><br>
+                                <input type="text" maxlength="8" name="materialName" id="materialName" required><br>
                                 <label for="remark">Remark: </label><br>
                                 <textarea name="remark" id="remark" rows="3" cols="30"></textarea><br>
                                 <label>Batch: </label><br>
@@ -358,23 +358,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="mat" items="${materialList}">
                                         <tr>
                                             <th scope="row">
-                                                <p>Something</p>
+                                                <c:out value="${mat.getMaterialData().getMaterialName()}" />
                                             </th>
                                             <td>
-                                                <p>Something</p>
+                                                <c:out value="${mat.getMaterialData().getProductNumber()}" />
                                             </td>
                                             <td>
-                                                <p>Something</p>
+                                                <c:out value="${mat.getGeneralData().getEmployeeID()}" />
                                             </td>
                                             <td>
-                                                <p>Something</p>
+                                                <c:out value="${mat.getGeneralData().getRequestDateTime()}" />
                                             </td>
                                             <td>
-                                                <p>Something</p>
+                                                <c:out value="${mat.getGeneralData().getRequestSubType()}" />
                                             </td>
                                         </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

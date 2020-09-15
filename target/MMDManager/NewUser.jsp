@@ -17,7 +17,7 @@
     <h2 class="m-0 p-2 navbar-brand"><b class="text-light">add<span class="main-color">User</span></b></h2>
 </header>
 <nav class="m-0 p-2 navbar navbar">
-    <form action="" method="POST">
+    <form action="BackToDashboard" method="POST">
         <fieldset>
             <ul class="m-0 p-0 navbar d-flex">
                 <li class="m-1 p-1 nav-item"><button type="submit" class="p-1 btn btn-secondary"><-Back</button></li>
@@ -46,8 +46,9 @@
                     <br>
                     <label class="text-light">Company: </label><br>
                         <select class="company" name="company">
+                            <option value="110">HTD Polska Sp. Z O.o.</option>
+                            <option value="109">Nordea Bank Abp SA Oddział w Polsce</option>
                             <option value="106">Daikin Airconditioning Poland Sp. z o.o.</option>
-                            <option value="105">Nordea Bank Abp SA Oddział w Polsce</option>
                             <option value="104">Fujitsu Technology Solutions</option>
                             <option value="103">Comarch SA</option>
                             <option value="102">GFT Poland Sp. z o.o.</option>

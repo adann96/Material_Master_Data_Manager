@@ -23,7 +23,7 @@ public class Materials extends HttpServlet {
     static PreparedStatement preparedStatement;
     ResultSet resultSet;
 
-    private final ArrayList<Material> materialList = new ArrayList<>();
+    private ArrayList<Material> materialList = new ArrayList<>();
     XSSFWorkbook workbook = new XSSFWorkbook();
     MultiPartEmail email = new MultiPartEmail();
 
@@ -41,8 +41,8 @@ public class Materials extends HttpServlet {
                 preparedStatement = connection.prepareStatement("select logons.logon_id, materials.request_number from materials inner join logons on logons.logon_id = materials.logon_id");
                 resultSet = preparedStatement.executeQuery();
 
-                //materialList = materialDAO.getMaterialList(materialList);
-                //workbook = excelWorkbook.getWorkbook(materialList, resultSet);
+                materialList = materialDAO.getMaterialList(materialList);
+                workbook = excelWorkbook.getWorkbook(materialList, resultSet);
                 email =  multiPartEmail.sendEmailWithAttachment(resultSet, materialList.size());
             }
             httpSession.removeAttribute("materialList");

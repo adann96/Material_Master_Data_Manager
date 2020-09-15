@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/adminDashStyle.css">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
     <script type="text/javascript" src='javaScript/bootstrap/jquery.min.js'></script>
+
     <script type="text/javascript" src='javaScript/bootstrap/bootstrap.min.js'></script>
 </head>
 
@@ -23,7 +24,7 @@
             <fieldset>
                 <ul class="m-0 p-0 navbar d-flex">
                     <li class="m-1 p-1 nav-item">
-                        <button type="submit" class="p-1 btn btn-secondary">Logout</button>
+                        <button id="adminLogOut" type="submit" class="p-1 btn btn-secondary">Logout</button>
                     </li>
                 </ul>
             </fieldset>
@@ -193,4 +194,5 @@
     </div>
 </section>
 </body>
+<script type="text/javascript" src='javaScript/preventRedirect.js'></script>
 </html>

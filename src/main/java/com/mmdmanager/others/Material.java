@@ -19,5 +19,25 @@ public class Material {
     public String toString() {
         return generalData + "," + materialData + "," + weigthsAndDimensions + "," + technicalData + "," + logisticData;
     }
+
+    public GeneralData getGeneralData() {
+        return generalData;
+    }
+
+    public MaterialData getMaterialData() {
+        return materialData;
+    }
+
+    public WeigthsAndDimensions getWeigthsAndDimensions() {
+        return weigthsAndDimensions;
+    }
+
+    public TechnicalData getTechnicalData() {
+        return technicalData;
+    }
+
+    public LogisticData getLogisticData() {
+        return logisticData;
+    }
 }
 

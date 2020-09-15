@@ -2,8 +2,6 @@ package com.mmdmanager.others;
 
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.MultiPartEmail;
-import org.apache.poi.ss.usermodel.Workbook;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -12,12 +10,11 @@ public class Email {
     EmailAttachment attachment = new EmailAttachment();
 
     public MultiPartEmail sendEmailWithAttachment(ResultSet resultSet, int materialsQuantity) throws SQLException {
-        String attachmentPath;
 
         try {
             if (resultSet.next()) {
                 int request_no = resultSet.getInt(2);
-                attachmentPath = "C:\\Users\\admin\\Desktop\\Request " + String.valueOf(request_no) + ".xlsx";
+                String attachmentPath = "C:\\Users\\admin\\Desktop\\Request " + String.valueOf(request_no) + ".xlsx";
 
                 attachment.setPath(attachmentPath);
                 attachment.setDisposition(EmailAttachment.ATTACHMENT);

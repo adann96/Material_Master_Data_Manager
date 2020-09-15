@@ -1,10 +1,8 @@
 package com.mmdmanager.dao;
 
-import com.google.gson.internal.$Gson$Preconditions;
 import com.mmdmanager.oracle.ClosureProvider;
 import com.mmdmanager.oracle.ConnectionProvider;
 import com.mmdmanager.others.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,7 +18,7 @@ public class MaterialDAO extends ClosureProvider {
 
         try {
             connection = ConnectionProvider.getConnection();
-            while(!connection.isClosed()) {
+            while(connection.isClosed()) {
                 callableStatement = connection.prepareCall("{call insertMaterialIntoDb(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 
                 connection.setAutoCommit(false);
@@ -41,7 +39,7 @@ public class MaterialDAO extends ClosureProvider {
                     callableStatement.setString(10, array[counter][9]);
                     callableStatement.setString(32, array[counter][34]);
                     callableStatement.setString(34, array[counter][33]);
-                    callableStatement.setString(35, array[counter][36].replace("-",","));
+                    callableStatement.setString(35, array[counter][36]);
                     callableStatement.setString(36, array[counter][35]);
                     callableStatement.setString(37, array[counter][37]);
                     callableStatement.setString(38, array[counter][38]);
@@ -85,6 +83,7 @@ public class MaterialDAO extends ClosureProvider {
                 callableStatement.executeBatch();
                 connection.commit();
                 connection.setAutoCommit(true);
+                connection.close();
             }
         }
         catch (SQLException ex) {

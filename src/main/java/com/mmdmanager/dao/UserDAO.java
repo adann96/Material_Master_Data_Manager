@@ -11,6 +11,7 @@ import java.util.List;
 public class UserDAO extends ClosureProvider {
     static Connection connection;
     static PreparedStatement preparedStatement;
+    static CallableStatement callableStatement;
     ResultSet resultSet;
     boolean isClosed;
     ClosureProvider closureProvider = new ClosureProvider();
@@ -20,7 +21,9 @@ public class UserDAO extends ClosureProvider {
 
         try {
             connection = ConnectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT COMPANY_ID, USER_ID, ACC_PASSWORD, IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE COMPANY_ID=? AND USER_ID=? AND ACC_PASSWORD=? AND IS_ADMIN = 'N'");
+            preparedStatement = connection.prepareStatement("SELECT COMPANY_ID, USER_ID, ACC_PASSWORD, " +
+                    "IS_ADMIN, FIRST_NAME, LAST_NAME, SEX FROM USERS WHERE COMPANY_ID=? AND USER_ID=? AND " +
+                    "ACC_PASSWORD=? AND IS_ADMIN = 'N'");
             preparedStatement.setString(1, company_id);
             preparedStatement.setString(2, user_id);
             preparedStatement.setString(3, acc_password);
@@ -74,10 +77,10 @@ public class UserDAO extends ClosureProvider {
 
         try {
             connection = ConnectionProvider.getConnection();
-            preparedStatement = connection.prepareStatement("delete users where user_id=?");
-            preparedStatement.setString(1,user_id);
+            callableStatement = connection.prepareCall("{call deleteUsersFromDb(?)}");
+            callableStatement.setString(1, user_id);
 
-            rowDeleted = preparedStatement.executeUpdate() > 0;
+            rowDeleted = callableStatement.executeUpdate() > 0;
         }
         catch (SQLException e) {
             e.printStackTrace();
