@@ -126,4 +126,14 @@ begin
       into :new.COMPANY_ID
       from dual;
 end;
+
+CREATE OR REPLACE EDITIONABLE TRIGGER "MMDMANAGER"."ADD_LOGON_ID" 
+before insert on logons
+for each row
+begin
+  select add_logon_id.nextval
+  into :new.LOGON_ID
+  from dual;
+end;
 ```
+<p><i>Wyzwalacze nadające numery identyfikacyjne sesjom użytkownika i klientom</i></p>
