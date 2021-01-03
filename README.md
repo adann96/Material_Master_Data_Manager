@@ -86,10 +86,33 @@ Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. uży
 <img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
 <p><i>Skrypt tworzący szkielet tabeli „Materials”</i></p>
 
-<p>Kolejne kolumny tabeli Materials dotyczą stricte właściwości materiału. Ciekawym przypadkiem jest PRODUCT_HIERARCHY, będąca kluczem obcym tabeli o takiej samej nazwie. Zawiera ona trzy kolumny: PRODUCT_HIERARCHY_ID, PRODUCT_HIERARCHY_DESCRIPTION i MATERIAL_GROUP. Zgodnie z wymaganiami biznesowymi grupa materiałowa musi stanowić pierwsze sześć znaków hierarchii produktu. W tym celu kolumna została zadeklarowana jako wirtualna, tzn. podczas zapytania wygląda jak zwykła kolumna tabeli, ale jej wartości są pobierane, a nie przechowywane na dysku. W tym przypadku kolumna zawiera wirtualne wyrażenie:
-•	SUBSTR("PRODUCT_HIERARCHY_ID",0,6),
-zapewniające przypisanie danej grupie materiałowej fragment wartości pierwszej kolumny, a wykonywane jest automatycznie podczas wprowadzania danych do dwóch pierwszych kolumn. Zaletami takiego rozwiązania są niewątpliwie:
-•	Stała synchronizacja wartości kolumny wirtualnej z danymi źródłowymi,
-•	Wykorzystywanie mniejszej ilości pamięci
-•	Cost-Based Optimizer może zbierać statystyki, tak jak zwykła kolumna.</p>
+<p>Kolejne kolumny tabeli Materials dotyczą stricte właściwości materiału. Ciekawym przypadkiem jest PRODUCT_HIERARCHY, będąca kluczem obcym tabeli o takiej samej nazwie. Zawiera ona trzy kolumny: PRODUCT_HIERARCHY_ID, PRODUCT_HIERARCHY_DESCRIPTION i MATERIAL_GROUP. Zgodnie z wymaganiami biznesowymi grupa materiałowa musi stanowić pierwsze sześć znaków hierarchii produktu. W tym celu kolumna została zadeklarowana jako wirtualna, tzn. podczas zapytania wygląda jak zwykła kolumna tabeli, ale jej wartości są pobierane, a nie przechowywane na dysku. W tym przypadku kolumna zawiera wirtualne wyrażenie:</p>
+<p>•	SUBSTR("PRODUCT_HIERARCHY_ID",0,6), zapewniające przypisanie danej grupie materiałowej fragment wartości pierwszej kolumny, a wykonywane jest automatycznie podczas wprowadzania danych do dwóch pierwszych kolumn. Zaletami takiego rozwiązania są niewątpliwie:</p>
+<p>•	Stała synchronizacja wartości kolumny wirtualnej z danymi źródłowymi,</p>
+<p>•	Wykorzystywanie mniejszej ilości pamięci</p>
+<p>•	Cost-Based Optimizer może zbierać statystyki, tak jak zwykła kolumna.</p>
 
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Przykład kolumny wirtualnej z wyrażeniem wykorzystującym funkcję substring</i></p>
+
+Materials zawiera największą liczbę kluczy obcych, a jest ich dokładnie szesnaście. W większości przypadków kolumny zawierające klucz obcy posiadają taką samą nazwę jak powiązane z nimi tabele, które z kolei zawierają zwykle dwie kolumny. Wartości w tych kolumnach reprezentują numery identyfikacyjne innych wartości, które stanowią właściwość materiału. Poza opisanymi wcześniej tabelami Product_Hierarchy, Users i Logons powiązanymi z tabelą Materials, baza danych posiada jeszcze następujące tabele:
+
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Diagram przedstawiający strukturę bazy z uwzględnieniem tabeli MATERIALS</i></p>
+
+- Procedury
+
+<p>Procedura jest jednostką programową, za pomocą której można zwrócić wiele wartości, co odróżnia je od funkcji, które zwracają jedynie jedną wartość określonego typu, a także w przeciwieństwie do procedur mogą być używane w instrukcji SQL.
+Za usuwanie i dodawanie nowych użytkowników odpowiedzialne są dwie procedury: insertUserIntoDb i deleteUsersFromDb. Są one wywoływane z poziomu języka Java, po uruchomieniu odpowiedniego zdarzenia „onlick” w panelu administratorskim. Pierwsza z procedur zawiera osiem parametrów będących odpowiednikami pierwszych ośmiu kolumn tabeli Users. W bloku anonimowym znajdują się wyrażenia INSERT i COMMIT, które odpowiadają kolejno za wdrożenie danych do bazy oraz zatwierdzenie transakcji. Analogiczna sytuacja dotyczy drugiej procedury. Jedyne różnice stanowi liczba jej parametrów – VAR_USER_ID przyjmuję wartość tekstową reprezentującą numer identyfikacyjny użytkownika, oraz użyte wyrażenie DML, które aktualizuje ostatnią kolumnę, aby uznać użytkownika za nieaktywnego.</p>
+
+<p>Bardzo podobny mechanizm działania posiadają procedury do usuwania i dodawania klientów. Są również wywoływane z poziomu języka Java, po uruchomieniu odpowiedniego zdarzenia „onlick”. Jedynym użytkownikiem mającym możliwość wprowadzenia tego typu zmian w tabeli Clients jest administrator.</p>
+
+<p>Kolejną ważną procedurą, wywoływaną z poziomu języka Java przy wylogowaniu się z aplikacji to wspominana wcześniej CLOSE_SESSION. Zmiennej MAX_VAL przypisywana jest najwyższa wartość z kolumny będącej kluczem podstawowym, tak aby następnie w wyrażeniu UPDATE określić wiersz, w którym komórka ostatniej kolumny powinna zostać wypełniona wartością zmiennej GET_CURR_TIMESTAMP. W przypadku wcześniej wspomnianych procedur, każda poprawnie wykonana transakcja jest zatwierdzana wyrażeniem COMMIT.</p>
+
+- Wyzwalacze
+
+<p>Wyzwalacz jest jednostką języka PL/SQL przechowywaną w bazie danych i wykonywaną automatycznie w odpowiedzi na określone zdarzenie DML – Data Manipulation Language. W poniższym przypadku zdarzeniem jest INSERT, przed wykonaniem którego należy zadeklarować jakiego rodzaju dane mają się znaleźć w kolumnie START_SESSION. W wyzwalaczu zadeklarowano zmienną „GET_CURR_TIMESTAMP”, do której z automatycznie tworzonej tabeli Dual jest przypisywana wartość typu timestamp, reprezentująca aktualną datę i czas, która następnie jest wprowadzana do kolumny jako moment rozpoczęcia sesji użytkownika. Ważne w wyzwalaczu jest wyrażanie PRAGMA AUTONOMOUS_TRANSACTION, które zmienia sposób działania podprogramu w ramach transakcji. Podprogram oznaczony tą pragmą może wykonywać operacje SQL i zatwierdzać lub wycofywać te operacje bez zatwierdzania lub wycofywania danych w głównej transakcji.</p>
+
+<p>Kolejnym przykładem jest wyzwalacz INSERT_LOG_REQNO. Zawiera bardzo prostą budowę, a jego zadaniem jest przypisywanie materiałowi odpowiednich numerów sesji użytkownika, podczas której materiał został stworzony oraz numer requestu, ponieważ użytkownik w trakcie jednej sesji może stworzyć więcej niż jeden materiał, a co za tym idzie, każdy z nich będzie miał przypisany ten sam numer requestu.</p>
+
+<p>W bazie danych umieszczone zostały jeszcze dwa, bardzo proste wyzwalacze: ADD_CLIENT_ID i ADD_LOGON_ID. Obydwa korzystają z sekwencji, z których pobrane wartości są przypisywane numerom identyfikacyjnym nowo otwartej sesji użytkownika oraz dodanego do bazy klienta.</p>
