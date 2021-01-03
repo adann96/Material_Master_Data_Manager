@@ -50,14 +50,26 @@ Plik Excel odzwierciedla tabelę Materials, gdyż układ kolumn jest w nim dokł
 <p>Baza danych została zaprojektowana bazując na zasadach tworzenia relacyjnego modelu bazy danych w Data Modeler - jednym z narzędzi wbudowanych w SQL Developer, Model został stworzony zgodnie ze zdefiniowanymi wcześniej wymaganiami biznesowymi, dot. rozwiązania problemu automatyzacji pracy z danymi podstawowymi materiałów oraz ich przechowywania w logicznej strukturze relacyjnej bazy danych.
 Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. użytkowników aplikacji, sesji użytkowników, klientów reprezentowanych przez użytkowników oraz danych podstawowych. Ta pierwsza jest typowym przykładem relacji wiele-do-wielu, w którym element lub kilka elementów jednej tabeli może posiadać relację z jednym lub kilkoma elementami drugiej tabeli. Ta ostatnia zawiera najliczniejszą ilość kolumn odpowiadających właściwościom danych podstawowych materiału.</p>
 
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<img src="Photos/Przykład relacji wiele-do-wielu na podstawie tabeli Users.png" alt="codeSTACKr Spotify Playing" width="450" />
 <p><i>Przykład relacji wiele-do-wielu na podstawie tabeli „Users”</i></p>
 
 - Struktura baz i tabel
 
 <p>Tabela Users zawiera dziewięć kolumn z danymi dot. użytkowników aplikacji webowej. Kluczem podstawowym jest kolumna USER_ID typu varchar2, przyjmująca jedynie sześć znaków, zgodnie z konwencją nadawania numerów identyfikacyjnych użytkownikom. Ten sam typ danych posiadają trzy kolumny z danymi osobowymi: FIRST_NAME, MIDDLE_NAME, LAST_NAME oraz kolumna ACC_PASSWORD, przechowująca unikalne hasło danego użytkownika. Dodatkowe trzy kolumny typu char, czyli: SEX, IS_ADMIN oraz IS_ACTIVE odpowiadają kolejno za określenie płci użytkownika, praw administratorskich i aktywacji / deaktywacji konta. W tym celu nałożono na nie ograniczenia typu „check”. Tabela zawiera dwa unikalne indeksy, nałożone na kolumny ACC_PASSWORD i USER_ID. Wszystkie kolumny poza MIDDLE_NAME zawierają ograniczenia „not null”.</p>
 
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+```sql
+  CREATE TABLE "MMDMANAGER"."USERS" 
+   (	"USER_ID" VARCHAR2(6 BYTE), 
+	"FIRST_NAME" VARCHAR2(15 BYTE), 
+	"MIDDLE_NAME" VARCHAR2(15 BYTE), 
+	"LAST_NAME" VARCHAR2(30 BYTE), 
+	"SEX" CHAR(1 BYTE), 
+	"COMPANY_ID" NUMBER(*,0), 
+	"IS_ADMIN" CHAR(1 BYTE), 
+	"ACC_PASSWORD" VARCHAR2(8 BYTE), 
+	"IS_ACTIVE" CHAR(1 BYTE)
+   );
+```
 <p><i>Skrypt tworzący szkielet tabeli „Users”</i></p>
 
 <p>Jedynym kluczem obcym, reprezentującym inną tabelę jest kolumna COMPANY_ID, zawierająca numery identyfikacyjne klientów, dla których pracują użytkownicy aplikacji. W tabeli Clients stanowi ona klucz podstawowy z nałożonym unikalnym indeksem. Oprócz tego, podobnie jak w tabeli Users występuję kolumna IS_ACTIVE określająca, czy dany klient został dezaktywowany. Dodatkowe trzy kolumny: COMPANY_NAME, COMPANY_SHORT_NAME, COMPANY_COUNTRY typu varchar2 oznaczają kolejno nazwę klienta, jej skróconą wersję oraz kraj pochodzenia. Administrator aplikacji może oczywiście usuwać oraz dodawać nowych klientów do bazy za pomocą jednej z dwóch dedykowanych procedur, które działają identycznie jak te w tabeli Users, a różnią się jedynie referencjami, czy nazwami zmiennych. Wszystkie kolumny tabeli zawierają ograniczenie „not null”.</p>
