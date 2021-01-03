@@ -105,7 +105,7 @@ Materials zawiera największą liczbę kluczy obcych, a jest ich dokładnie szes
 <p>Procedura jest jednostką programową, za pomocą której można zwrócić wiele wartości, co odróżnia je od funkcji, które zwracają jedynie jedną wartość określonego typu, a także w przeciwieństwie do procedur mogą być używane w instrukcji SQL.
 Za usuwanie i dodawanie nowych użytkowników odpowiedzialne są dwie procedury: insertUserIntoDb i deleteUsersFromDb. Są one wywoływane z poziomu języka Java, po uruchomieniu odpowiedniego zdarzenia „onlick” w panelu administratorskim. Pierwsza z procedur zawiera osiem parametrów będących odpowiednikami pierwszych ośmiu kolumn tabeli Users. W bloku anonimowym znajdują się wyrażenia INSERT i COMMIT, które odpowiadają kolejno za wdrożenie danych do bazy oraz zatwierdzenie transakcji. Analogiczna sytuacja dotyczy drugiej procedury. Jedyne różnice stanowi liczba jej parametrów – VAR_USER_ID przyjmuję wartość tekstową reprezentującą numer identyfikacyjny użytkownika, oraz użyte wyrażenie DML, które aktualizuje ostatnią kolumnę, aby uznać użytkownika za nieaktywnego.</p>
 
-```
+```sql
   CREATE OR REPLACE EDITIONABLE PROCEDURE "MMDMANAGER"."INSERTUSERINTODB" (
     USER_ID IN USERS.USER_ID%TYPE,
     FIRST_NAME IN USERS.FIRST_NAME%TYPE,
@@ -137,7 +137,7 @@ END;
 
 <p>Bardzo podobny mechanizm działania posiadają procedury do usuwania i dodawania klientów. Są również wywoływane z poziomu języka Java, po uruchomieniu odpowiedniego zdarzenia „onlick”. Jedynym użytkownikiem mającym możliwość wprowadzenia tego typu zmian w tabeli Clients jest administrator.</p>
 
-```
+```sql
   CREATE OR REPLACE EDITIONABLE PROCEDURE "MMDMANAGER"."INSERTCLIENTINTODB" (
     NEW_company_name IN CLIENTS.company_name%TYPE,
     NEW_company_short_name IN CLIENTS.company_short_name%TYPE,
@@ -164,7 +164,7 @@ END;
 
 <p>Kolejną ważną procedurą, wywoływaną z poziomu języka Java przy wylogowaniu się z aplikacji to wspominana wcześniej CLOSE_SESSION. Zmiennej MAX_VAL przypisywana jest najwyższa wartość z kolumny będącej kluczem podstawowym, tak aby następnie w wyrażeniu UPDATE określić wiersz, w którym komórka ostatniej kolumny powinna zostać wypełniona wartością zmiennej GET_CURR_TIMESTAMP. W przypadku wcześniej wspomnianych procedur, każda poprawnie wykonana transakcja jest zatwierdzana wyrażeniem COMMIT.</p>
 
-```
+```sql
   CREATE OR REPLACE EDITIONABLE PROCEDURE "MMDMANAGER"."CLOSE_SESSION" 
 IS
     MAX_VAL             NUMBER;
@@ -187,7 +187,7 @@ END CLOSE_SESSION;
 
 <p>Wyzwalacz jest jednostką języka PL/SQL przechowywaną w bazie danych i wykonywaną automatycznie w odpowiedzi na określone zdarzenie DML – Data Manipulation Language. W poniższym przypadku zdarzeniem jest INSERT, przed wykonaniem którego należy zadeklarować jakiego rodzaju dane mają się znaleźć w kolumnie START_SESSION. W wyzwalaczu zadeklarowano zmienną „GET_CURR_TIMESTAMP”, do której z automatycznie tworzonej tabeli Dual jest przypisywana wartość typu timestamp, reprezentująca aktualną datę i czas, która następnie jest wprowadzana do kolumny jako moment rozpoczęcia sesji użytkownika. Ważne w wyzwalaczu jest wyrażanie PRAGMA AUTONOMOUS_TRANSACTION, które zmienia sposób działania podprogramu w ramach transakcji. Podprogram oznaczony tą pragmą może wykonywać operacje SQL i zatwierdzać lub wycofywać te operacje bez zatwierdzania lub wycofywania danych w głównej transakcji.</p>
 
-```
+```sql
   CREATE OR REPLACE EDITIONABLE TRIGGER "MMDMANAGER"."OPEN_SESSION" 
 BEFORE INSERT ON LOGONS
 FOR EACH ROW
@@ -207,7 +207,7 @@ END;
 
 <p>Kolejnym przykładem jest wyzwalacz INSERT_LOG_REQNO. Zawiera bardzo prostą budowę, a jego zadaniem jest przypisywanie materiałowi odpowiednich numerów sesji użytkownika, podczas której materiał został stworzony oraz numer requestu, ponieważ użytkownik w trakcie jednej sesji może stworzyć więcej niż jeden materiał, a co za tym idzie, każdy z nich będzie miał przypisany ten sam numer requestu.</p>
 
-```
+```sql
   CREATE OR REPLACE EDITIONABLE TRIGGER "MMDMANAGER"."INSERT_LOG_REQNO" 
 before insert on materials
 FOR EACH ROW 
