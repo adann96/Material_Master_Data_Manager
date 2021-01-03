@@ -44,3 +44,13 @@ Plik Excel odzwierciedla tabelę Materials, gdyż układ kolumn jest w nim dokł
 
 <img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
 <p><i>Przykład pliku Excel z dodatkowymi kolumnami</i></p>
+
+## Baza Danych
+
+<p>Baza danych została zaprojektowana bazując na zasadach tworzenia relacyjnego modelu bazy danych w Data Modeler - jednym z narzędzi wbudowanych w SQL Developer, Model został stworzony zgodnie ze zdefiniowanymi wcześniej wymaganiami biznesowymi, dot. rozwiązania problemu automatyzacji pracy z danymi podstawowymi materiałów oraz ich przechowywania w logicznej strukturze relacyjnej bazy danych.
+Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. użytkowników aplikacji, sesji użytkowników, klientów reprezentowanych przez użytkowników oraz danych podstawowych. Ta pierwsza jest typowym przykładem relacji wiele-do-wielu, w którym element lub kilka elementów jednej tabeli może posiadać relację z jednym lub kilkoma elementami drugiej tabeli. Ta ostatnia zawiera najliczniejszą ilość kolumn odpowiadających właściwościom danych podstawowych materiału.</p>
+
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Przykład pliku Excel z dodatkowymi kolumnami</i></p>
+
+- Struktura baz i tabel
