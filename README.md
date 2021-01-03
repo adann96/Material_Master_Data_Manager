@@ -51,6 +51,45 @@ Plik Excel odzwierciedla tabelę Materials, gdyż układ kolumn jest w nim dokł
 Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. użytkowników aplikacji, sesji użytkowników, klientów reprezentowanych przez użytkowników oraz danych podstawowych. Ta pierwsza jest typowym przykładem relacji wiele-do-wielu, w którym element lub kilka elementów jednej tabeli może posiadać relację z jednym lub kilkoma elementami drugiej tabeli. Ta ostatnia zawiera najliczniejszą ilość kolumn odpowiadających właściwościom danych podstawowych materiału.</p>
 
 <img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
-<p><i>Przykład pliku Excel z dodatkowymi kolumnami</i></p>
+<p><i>Przykład relacji wiele-do-wielu na podstawie tabeli „Users”</i></p>
 
 - Struktura baz i tabel
+
+<p>Tabela Users zawiera dziewięć kolumn z danymi dot. użytkowników aplikacji webowej. Kluczem podstawowym jest kolumna USER_ID typu varchar2, przyjmująca jedynie sześć znaków, zgodnie z konwencją nadawania numerów identyfikacyjnych użytkownikom. Ten sam typ danych posiadają trzy kolumny z danymi osobowymi: FIRST_NAME, MIDDLE_NAME, LAST_NAME oraz kolumna ACC_PASSWORD, przechowująca unikalne hasło danego użytkownika. Dodatkowe trzy kolumny typu char, czyli: SEX, IS_ADMIN oraz IS_ACTIVE odpowiadają kolejno za określenie płci użytkownika, praw administratorskich i aktywacji / deaktywacji konta. W tym celu nałożono na nie ograniczenia typu „check”. Tabela zawiera dwa unikalne indeksy, nałożone na kolumny ACC_PASSWORD i USER_ID. Wszystkie kolumny poza MIDDLE_NAME zawierają ograniczenia „not null”.</p>
+
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Skrypt tworzący szkielet tabeli „Users”</i></p>
+
+<p>Jedynym kluczem obcym, reprezentującym inną tabelę jest kolumna COMPANY_ID, zawierająca numery identyfikacyjne klientów, dla których pracują użytkownicy aplikacji. W tabeli Clients stanowi ona klucz podstawowy z nałożonym unikalnym indeksem. Oprócz tego, podobnie jak w tabeli Users występuję kolumna IS_ACTIVE określająca, czy dany klient został dezaktywowany. Dodatkowe trzy kolumny: COMPANY_NAME, COMPANY_SHORT_NAME, COMPANY_COUNTRY typu varchar2 oznaczają kolejno nazwę klienta, jej skróconą wersję oraz kraj pochodzenia. Administrator aplikacji może oczywiście usuwać oraz dodawać nowych klientów do bazy za pomocą jednej z dwóch dedykowanych procedur, które działają identycznie jak te w tabeli Users, a różnią się jedynie referencjami, czy nazwami zmiennych. Wszystkie kolumny tabeli zawierają ograniczenie „not null”.</p>
+
+
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Skrypt tworzący szkielet tabeli „Clients”</i></p>
+
+<p>Dużo ważniejszą z punktu widzenia funkcjonalności aplikacji pozostaje tabela Logons, zawierająca kluczowe informacje dotyczące rozpoczętych i zamkniętych sesji użytkowników. Kluczem podstawowym jest kolumna LOGON_ID. Podobnie jak w przypadku tabeli Clients unikalny numer identyfikacyjny każdej z otwartych sesji użytkownika gwarantuje sekwencja ADD_LOGON_ID.</p>
+
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Sekwencje ADD_LOGON_ID i ADD_CLIENT_ID</i></p>
+
+<p>Po wygenerowaniu numeru sekwencji jest ona inkrementowana, niezależnie od zatwierdzenia lub wycofania transakcji. Każda kolejna udana próba zalogowania do aplikacji owocuje zwiększoną o jeden wartością w kolumnie LOGON_ID, która oznacza numer identyfikacyjny otwartej sesji użytkownika. W drugiej kolumnie przechowywane są wartości klucza obcego kolumny USER_ID. Trzecia kolumna o nazwie START_SESSION przechowuje dokładną datę oraz czas, w którym nastąpiło otwarcie sesji użytkownika, a użyty został do tego typ danych timestamp. Czwarta kolumna o nazwie END_OF_SESSION jest niemalże identyczna co jej poprzedniczka. Przechowuje dokładny czas i datę zamknięcia sesji, a do wypełnienia jej wartościami typu timestamp wykorzystywana jest bezparametrowa procedura CLOSE_SESSION. Wszystkie opisane kolumny, poza ostatnią mają ograniczenie „not null”, z tego względu iż w momencie dodania nowego rekordu (po zalogowaniu do aplikacji) kolumna END_OF_SESSION jest wypełniana danymi zawsze na samym końcu.</p>
+
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Skrypt tworzący szkielet tabeli „Logons”</i></p>
+
+<p>Najważniejszą tabelą z punktu widzenia funkcjonalności aplikacji jest tabela Materials, w której przechowywane są wszystkie dane podstawowe materiałów. Kluczem podstawowym jest kolumna MATERIAL_NAME typu varchar2, która przyjmuje dokładnie osiem znaków. W tabeli znajduje się najwięcej, bo aż szesnaście kluczy obcych, z których większość reprezentuje numery identyfikacyjne niektórych właściwości materiału jak np. hierarchia produktu. Jedyną tabelą, która nie jest bezpośrednio połączona z Materials jest tabela Clients. Oprócz tego w tabeli zawarte są klucze obce do tabel Users i Logons w celu informacji, który konkretnie użytkownik, podczas której sesji stworzył dany materiał lub zestaw materiałów, ponieważ przechowywanie każdego z nich wiąże się z weryfikacją historii ich tworzenia.</p>
+
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Diagram przedstawiający strukturę bazy z uwzględnieniem tabeli MATERIALS</i></p>
+
+<p>Ważnymi z tego punktu widzenia są również kolumny REQUEST_NUMBER oraz REQUEST_DATETIME. Ta pierwsza zdaje się działać bardzo podobnie do kolumny LOGON_ID, lecz podstawową różnicą pomiędzy nimi jest moment, w którym ich wartości są inkrementowane. Kolumna LOGON_ID do inkrementacji korzysta z sekwencji, która uruchomiona zostaje podczas każdego logowania do aplikacji. Wyzwalacz na kolumnie REQUEST_NUMBER uruchamia proces inkrementacji tylko wtedy, gdy po stworzeniu co najmniej jednego materiału użytkownik klikając przycisk „send” uruchomi mechanizm zapisu materiału do bazy danych oraz generowania pliku Excel, który zostanie następnie wysłany pocztą elektroniczną. Kolumna REQUEST_DATETIME (posiadająca typ danych timestamp) określa dokładną datę oraz czas, w którym stworzony materiał został zapisany w pamięci aplikacji jako ten, który za chwilę doczeka się zapisu do bazy i do pliku Excel. W związku z tym nie ma technicznej możliwości na to, aby dwa materiały mogły zostać stworzone w dokładnie tym samym czasie. Rzecz jasna, każda z wymienionych kolumn musi posiadać ograniczenie „not null”.</p>
+
+<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<p><i>Skrypt tworzący szkielet tabeli „Materials”</i></p>
+
+<p>Kolejne kolumny tabeli Materials dotyczą stricte właściwości materiału. Ciekawym przypadkiem jest PRODUCT_HIERARCHY, będąca kluczem obcym tabeli o takiej samej nazwie. Zawiera ona trzy kolumny: PRODUCT_HIERARCHY_ID, PRODUCT_HIERARCHY_DESCRIPTION i MATERIAL_GROUP. Zgodnie z wymaganiami biznesowymi grupa materiałowa musi stanowić pierwsze sześć znaków hierarchii produktu. W tym celu kolumna została zadeklarowana jako wirtualna, tzn. podczas zapytania wygląda jak zwykła kolumna tabeli, ale jej wartości są pobierane, a nie przechowywane na dysku. W tym przypadku kolumna zawiera wirtualne wyrażenie:
+•	SUBSTR("PRODUCT_HIERARCHY_ID",0,6),
+zapewniające przypisanie danej grupie materiałowej fragment wartości pierwszej kolumny, a wykonywane jest automatycznie podczas wprowadzania danych do dwóch pierwszych kolumn. Zaletami takiego rozwiązania są niewątpliwie:
+•	Stała synchronizacja wartości kolumny wirtualnej z danymi źródłowymi,
+•	Wykorzystywanie mniejszej ilości pamięci
+•	Cost-Based Optimizer może zbierać statystyki, tak jak zwykła kolumna.</p>
+
