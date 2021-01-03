@@ -112,7 +112,51 @@ Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. uży
 
 <p>Ważnymi z tego punktu widzenia są również kolumny REQUEST_NUMBER oraz REQUEST_DATETIME. Ta pierwsza zdaje się działać bardzo podobnie do kolumny LOGON_ID, lecz podstawową różnicą pomiędzy nimi jest moment, w którym ich wartości są inkrementowane. Kolumna LOGON_ID do inkrementacji korzysta z sekwencji, która uruchomiona zostaje podczas każdego logowania do aplikacji. Wyzwalacz na kolumnie REQUEST_NUMBER uruchamia proces inkrementacji tylko wtedy, gdy po stworzeniu co najmniej jednego materiału użytkownik klikając przycisk „send” uruchomi mechanizm zapisu materiału do bazy danych oraz generowania pliku Excel, który zostanie następnie wysłany pocztą elektroniczną. Kolumna REQUEST_DATETIME (posiadająca typ danych timestamp) określa dokładną datę oraz czas, w którym stworzony materiał został zapisany w pamięci aplikacji jako ten, który za chwilę doczeka się zapisu do bazy i do pliku Excel. W związku z tym nie ma technicznej możliwości na to, aby dwa materiały mogły zostać stworzone w dokładnie tym samym czasie. Rzecz jasna, każda z wymienionych kolumn musi posiadać ograniczenie „not null”.</p>
 
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+```sql
+  CREATE TABLE "MMDMANAGER"."MATERIALS" 
+   (	"MATERIAL_NAME" VARCHAR2(8 BYTE), 
+	"USER_ID" VARCHAR2(6 BYTE), 
+	"LOGON_ID" NUMBER, 
+	"REQUEST_NUMBER" NUMBER, 
+	"REQUEST_DATETIME" TIMESTAMP (6), 
+	"ESK_NUMBER" NUMBER(6,0), 
+	"REQUEST_TYPE" VARCHAR2(15 BYTE), 
+	"REQUEST_SUB_TYPE" VARCHAR2(12 BYTE), 
+	"PRODUCT_NUMBER" VARCHAR2(12 BYTE), 
+	"REMARK" VARCHAR2(114 BYTE), 
+	"BATCH_NUMBER" VARCHAR2(4 BYTE), 
+	"PRODUCT_HIERARCHY" VARCHAR2(15 BYTE), 
+	"GROSS_WEIGHT" NUMBER(3,3), 
+	"NET_WEIGHT" NUMBER(3,3), 
+	"MATERIAL_LENGTH" NUMBER(3,3), 
+	"MATERIAL_WIDTH" NUMBER(3,3), 
+	"MATERIAL_HEIGHT" NUMBER(3,3), 
+	"MATERIAL_VOLUME" NUMBER(3,3), 
+	"CAPACITY_UNIT_OF_MEASURE" NUMBER(1,0), 
+	"INVERTER" NUMBER(1,0), 
+	"POWER_SUPPLY" NUMBER, 
+	"CEMARK" NUMBER, 
+	"REFR_APPLICATION" NUMBER, 
+	"REFR_MODE" NUMBER, 
+	"REFRIGERANT_TYPE" NUMBER, 
+	"REFRIGERANT_WEIGHT" NUMBER(3,3), 
+	"FREQUENCY" NUMBER(3,3), 
+	"COMPRESSOR_TYPE" NUMBER, 
+	"PACKAGING_STYLE" NUMBER, 
+	"SALES_OEM_PRODUCT" NUMBER, 
+	"BUY_OEM_PRODUCT" NUMBER, 
+	"INDOOR_OUTDOOR" NUMBER, 
+	"DG_INDICATOR_PROFILE" NUMBER, 
+	"SALES_BRAND" VARCHAR2(50 BYTE), 
+	"BUSINESS_PILAR" NUMBER, 
+	"MATERIAL_SOURCE" VARCHAR2(3 BYTE), 
+	"FACTORY_NAME" VARCHAR2(35 BYTE), 
+	"DESTINATION_MARKET" VARCHAR2(150 BYTE), 
+	"COUNTRY_OF_ORIGIN" VARCHAR2(3 BYTE) GENERATED ALWAYS AS (UPPER("MATERIAL_SOURCE")) VIRTUAL , 
+	"MRP_TYPE" VARCHAR2(2 BYTE), 
+	"SNP_PLANNER" VARCHAR2(8 BYTE)
+   );
+```
 <p><i>Skrypt tworzący szkielet tabeli „Materials”</i></p>
 
 <p>Kolejne kolumny tabeli Materials dotyczą stricte właściwości materiału. Ciekawym przypadkiem jest PRODUCT_HIERARCHY, będąca kluczem obcym tabeli o takiej samej nazwie. Zawiera ona trzy kolumny: PRODUCT_HIERARCHY_ID, PRODUCT_HIERARCHY_DESCRIPTION i MATERIAL_GROUP. Zgodnie z wymaganiami biznesowymi grupa materiałowa musi stanowić pierwsze sześć znaków hierarchii produktu. W tym celu kolumna została zadeklarowana jako wirtualna, tzn. podczas zapytania wygląda jak zwykła kolumna tabeli, ale jej wartości są pobierane, a nie przechowywane na dysku. W tym przypadku kolumna zawiera wirtualne wyrażenie:</p>
@@ -126,7 +170,7 @@ Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. uży
 
 Materials zawiera największą liczbę kluczy obcych, a jest ich dokładnie szesnaście. W większości przypadków kolumny zawierające klucz obcy posiadają taką samą nazwę jak powiązane z nimi tabele, które z kolei zawierają zwykle dwie kolumny. Wartości w tych kolumnach reprezentują numery identyfikacyjne innych wartości, które stanowią właściwość materiału. Poza opisanymi wcześniej tabelami Product_Hierarchy, Users i Logons powiązanymi z tabelą Materials, baza danych posiada jeszcze następujące tabele:
 
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<img src="Photos/Diagram przedstawiający strukturę bazy z uwzględnieniem tabeli MATERIALS.png" alt="codeSTACKr Spotify Playing" width="450" />
 <p><i>Diagram przedstawiający strukturę bazy z uwzględnieniem tabeli MATERIALS</i></p>
 
 - Procedury
