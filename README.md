@@ -74,18 +74,35 @@ Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. uży
 
 <p>Jedynym kluczem obcym, reprezentującym inną tabelę jest kolumna COMPANY_ID, zawierająca numery identyfikacyjne klientów, dla których pracują użytkownicy aplikacji. W tabeli Clients stanowi ona klucz podstawowy z nałożonym unikalnym indeksem. Oprócz tego, podobnie jak w tabeli Users występuję kolumna IS_ACTIVE określająca, czy dany klient został dezaktywowany. Dodatkowe trzy kolumny: COMPANY_NAME, COMPANY_SHORT_NAME, COMPANY_COUNTRY typu varchar2 oznaczają kolejno nazwę klienta, jej skróconą wersję oraz kraj pochodzenia. Administrator aplikacji może oczywiście usuwać oraz dodawać nowych klientów do bazy za pomocą jednej z dwóch dedykowanych procedur, które działają identycznie jak te w tabeli Users, a różnią się jedynie referencjami, czy nazwami zmiennych. Wszystkie kolumny tabeli zawierają ograniczenie „not null”.</p>
 
-
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+```sql
+  CREATE TABLE "MMDMANAGER"."CLIENTS" 
+   (	"COMPANY_ID" NUMBER, 
+	"COMPANY_NAME" VARCHAR2(50 BYTE), 
+	"COMPANY_SHORT_NAME" VARCHAR2(20 BYTE), 
+	"COMPANY_COUNTRY" VARCHAR2(40 BYTE), 
+	"IS_ACTIVE" CHAR(1 BYTE)
+   );
+```
 <p><i>Skrypt tworzący szkielet tabeli „Clients”</i></p>
 
 <p>Dużo ważniejszą z punktu widzenia funkcjonalności aplikacji pozostaje tabela Logons, zawierająca kluczowe informacje dotyczące rozpoczętych i zamkniętych sesji użytkowników. Kluczem podstawowym jest kolumna LOGON_ID. Podobnie jak w przypadku tabeli Clients unikalny numer identyfikacyjny każdej z otwartych sesji użytkownika gwarantuje sekwencja ADD_LOGON_ID.</p>
 
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+```sql
+   CREATE SEQUENCE "MMDMANAGER"."ADD_CLIENT_ID" MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 114 NOCACHE  ORDER  NOCYCLE;
+   CREATE SEQUENCE "MMDMANAGER"."ADD_LOGON_ID" MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 287 NOCACHE  ORDER  NOCYCLE;
+```
 <p><i>Sekwencje ADD_LOGON_ID i ADD_CLIENT_ID</i></p>
 
 <p>Po wygenerowaniu numeru sekwencji jest ona inkrementowana, niezależnie od zatwierdzenia lub wycofania transakcji. Każda kolejna udana próba zalogowania do aplikacji owocuje zwiększoną o jeden wartością w kolumnie LOGON_ID, która oznacza numer identyfikacyjny otwartej sesji użytkownika. W drugiej kolumnie przechowywane są wartości klucza obcego kolumny USER_ID. Trzecia kolumna o nazwie START_SESSION przechowuje dokładną datę oraz czas, w którym nastąpiło otwarcie sesji użytkownika, a użyty został do tego typ danych timestamp. Czwarta kolumna o nazwie END_OF_SESSION jest niemalże identyczna co jej poprzedniczka. Przechowuje dokładny czas i datę zamknięcia sesji, a do wypełnienia jej wartościami typu timestamp wykorzystywana jest bezparametrowa procedura CLOSE_SESSION. Wszystkie opisane kolumny, poza ostatnią mają ograniczenie „not null”, z tego względu iż w momencie dodania nowego rekordu (po zalogowaniu do aplikacji) kolumna END_OF_SESSION jest wypełniana danymi zawsze na samym końcu.</p>
 
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+```sql
+  CREATE TABLE "MMDMANAGER"."LOGONS" 
+   (	"LOGON_ID" NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE , 
+	"USER_ID" VARCHAR2(6 BYTE), 
+	"START_SESSION" TIMESTAMP (6), 
+	"END_OF_SESSION" TIMESTAMP (6)
+   );
+```
 <p><i>Skrypt tworzący szkielet tabeli „Logons”</i></p>
 
 <p>Najważniejszą tabelą z punktu widzenia funkcjonalności aplikacji jest tabela Materials, w której przechowywane są wszystkie dane podstawowe materiałów. Kluczem podstawowym jest kolumna MATERIAL_NAME typu varchar2, która przyjmuje dokładnie osiem znaków. W tabeli znajduje się najwięcej, bo aż szesnaście kluczy obcych, z których większość reprezentuje numery identyfikacyjne niektórych właściwości materiału jak np. hierarchia produktu. Jedyną tabelą, która nie jest bezpośrednio połączona z Materials jest tabela Clients. Oprócz tego w tabeli zawarte są klucze obce do tabel Users i Logons w celu informacji, który konkretnie użytkownik, podczas której sesji stworzył dany materiał lub zestaw materiałów, ponieważ przechowywanie każdego z nich wiąże się z weryfikacją historii ich tworzenia.</p>
