@@ -107,9 +107,6 @@ Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. uży
 
 <p>Najważniejszą tabelą z punktu widzenia funkcjonalności aplikacji jest tabela Materials, w której przechowywane są wszystkie dane podstawowe materiałów. Kluczem podstawowym jest kolumna MATERIAL_NAME typu varchar2, która przyjmuje dokładnie osiem znaków. W tabeli znajduje się najwięcej, bo aż szesnaście kluczy obcych, z których większość reprezentuje numery identyfikacyjne niektórych właściwości materiału jak np. hierarchia produktu. Jedyną tabelą, która nie jest bezpośrednio połączona z Materials jest tabela Clients. Oprócz tego w tabeli zawarte są klucze obce do tabel Users i Logons w celu informacji, który konkretnie użytkownik, podczas której sesji stworzył dany materiał lub zestaw materiałów, ponieważ przechowywanie każdego z nich wiąże się z weryfikacją historii ich tworzenia.</p>
 
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
-<p><i>Diagram przedstawiający strukturę bazy z uwzględnieniem tabeli MATERIALS</i></p>
-
 <p>Ważnymi z tego punktu widzenia są również kolumny REQUEST_NUMBER oraz REQUEST_DATETIME. Ta pierwsza zdaje się działać bardzo podobnie do kolumny LOGON_ID, lecz podstawową różnicą pomiędzy nimi jest moment, w którym ich wartości są inkrementowane. Kolumna LOGON_ID do inkrementacji korzysta z sekwencji, która uruchomiona zostaje podczas każdego logowania do aplikacji. Wyzwalacz na kolumnie REQUEST_NUMBER uruchamia proces inkrementacji tylko wtedy, gdy po stworzeniu co najmniej jednego materiału użytkownik klikając przycisk „send” uruchomi mechanizm zapisu materiału do bazy danych oraz generowania pliku Excel, który zostanie następnie wysłany pocztą elektroniczną. Kolumna REQUEST_DATETIME (posiadająca typ danych timestamp) określa dokładną datę oraz czas, w którym stworzony materiał został zapisany w pamięci aplikacji jako ten, który za chwilę doczeka się zapisu do bazy i do pliku Excel. W związku z tym nie ma technicznej możliwości na to, aby dwa materiały mogły zostać stworzone w dokładnie tym samym czasie. Rzecz jasna, każda z wymienionych kolumn musi posiadać ograniczenie „not null”.</p>
 
 ```sql
@@ -170,7 +167,7 @@ Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. uży
 
 Materials zawiera największą liczbę kluczy obcych, a jest ich dokładnie szesnaście. W większości przypadków kolumny zawierające klucz obcy posiadają taką samą nazwę jak powiązane z nimi tabele, które z kolei zawierają zwykle dwie kolumny. Wartości w tych kolumnach reprezentują numery identyfikacyjne innych wartości, które stanowią właściwość materiału. Poza opisanymi wcześniej tabelami Product_Hierarchy, Users i Logons powiązanymi z tabelą Materials, baza danych posiada jeszcze następujące tabele:
 
-<img src="Photos/Diagram przedstawiający strukturę bazy z uwzględnieniem tabeli MATERIALS.png" alt="codeSTACKr Spotify Playing" width="450" />
+<img src="Photos/Diagram przedstawiający strukturę bazy z uwzględnieniem tabeli MATERIALS.png" alt="codeSTACKr Spotify Playing" width="850" />
 <p><i>Diagram przedstawiający strukturę bazy z uwzględnieniem tabeli MATERIALS</i></p>
 
 - Procedury
