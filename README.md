@@ -6,12 +6,12 @@
 
 <p>W przypadku pozytywnego przejścia procesu weryfikacji danych aplikacja przekieruje użytkownika do odpowiedniego panelu. Za proces odpowiada serwlet MaterialDashboard, który obsługując metodę doPost pobiera podane przez użytkownika dane, a następnie przekazuje je do metody getUser, która łączy się bazą danych i w odpowiedniej tabeli wyszukuje użytkownika. Metoda pochodzi z klasy UserDAO (data access object), która jest swojego rodzaju wzorcem zapewniającym abstrakcyjny interfejs do bazy danych lub mechanizmu trwałości. Mapując wywołania aplikacji do warstwy trwałości, DAO zapewnia określone operacje na danych bez ujawniania szczegółów bazy danych. Jeżeli metoda next zmiennej resultSet zwróci wartość większą od 1, to znaczy, że użytkownik został znaleziony w tabeli Users.</p>
 
-<img src="Photos/Implementacja metody getUser.png" alt="codeSTACKr Spotify Playing" width="450" />
+<img src="Photos/Implementacja metody getUser.png" alt="codeSTACKr Spotify Playing" width="550" />
 <i>Implementacja metody getUser</i>
 
 <p>Następnym krokiem pozostaje odnotowanie momentu zalogowania do aplikacji. Metoda startSession przyjmuje jako parametr numer identyfikacyjny znalezionego w bazie użytkownika, a następnie dokonuje procesu odnotowania rozpoczęcia sesji użytkownika. Z poziomu aplikacji wykonywane jest wyrażanie insert, które wprowadza do tabeli jedynie id użytkownika, a opisamy wcześniej wyzwalacz OPEN_SESSION określa dokładną datę i czas rozpoczęcia sesji.</p>
 
-<img src="Photos/Serwlet MaterialDashboard z metoda doPost.png" alt="codeSTACKr Spotify Playing" width="450" />
+<img src="Photos/Serwlet MaterialDashboard z metoda doPost.png" alt="codeSTACKr Spotify Playing" width="550" />
 <i>Serwlet MaterialDashboard z metoda doPost</i>
 
 ## Moduł administratora
