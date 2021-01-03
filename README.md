@@ -92,7 +92,7 @@ Baza posiada cztery podstawowe tabele zawierające kluczowe informacje dot. uży
 <p>•	Wykorzystywanie mniejszej ilości pamięci</p>
 <p>•	Cost-Based Optimizer może zbierać statystyki, tak jak zwykła kolumna.</p>
 
-<img src="Photos/Przykład pliku Excel z dodatkowymi kolumnami.png" alt="codeSTACKr Spotify Playing" width="450" />
+<img src="Photos/Przykład kolumny wirtualnej z wyrażeniem wykorzystującym funkcję substring.png" alt="codeSTACKr Spotify Playing" width="450" />
 <p><i>Przykład kolumny wirtualnej z wyrażeniem wykorzystującym funkcję substring</i></p>
 
 Materials zawiera największą liczbę kluczy obcych, a jest ich dokładnie szesnaście. W większości przypadków kolumny zawierające klucz obcy posiadają taką samą nazwę jak powiązane z nimi tabele, które z kolei zawierają zwykle dwie kolumny. Wartości w tych kolumnach reprezentują numery identyfikacyjne innych wartości, które stanowią właściwość materiału. Poza opisanymi wcześniej tabelami Product_Hierarchy, Users i Logons powiązanymi z tabelą Materials, baza danych posiada jeszcze następujące tabele:
@@ -105,15 +105,124 @@ Materials zawiera największą liczbę kluczy obcych, a jest ich dokładnie szes
 <p>Procedura jest jednostką programową, za pomocą której można zwrócić wiele wartości, co odróżnia je od funkcji, które zwracają jedynie jedną wartość określonego typu, a także w przeciwieństwie do procedur mogą być używane w instrukcji SQL.
 Za usuwanie i dodawanie nowych użytkowników odpowiedzialne są dwie procedury: insertUserIntoDb i deleteUsersFromDb. Są one wywoływane z poziomu języka Java, po uruchomieniu odpowiedniego zdarzenia „onlick” w panelu administratorskim. Pierwsza z procedur zawiera osiem parametrów będących odpowiednikami pierwszych ośmiu kolumn tabeli Users. W bloku anonimowym znajdują się wyrażenia INSERT i COMMIT, które odpowiadają kolejno za wdrożenie danych do bazy oraz zatwierdzenie transakcji. Analogiczna sytuacja dotyczy drugiej procedury. Jedyne różnice stanowi liczba jej parametrów – VAR_USER_ID przyjmuję wartość tekstową reprezentującą numer identyfikacyjny użytkownika, oraz użyte wyrażenie DML, które aktualizuje ostatnią kolumnę, aby uznać użytkownika za nieaktywnego.</p>
 
+```
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "MMDMANAGER"."INSERTUSERINTODB" (
+    USER_ID IN USERS.USER_ID%TYPE,
+    FIRST_NAME IN USERS.FIRST_NAME%TYPE,
+    MIDDLE_NAME IN USERS.MIDDLE_NAME%TYPE,
+    LAST_NAME IN USERS.LAST_NAME%TYPE,
+    SEX IN USERS.SEX%TYPE,
+    COMPANY_ID IN USERS.COMPANY_ID%TYPE,
+    IS_ADMIN IN USERS.IS_ADMIN%TYPE,
+    ACC_PASSWORD IN USERS.ACC_PASSWORD%TYPE
+    )
+IS
+BEGIN
+  Insert into MMDMANAGER.USERS (USER_ID,FIRST_NAME,MIDDLE_NAME,LAST_NAME,SEX,COMPANY_ID,IS_ADMIN,ACC_PASSWORD)
+  VALUES (USER_ID,FIRST_NAME,MIDDLE_NAME,LAST_NAME,SEX,COMPANY_ID,IS_ADMIN,ACC_PASSWORD);
+  COMMIT;
+END;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "MMDMANAGER"."DELETEUSERSFROMDB" (VAR_USER_ID IN USERS.USER_ID%TYPE)
+IS
+BEGIN
+    UPDATE USERS SET IS_ACTIVE = 'N' WHERE USERS.USER_ID = VAR_USER_ID;
+    COMMIT;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No user found!');
+END;
+```
+<p><i>Procedury usuwające i dodawające użytkownika do bazy danych</i></p>
+
 <p>Bardzo podobny mechanizm działania posiadają procedury do usuwania i dodawania klientów. Są również wywoływane z poziomu języka Java, po uruchomieniu odpowiedniego zdarzenia „onlick”. Jedynym użytkownikiem mającym możliwość wprowadzenia tego typu zmian w tabeli Clients jest administrator.</p>
 
+```
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "MMDMANAGER"."INSERTCLIENTINTODB" (
+    NEW_company_name IN CLIENTS.company_name%TYPE,
+    NEW_company_short_name IN CLIENTS.company_short_name%TYPE,
+    NEW_company_country IN CLIENTS.company_country%TYPE
+    )
+IS
+BEGIN
+  Insert into MMDMANAGER.CLIENTS (company_name, company_short_name, company_country, is_active)
+  VALUES (NEW_company_name,NEW_company_short_name,NEW_company_country, 'Y');
+  COMMIT;
+END;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "MMDMANAGER"."DELETECLIENTFROMDB" (VAR_COMPANY_ID IN CLIENTS.COMPANY_ID%TYPE)
+IS
+BEGIN
+    UPDATE CLIENTS SET IS_ACTIVE = 'N' WHERE CLIENTS.COMPANY_ID = VAR_COMPANY_ID;
+    COMMIT;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No client found!');
+END;
+```
+<p><i>Procedury “insertClientIntoDb” i “deleteClientFromDb”</i></p>
+
 <p>Kolejną ważną procedurą, wywoływaną z poziomu języka Java przy wylogowaniu się z aplikacji to wspominana wcześniej CLOSE_SESSION. Zmiennej MAX_VAL przypisywana jest najwyższa wartość z kolumny będącej kluczem podstawowym, tak aby następnie w wyrażeniu UPDATE określić wiersz, w którym komórka ostatniej kolumny powinna zostać wypełniona wartością zmiennej GET_CURR_TIMESTAMP. W przypadku wcześniej wspomnianych procedur, każda poprawnie wykonana transakcja jest zatwierdzana wyrażeniem COMMIT.</p>
+
+```
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "MMDMANAGER"."CLOSE_SESSION" 
+IS
+    MAX_VAL             NUMBER;
+    GET_CURR_TIMESTAMP  TIMESTAMP(6);
+BEGIN
+    SELECT CAST(SYSDATE AS TIMESTAMP) 
+    INTO GET_CURR_TIMESTAMP
+    FROM DUAL;
+
+    SELECT MAX(LOGON_ID) INTO MAX_VAL
+    FROM LOGONS;
+
+    UPDATE LOGONS SET END_OF_SESSION = GET_CURR_TIMESTAMP WHERE LOGON_ID = MAX_VAL;
+    COMMIT;
+END CLOSE_SESSION;
+```
+<p><i>Procedura CLOSE_SESSION</i></p>
 
 - Wyzwalacze
 
 <p>Wyzwalacz jest jednostką języka PL/SQL przechowywaną w bazie danych i wykonywaną automatycznie w odpowiedzi na określone zdarzenie DML – Data Manipulation Language. W poniższym przypadku zdarzeniem jest INSERT, przed wykonaniem którego należy zadeklarować jakiego rodzaju dane mają się znaleźć w kolumnie START_SESSION. W wyzwalaczu zadeklarowano zmienną „GET_CURR_TIMESTAMP”, do której z automatycznie tworzonej tabeli Dual jest przypisywana wartość typu timestamp, reprezentująca aktualną datę i czas, która następnie jest wprowadzana do kolumny jako moment rozpoczęcia sesji użytkownika. Ważne w wyzwalaczu jest wyrażanie PRAGMA AUTONOMOUS_TRANSACTION, które zmienia sposób działania podprogramu w ramach transakcji. Podprogram oznaczony tą pragmą może wykonywać operacje SQL i zatwierdzać lub wycofywać te operacje bez zatwierdzania lub wycofywania danych w głównej transakcji.</p>
 
+```
+  CREATE OR REPLACE EDITIONABLE TRIGGER "MMDMANAGER"."OPEN_SESSION" 
+BEFORE INSERT ON LOGONS
+FOR EACH ROW
+DECLARE
+    PRAGMA AUTONOMOUS_TRANSACTION; 
+    GET_CURR_TIMESTAMP TIMESTAMP(6);
+BEGIN
+    SELECT CAST(SYSDATE AS TIMESTAMP) INTO GET_CURR_TIMESTAMP
+    FROM DUAL;
+    IF INSERTING THEN
+        :NEW.START_SESSION := GET_CURR_TIMESTAMP;
+    END IF;
+    COMMIT;
+END;
+```
+<p><i>Wyzwalacz OPEN_SESSION</i></p>
+
 <p>Kolejnym przykładem jest wyzwalacz INSERT_LOG_REQNO. Zawiera bardzo prostą budowę, a jego zadaniem jest przypisywanie materiałowi odpowiednich numerów sesji użytkownika, podczas której materiał został stworzony oraz numer requestu, ponieważ użytkownik w trakcie jednej sesji może stworzyć więcej niż jeden materiał, a co za tym idzie, każdy z nich będzie miał przypisany ten sam numer requestu.</p>
+
+```
+  CREATE OR REPLACE EDITIONABLE TRIGGER "MMDMANAGER"."INSERT_LOG_REQNO" 
+before insert on materials
+FOR EACH ROW 
+DECLARE
+  pragma autonomous_transaction;
+  last_logon_id number;
+  request_no_nextVal number;
+BEGIN
+  Select max(logon_id) INTO last_logon_id from LOGONS;
+  Select max(request_number)+1 INTO request_no_nextVal from MATERIALS;
+  :new.LOGON_ID := last_logon_id;
+  :new.REQUEST_NUMBER := request_no_nextVal;
+END;
+```
+<p><i>Wyzwalacz przypisujący materiałowi numer sesji oraz numer requestu</i></p>
 
 <p>W bazie danych umieszczone zostały jeszcze dwa, bardzo proste wyzwalacze: ADD_CLIENT_ID i ADD_LOGON_ID. Obydwa korzystają z sekwencji, z których pobrane wartości są przypisywane numerom identyfikacyjnym nowo otwartej sesji użytkownika oraz dodanego do bazy klienta.</p>
 
