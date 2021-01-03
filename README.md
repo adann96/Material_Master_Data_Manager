@@ -30,7 +30,7 @@
 
 <p>W module użytkownika mamy zawartą jedynie jedną opcję, która stanowi clou aplikacji. Główny panel podzielony jest na dwie części: po lewo znajduje się formularz danych podstawowych materiału, po prawej stronie znajduje się tabela ze stworzonymi, ale nie przesłanymi do bazy materiałami, które po kliknięciu przycisku „save” na końcu wypełnionego formularza tymczasowo są przechowywane w pamięci aplikacji. Tabela zawiera kolumny z nazwą materiału, numerem produktu, id użytkownika, czas i datę stworzenia materiału i typ requestu.</p>
 
-<img src="Photos/Główny panel użytkownika, po stworzeniu dwóch materiałów.png" alt="codeSTACKr Spotify Playing" width="450" />
+<img src="Photos/Główny panel użytkownika, po stworzeniu dwóch materiałów.png" alt="codeSTACKr Spotify Playing" width="650" />
 <i>Główny panel użytkownika, po stworzeniu dwóch materiałów</i>
 
 <p>Wypełniona po prawo tabela wyświetla tylko niewielką cześć właściwości materiału, które po każdym zapisaniu są dodawanie jako obiekt do listy materialList. Lista jest jednym z atrybutów sesji użytkownika usuwanym i czyszczonym po każdym wylogowaniu lub wysłaniu materiałów do bazy.</p>
