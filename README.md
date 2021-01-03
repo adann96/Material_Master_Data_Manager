@@ -116,3 +116,14 @@ Za usuwanie i dodawanie nowych użytkowników odpowiedzialne są dwie procedury:
 <p>Kolejnym przykładem jest wyzwalacz INSERT_LOG_REQNO. Zawiera bardzo prostą budowę, a jego zadaniem jest przypisywanie materiałowi odpowiednich numerów sesji użytkownika, podczas której materiał został stworzony oraz numer requestu, ponieważ użytkownik w trakcie jednej sesji może stworzyć więcej niż jeden materiał, a co za tym idzie, każdy z nich będzie miał przypisany ten sam numer requestu.</p>
 
 <p>W bazie danych umieszczone zostały jeszcze dwa, bardzo proste wyzwalacze: ADD_CLIENT_ID i ADD_LOGON_ID. Obydwa korzystają z sekwencji, z których pobrane wartości są przypisywane numerom identyfikacyjnym nowo otwartej sesji użytkownika oraz dodanego do bazy klienta.</p>
+
+```sql
+CREATE OR REPLACE EDITIONABLE TRIGGER "MMDMANAGER"."ADD_CLIENT_ID" 
+before insert on clients
+for each row
+begin
+      select add_client_id.nextval
+      into :new.COMPANY_ID
+      from dual;
+end;
+```
